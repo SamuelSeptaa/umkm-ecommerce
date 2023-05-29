@@ -17,8 +17,8 @@ class CreateVouchersTable extends Migration
             $table->id();
             $table->foreignId('shop_id');
             $table->string('code');
-            $table->timestamp('valid_from');
-            $table->timestamp('valid_until');
+            $table->timestamp('valid_from')->nullable();
+            $table->timestamp('valid_until')->nullable();
             $table->timestamps();
         });
     }
