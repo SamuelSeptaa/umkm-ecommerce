@@ -617,9 +617,28 @@ ol {
 
 .hero__categories ul {
 	border: 1px solid #ebebeb;
-	padding-left: 40px;
+	padding-left: 20px;
 	padding-top: 10px;
 	padding-bottom: 12px;
+    max-height: 465px;
+    overflow-x: auto;
+}
+
+.hero__categories ul::-webkit-scrollbar {
+    width: 8px;
+}
+
+.hero__categories ul::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+
+.hero__categories ul::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 4px;
+}
+
+.hero__categories ul::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
 }
 
 .hero__categories ul li {
@@ -631,6 +650,12 @@ ol {
 	color: #1c1c1c;
 	line-height: 39px;
 	display: block;
+    padding-left: 12px;
+}
+
+.hero__categories ul li a:hover {
+	color:#f1f1f1;
+    background-color: #3CC032;
 }
 
 .hero__search {
@@ -2920,7 +2945,7 @@ ol {
 	.hero__categories__all {
 		padding: 10px 25px 10px 20px;
 	}
-	.hero__categories ul {
+	.hero__categories ul, .hero__search__form ul {
 		padding-left: 20px;
 	}
 	.latest-product__slider.owl-carousel .owl-nav {
