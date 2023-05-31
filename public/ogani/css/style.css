@@ -2889,6 +2889,10 @@ ol {
 	padding-bottom: 80px;
 }
 
+.contact-form span a:hover{
+    color: #3CC032;
+}
+
 .contact-form form input {
 	width: 100%;
 	height: 50px;

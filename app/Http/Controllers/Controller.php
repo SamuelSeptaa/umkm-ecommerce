@@ -11,4 +11,10 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     public $data = [];
+
+    public function __construct()
+    {
+        $this->data['active'] = "";
+        $this->data['title'] = 'UMKM Palangka Raya';
+    }
 }

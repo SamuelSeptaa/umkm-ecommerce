@@ -13,6 +13,7 @@ class Index extends Controller
 {
     public function index()
     {
+        $this->data['active']               = "Home";
         $this->data['shops']                = shop::orderBy('shop_name')->get();
         $this->data['categories']           = category::all();
         $this->data['featured']             = featured_product::with('product.category')->get();
@@ -22,11 +23,13 @@ class Index extends Controller
         $this->data['best_selling_2']       = product::orderBy('total_sold', 'desc')->limit(3)->offset(3)->get();
         $this->data['latest_blog']          = blog::orderBy('created_at', 'desc')->limit(3)->get();
 
+
+
         return view('guest.index', $this->data);
     }
 
     public function shop()
     {
-        return view('guest.shop');
+        return view('guest.shop', $this->data);
     }
 }

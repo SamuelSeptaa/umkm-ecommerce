@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Index;
+use App\Http\Controllers\Login;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [Index::class, 'index']);
-Route::get('/shop', [Index::class, 'shop']);
+Route::get('/', [Index::class, 'index'])->name('index');
+Route::get('/shop', [Index::class, 'shop'])->name('shop');
+
+Route::get('/login', [Login::class, 'index'])->name('login');
+Route::post('/sign-in', [Login::class, 'sign_in'])->name('sign-in');
+
+
+Route::get('/sign-up', [Login::class, 'sign_up'])->name('sign-up');
+Route::post('/sign', [Login::class, 'sign'])->name('sign');
