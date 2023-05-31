@@ -2304,6 +2304,7 @@ ol {
 
 .blog__item__pic img {
 	min-width: 100%;
+    max-height: 250px;
 }
 
 .blog__item__text {

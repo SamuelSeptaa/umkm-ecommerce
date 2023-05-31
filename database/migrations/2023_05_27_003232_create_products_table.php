@@ -22,9 +22,9 @@ class CreateProductsTable extends Migration
             $table->string('slug');
             $table->text('description');
             $table->float('price');
-            $table->float('discount');
+            $table->float('discount')->nullable();
             $table->integer('stock');
-            $table->integer('total_sold');
+            $table->integer('total_sold')->nullable();
             $table->enum('status', ['DRAFT', 'PUBLISH'])->default('PUBLISH');
             $table->timestamps();
         });
