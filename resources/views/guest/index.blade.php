@@ -12,7 +12,7 @@
                         </div>
                         <ul>
                             @foreach ($shops as $s)
-                                <li><a href="{{ $s->slug }}">{{ $s->shop_name }}</a></li>
+                                <li><a href="{{ route('shop', ['shop' => $s->slug]) }}">{{ $s->shop_name }}</a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -56,7 +56,7 @@
                     @foreach ($categories as $c)
                         <div class="col-lg-3">
                             <div class="categories__item set-bg" data-setbg="{{ url($c->thumbnail) }}">
-                                <h5><a href="#">{{ $c->category }}</a></h5>
+                                <h5><a href="{{ route('shop', ['category' => $c->slug]) }}">{{ $c->category }}</a></h5>
                             </div>
                         </div>
                     @endforeach

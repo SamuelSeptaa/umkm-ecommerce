@@ -17,7 +17,7 @@ class ProductSeeder extends Seeder
         $categories = [1, 2, 3, 4];
         $shops = [1, 2, 3];
 
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             $categoryId = $categories[array_rand($categories)];
             $shopId = $shops[array_rand($shops)];
             $productName = "Product " . ($i + 1);

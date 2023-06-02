@@ -36,9 +36,8 @@ class Index extends Controller
         $this->data['shops']                = shop::orderBy('shop_name')->get();
         $this->data['categories']           = category::all();
 
-        $query = $request->query();
-
-
+        $this->data['query']                = $request->query();
+        unset($this->data['query']['page']);
         $this->data['products']             =
             product::select('products.*', 'shops.shop_name', 'categories.category')
             ->join('shops', 'shops.id', "=", "products.shop_id")
@@ -49,7 +48,6 @@ class Index extends Controller
             ->paginate(12)->withQueryString();
 
 
-        dd($this->data['products']->lastPage);
 
         return view('guest.shop', $this->data);
     }

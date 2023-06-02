@@ -28,7 +28,16 @@
                             <h4>Semua Toko</h4>
                             <ul>
                                 @foreach ($shops as $s)
-                                    <li><a href="{{ $s->slug }}">{{ $s->shop_name }}</a></li>
+                                    @php
+                                        $shop = '';
+                                        if (array_key_exists('shop', $query)) {
+                                            $shop = $query['shop'];
+                                        }
+                                        $activeQueryShop = $query;
+                                        $activeQueryShop['shop'] = $s->slug;
+                                    @endphp
+                                    <li><a class="{{ $shop == $s->slug ? 'active' : '' }}"
+                                            href="{{ route('shop', $activeQueryShop) }}">{{ $s->shop_name }}</a></li>
                                 @endforeach
                             </ul>
                         </div>
@@ -50,31 +59,36 @@
                             </div>
                         </div> --}}
                         <div class="sidebar__item">
-                            <h4>Popular Size</h4>
-                            <div class="sidebar__item__size">
-                                <label for="large">
-                                    Large
-                                    <input type="radio" id="large">
-                                </label>
-                            </div>
-                            <div class="sidebar__item__size">
-                                <label for="medium">
-                                    Medium
-                                    <input type="radio" id="medium">
-                                </label>
-                            </div>
-                            <div class="sidebar__item__size">
-                                <label for="small">
-                                    Small
-                                    <input type="radio" id="small">
-                                </label>
-                            </div>
-                            <div class="sidebar__item__size">
-                                <label for="tiny">
-                                    Tiny
-                                    <input type="radio" id="tiny">
-                                </label>
-                            </div>
+                            <h4>Berdasarkan Kategori</h4>
+                            @foreach ($categories as $c)
+                                @php
+                                    $category = '';
+                                    if (array_key_exists('category', $query)) {
+                                        $category = $query['category'];
+                                    }
+                                    $activeQuery = $query;
+                                    $activeQuery['category'] = $c->slug;
+                                @endphp
+                                <div class="sidebar__item__size">
+                                    <a href="{{ route('shop', $activeQuery) }}">
+                                        <label class="{{ $category == $c->slug ? 'active' : '' }}">
+                                            {{ $c->category }}
+                                        </label>
+                                    </a>
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="sidebar__item">
+                            @if (count($query) > 0)
+                                <div class="filter__item">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12">
+                                            <a class="btn btn-sm btn-outline-success" href="{{ route('shop') }}">Bersihkan
+                                                Filter</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -196,25 +210,10 @@
                             </div>
                         </div>
                     </div> --}}
-                    <div class="filter__item">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-5">
-                                <div class="filter__sort">
-                                    <span>Sort By</span>
-                                    <select>
-                                        <option value="product_name ASC">A-Z</option>
-                                        <option value="product_name DESC">Z-A</option>
-                                        <option value="price ASC">Harga Terendah</option>
-                                        <option value="price DESC">Harga Tertinggi</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="row">
                         @foreach ($products as $p)
                             <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="product__discount__item">
+                                <div class="product__discount__item mb-5">
                                     <div class="product__discount__item__pic set-bg"
                                         data-setbg="{{ asset($p->image_url) }}">
                                         @if ($p->discount > 0)
@@ -245,11 +244,40 @@
                         @endforeach
                     </div>
                     <div class="product__pagination mt-3 text-center">
-                        @for ()
+                        @php
+                            $maxPageShow = 6;
+                            $showedPage = 0;
+                        @endphp
+                        @if ($products->lastPage() > 1)
+                            @if ($products->currentPage() != 1)
+                                @php
+                                    $query['page'] = $products->currentPage() - 1;
+                                @endphp
+                                <a href="{{ route('shop', $query) }}"><i class="fa fa-long-arrow-left"></i></a>
+                            @endif
 
-                        @endfor
-                        {{-- <a href="#"><i class="fa fa-long-arrow-left"></i></a>
-                        <a href="#">1</a>
+                            @for ($i = $products->currentPage() - 2; $i <= $products->lastPage(); $i++)
+                                @php
+                                    $showedPage++;
+                                    if ($showedPage == $maxPageShow) {
+                                        break;
+                                    }
+                                    $query['page'] = $i;
+                                @endphp
+                                @if ($i >= 1)
+                                    <a class="{{ $products->currentPage() == $i ? 'active' : '' }}"
+                                        href="{{ route('shop', $query) }}">{{ $i }}</a>
+                                @endif
+                            @endfor
+
+                            @if ($products->currentPage() != $products->lastPage())
+                                @php
+                                    $query['page'] = $products->currentPage() + 1;
+                                @endphp
+                                <a href="{{ route('shop', $query) }}"><i class="fa fa-long-arrow-right"></i></a>
+                            @endif
+                        @endif
+                        {{--
                         <a href="#">2</a>
                         <a href="#">3</a>
                         <a href="#"><i class="fa fa-long-arrow-right"></i></a> --}}
