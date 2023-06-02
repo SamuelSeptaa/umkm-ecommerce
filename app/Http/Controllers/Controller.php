@@ -15,6 +15,7 @@ class Controller extends BaseController
     public function __construct()
     {
         $this->data['active'] = "";
+        $this->data['sub_title'] = "";
         $this->data['title'] = 'UMKM Palangka Raya';
     }
 }

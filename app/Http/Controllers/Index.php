@@ -14,6 +14,7 @@ class Index extends Controller
     public function index()
     {
         $this->data['active']               = "Home";
+        $this->data['sub_title']            = "Beranda";
         $this->data['shops']                = shop::orderBy('shop_name')->get();
         $this->data['categories']           = category::all();
         $this->data['featured']             = featured_product::with('product.category')->get();
@@ -28,8 +29,28 @@ class Index extends Controller
         return view('guest.index', $this->data);
     }
 
-    public function shop()
+    public function shop(Request $request)
     {
+        $this->data['active']               = "Shop";
+        $this->data['sub_title']            = "Belanja";
+        $this->data['shops']                = shop::orderBy('shop_name')->get();
+        $this->data['categories']           = category::all();
+
+        $query = $request->query();
+
+
+        $this->data['products']             =
+            product::select('products.*', 'shops.shop_name', 'categories.category')
+            ->join('shops', 'shops.id', "=", "products.shop_id")
+            ->join('categories', 'categories.id', "=", "products.category_id")
+            ->where('shops.slug', 'like', ($request->query("shop")) ?  $request->query("shop") : '%%')
+            ->where('categories.slug', 'like', ($request->query("category")) ?  $request->query("category") : '%%')
+            ->where('products.product_name', 'like', ($request->query("product")) ?  "%" . $request->query("product") . "%" : '%%')
+            ->paginate(12)->withQueryString();
+
+
+        dd($this->data['products']->lastPage);
+
         return view('guest.shop', $this->data);
     }
 }

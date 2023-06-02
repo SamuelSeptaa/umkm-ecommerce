@@ -88,8 +88,7 @@
                 @foreach ($featured as $f)
                     <div class="col-lg-3 col-md-4 col-sm-6 mix {{ $f->product->category->slug }}">
                         <div class="featured__item">
-                            <div class="featured__item__pic set-bg"
-                                data-setbg="{{ asset('ogani/' . $f->product->image_url) }}">
+                            <div class="featured__item__pic set-bg" data-setbg="{{ asset($f->product->image_url) }}">
                                 <ul class="featured__item__pic__hover">
                                     <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                     <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -120,7 +119,7 @@
                                 @foreach ($latest_product_1 as $l)
                                     <a href="#" class="latest-product__item">
                                         <div class="latest-product__item__pic">
-                                            <img src="{{ asset('ogani/' . $l->image_url) }}" alt="">
+                                            <img src="{{ asset($l->image_url) }}" alt="">
                                         </div>
                                         <div class="latest-product__item__text">
                                             <h6>{{ $l->product_name }}</h6>
@@ -133,7 +132,7 @@
                                 @foreach ($latest_product_2 as $l)
                                     <a href="#" class="latest-product__item">
                                         <div class="latest-product__item__pic">
-                                            <img src="{{ asset('ogani/' . $l->image_url) }}" alt="">
+                                            <img src="{{ asset($l->image_url) }}" alt="">
                                         </div>
                                         <div class="latest-product__item__text">
                                             <h6>{{ $l->product_name }}</h6>
@@ -153,7 +152,7 @@
                                 @foreach ($best_selling_1 as $l)
                                     <a href="#" class="latest-product__item">
                                         <div class="latest-product__item__pic">
-                                            <img src="{{ asset('ogani/' . $l->image_url) }}" alt="">
+                                            <img src="{{ asset($l->image_url) }}" alt="">
                                         </div>
                                         <div class="latest-product__item__text">
                                             <h6>{{ $l->product_name }}</h6>
@@ -166,7 +165,7 @@
                                 @foreach ($best_selling_2 as $l)
                                     <a href="#" class="latest-product__item">
                                         <div class="latest-product__item__pic">
-                                            <img src="{{ asset('ogani/' . $l->image_url) }}" alt="">
+                                            <img src="{{ asset($l->image_url) }}" alt="">
                                         </div>
                                         <div class="latest-product__item__text">
                                             <h6>{{ $l->product_name }}</h6>

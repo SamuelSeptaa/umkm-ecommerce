@@ -19,7 +19,7 @@
     <nav class="humberger__menu__nav mobile-menu">
         <ul>
             <li class="{{ $active == 'Home' ? 'active' : '' }}"><a href="{{ route('index') }}">Home</a></li>
-            <li><a href="./shop-grid.html">Shop</a></li>
+            <li class="{{ $active == 'Shop' ? 'active' : '' }}"><a href="{{ route('shop') }}">Shop</a></li>
             <li><a href="./blog.html">Blog</a></li>
             <li><a href="./contact.html">Contact</a></li>
         </ul>
@@ -54,7 +54,8 @@
                 <nav class="header__menu">
                     <ul>
                         <li class="{{ $active == 'Home' ? 'active' : '' }}"><a href="{{ route('index') }}">Home</a></li>
-                        <li><a href="./shop-grid.html">Shop</a></li>
+                        <li class="{{ $active == 'Shop' ? 'active' : '' }}"><a href="{{ route('shop') }}">Shop</a>
+                        </li>
                         <li><a href="./blog.html">Blog</a></li>
                         <li><a href="./contact.html">Contact</a></li>
                     </ul>

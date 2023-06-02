@@ -22,7 +22,7 @@ class Login extends Controller
         ]);
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            if (Auth::user()->hasRole('admin')) {
+            if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('merchant')) {
                 return redirect('dashboard');
             }
             if (Auth::user()->hasRole('user')) {
