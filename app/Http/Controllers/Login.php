@@ -25,7 +25,7 @@ class Login extends Controller
             if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('merchant')) {
                 return redirect('dashboard');
             }
-            if (Auth::user()->hasRole('user')) {
+            if (Auth::user()->hasRole('member')) {
                 return redirect('/');
             }
         }
@@ -55,5 +55,13 @@ class Login extends Controller
             'user_id'       => $member->id,
         ]);
         return redirect()->route('login')->with('success', 'Berhasil membuat akun, Anda dapat login sekarang');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
     }
 }

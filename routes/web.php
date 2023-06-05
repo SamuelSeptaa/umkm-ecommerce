@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Index;
 use App\Http\Controllers\Login;
+use App\Http\Controllers\Profile;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,9 +19,20 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [Index::class, 'index'])->name('index');
 Route::get('/shop', [Index::class, 'shop'])->name('shop');
 
-Route::get('/login', [Login::class, 'index'])->name('login');
-Route::post('/sign-in', [Login::class, 'sign_in'])->name('sign-in');
+Route::group(['middleware' => 'guest'], function () {
+    Route::get('/login', [Login::class, 'index'])->name('login');
+    Route::post('/sign-in', [Login::class, 'sign_in'])->name('sign-in');
+
+    Route::get('/sign-up', [Login::class, 'sign_up'])->name('sign-up');
+    Route::post('/sign', [Login::class, 'sign'])->name('sign');
+});
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/logout', [Login::class, 'logout'])->name("logout");
+});
 
 
-Route::get('/sign-up', [Login::class, 'sign_up'])->name('sign-up');
-Route::post('/sign', [Login::class, 'sign'])->name('sign');
+Route::group(['middleware' => ['auth', 'role:member']], function () {
+    Route::get('/profile', [Profile::class, 'index'])->name("profile");
+    Route::post('/save_profile', [Profile::class, 'save_profile'])->name("save_profile");
+});

@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="{{ asset('ogani/css/owl.carousel.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('ogani/css/slicknav.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('ogani/css/style.css') }}" type="text/css">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
 </head>
 
 <body>
@@ -105,8 +106,10 @@
     <script src="{{ asset('ogani/js/mixitup.min.js') }}"></script>
     <script src="{{ asset('ogani/js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('ogani/js/main.js') }}"></script>
-
-
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+    @isset($script)
+        @include($script)
+    @endisset
 
 </body>
 

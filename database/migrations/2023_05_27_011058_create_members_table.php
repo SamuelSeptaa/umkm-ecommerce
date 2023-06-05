@@ -19,6 +19,8 @@ class CreateMembersTable extends Migration
             $table->string('name')->nullable();
             $table->text('address')->nullable();
             $table->string('phone')->nullable();
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
             $table->timestamps();
         });
     }

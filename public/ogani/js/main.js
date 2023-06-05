@@ -221,7 +221,7 @@
         $button.parent().find('input').val(newVal);
     });
 
-    $("#sign-form input, #sign-form select").on('input change', function(e) {
+    $("#sign-form input, #sign-form select, #sign-form textarea").on('input change', function(e) {
         $(this).removeClass('is-invalid');
     });
 
