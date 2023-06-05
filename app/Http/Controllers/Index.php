@@ -49,6 +49,7 @@ class Index extends Controller
 
 
 
+        $this->data['script']   = "guest.script.shop";
         return view('guest.shop', $this->data);
     }
 }

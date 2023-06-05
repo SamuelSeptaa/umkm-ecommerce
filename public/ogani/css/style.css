@@ -1369,7 +1369,7 @@ ol {
 	transform: rotate(360deg);
 }
 
-.product__item__pic__hover li a {
+.product__item__pic__hover li button {
 	font-size: 16px;
 	color: #1c1c1c;
 	height: 40px;
@@ -1387,7 +1387,7 @@ ol {
 	transition: all, 0.5s;
 }
 
-.product__item__pic__hover li a i {
+.product__item__pic__hover li button i {
 	position: relative;
 	transform: rotate(0);
 	-webkit-transition: all, 0.3s;
@@ -1599,17 +1599,17 @@ ol {
 	margin-right: 0;
 }
 
-.product__item__pic__hover li:hover a {
+.product__item__pic__hover li:hover button {
 	background: #7fad39;
 	border-color: #7fad39;
 }
 
-.product__item__pic__hover li:hover a i {
+.product__item__pic__hover li:hover button i {
 	color: #ffffff;
 	transform: rotate(360deg);
 }
 
-.product__item__pic__hover li a {
+.product__item__pic__hover li button {
 	font-size: 16px;
 	color: #1c1c1c;
 	height: 40px;
@@ -1627,7 +1627,7 @@ ol {
 	transition: all, 0.5s;
 }
 
-.product__item__pic__hover li a i {
+.product__item__pic__hover li button i {
 	position: relative;
 	transform: rotate(0);
 	-webkit-transition: all, 0.3s;

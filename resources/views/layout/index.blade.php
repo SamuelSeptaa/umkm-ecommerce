@@ -6,6 +6,7 @@
     <meta name="description" content="Ogani Template">
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ " $title | $sub_title" }}</title>
 
@@ -107,6 +108,7 @@
     <script src="{{ asset('ogani/js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('ogani/js/main.js') }}"></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
     @isset($script)
         @include($script)
     @endisset

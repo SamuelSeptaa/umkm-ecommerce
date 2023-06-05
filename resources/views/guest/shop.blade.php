@@ -210,7 +210,7 @@
                             </div>
                         </div>
                     </div> --}}
-                    <div class="row">
+                    <div class="row" id="product-list">
                         @foreach ($products as $p)
                             <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="product__discount__item mb-5">
@@ -220,9 +220,11 @@
                                             <div class="product__discount__percent">{{ "-$p->discount%" }}</div>
                                         @endif
                                         <ul class="product__item__pic__hover">
-                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <li><button v-on:click="say('{{ $p->id }}')"><i
+                                                        class="fa fa-heart"></i></button></li>
+                                            <li><button v-on:click="say('{{ $p->id }}')"><i
+                                                        class="fa fa-shopping-cart"></i></button>
+                                            </li>
                                         </ul>
                                     </div>
                                     <div class="product__discount__item__text">
