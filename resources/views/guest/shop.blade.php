@@ -220,9 +220,11 @@
                                             <div class="product__discount__percent">{{ "-$p->discount%" }}</div>
                                         @endif
                                         <ul class="product__item__pic__hover">
-                                            <li><button v-on:click="say('{{ $p->id }}')"><i
+                                            <li><button class="{{ in_array($p->id, $favorit) ? 'active' : '' }}"
+                                                    v-on:click="addFavorit('{{ $p->id }}')"><i
                                                         class="fa fa-heart"></i></button></li>
-                                            <li><button v-on:click="say('{{ $p->id }}')"><i
+                                            <li><button class="{{ in_array($p->id, $cart) ? 'active' : '' }}"
+                                                    v-on:click="addToCart('{{ $p->id }}')"><i
                                                         class="fa fa-shopping-cart"></i></button>
                                             </li>
                                         </ul>

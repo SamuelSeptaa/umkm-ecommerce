@@ -1599,12 +1599,12 @@ ol {
 	margin-right: 0;
 }
 
-.product__item__pic__hover li:hover button {
+.product__item__pic__hover li:hover button, .product__item__pic__hover li button.active {
 	background: #7fad39;
 	border-color: #7fad39;
 }
 
-.product__item__pic__hover li:hover button i {
+.product__item__pic__hover li:hover button i, .product__item__pic__hover li button.active i {
 	color: #ffffff;
 	transform: rotate(360deg);
 }

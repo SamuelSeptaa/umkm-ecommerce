@@ -71,8 +71,8 @@
             <div class="col-lg-3">
                 <div class="header__cart">
                     @role('member')
-                        <ul>
-                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                        <ul id="fav-and-cart">
+                            <li><a href="#"><i class="fa fa-heart"></i> <span v-text="counterFav"></span></a></li>
                             <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
                         </ul>
                     @endrole

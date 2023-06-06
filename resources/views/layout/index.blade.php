@@ -109,6 +109,25 @@
     <script src="{{ asset('ogani/js/main.js') }}"></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function showLoading() {
+            $(".loader").show();
+            $("#preloder").delay(50).fadeIn("fast");
+        }
+
+        function hideLoading() {
+            $(".loader").fadeOut();
+            $("#preloder").delay(50).fadeOut("fast");
+        }
+
+        var cartAndFavorite = new Vue({
+            el: '#fav-and-cart',
+            data: {
+                counterFav: {{ $total_favorit }}
+            }
+        })
+    </script>
     @isset($script)
         @include($script)
     @endisset

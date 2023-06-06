@@ -2,26 +2,54 @@
     new Vue({
         el: '#product-list',
         methods: {
-            say: function(product_id) {
-                console.log(product_id)
+            addFavorit: function(product_id) {
+                const $button = $(event.target).closest('button');
+                $.ajax({
+                    type: "post",
+                    url: `{{ route('add-favorit') }}`,
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    data: {
+                        product_id: product_id,
+                    },
+                    processData: true,
+                    beforeSend: function() {
+                        showLoading();
+                    },
+                    success: function(response) {
+                        if (!$button.hasClass('active')) {
+                            $button.addClass('active');
+                            cartAndFavorite.$data.counterFav++;
+                        } else {
+                            $button.removeClass('active');
+                            cartAndFavorite.$data.counterFav--;
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        const statusCode = jqXHR.status;
+                        switch (statusCode) {
+                            case 401:
+                                Swal.fire(
+                                    'Gagal',
+                                    'Anda harus login untuk menambahkan ke Favorit',
+                                    'error'
+                                );
+                                break;
+                            default:
+                                Swal.fire(
+                                    textStatus,
+                                    jqXHR.responseJSON.message,
+                                    'error'
+                                );
+                        }
+
+                    },
+                    complete: function() {
+                        hideLoading();
+                    }
+                });
             }
         }
     })
-
-    function fetch(url, callback) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', url, true);
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                var data = JSON.parse(xhr.responseText);
-                callback(data);
-            }
-        };
-        xhr.send();
-    }
-
-    fetch('{{ route('shop') }}', function(data) {
-        // Use the parsed data here
-        console.log(data);
-    });
 </script>

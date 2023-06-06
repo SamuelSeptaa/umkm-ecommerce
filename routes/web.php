@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Cart;
 use App\Http\Controllers\Index;
 use App\Http\Controllers\Login;
 use App\Http\Controllers\Profile;
@@ -35,4 +36,6 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => ['auth', 'role:member']], function () {
     Route::get('/profile', [Profile::class, 'index'])->name("profile");
     Route::post('/save_profile', [Profile::class, 'save_profile'])->name("save_profile");
+
+    Route::post("/add_favorit", [Cart::class, "add_favorit"])->name("add-favorit");
 });
