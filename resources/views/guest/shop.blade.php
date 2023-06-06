@@ -231,7 +231,9 @@
                                     </div>
                                     <div class="product__discount__item__text">
                                         <span>{{ $p->shop->shop_name }}</span>
-                                        <h5><a href="#">{{ $p->product_name }}</a></h5>
+                                        <h5><a
+                                                href="{{ route('shop-detail', ['slug' => $p->slug]) }}">{{ $p->product_name }}</a>
+                                        </h5>
                                         @if ($p->discount > 0)
                                             <div class="product__item__price">
                                                 {{ currencyIDR($p->price - ($p->price * $p->discount) / 100) }}

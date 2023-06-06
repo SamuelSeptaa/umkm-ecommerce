@@ -55,4 +55,17 @@ class Index extends Controller
         $this->data['script']   = "guest.script.shop";
         return view('guest.shop', $this->data);
     }
+
+    public function shop_detail($slug)
+    {
+        $this->headData();
+
+        $this->data['product']          = product::where('slug', $slug)->firstOrFail();
+        $this->data['related']          =
+            product::where('shop_id', $this->data['product']->shop_id)
+            ->inRandomOrder()->limit(4)->get();
+
+
+        return view('guest.shop_detail', $this->data);
+    }
 }
