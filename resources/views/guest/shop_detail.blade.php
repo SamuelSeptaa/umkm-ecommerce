@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
-                    <div class="product__details__text">
+                    <div class="product__details__text" id="product-detail">
                         <h3>{{ $product->product_name }}</h3>
                         <div class="product__details__price">
                             @if ($product->discount > 0)
@@ -45,14 +45,15 @@
                         <div class="product__details__quantity">
                             <div class="quantity">
                                 <div class="pro-qty">
-                                    <input type="text" value="1">
+                                    <span v-on:click="decreaseQty" class="dec qtybtn">-</span>
+                                    <input type="text" name="quantity" v-model="quantity" v-on:keyup="onlyNumber">
+                                    <span v-on:click="increaseQty" class="inc qtybtn">+</span>
                                 </div>
                             </div>
                         </div>
-                        <button href="#" class="btn primary-btn">ADD TO CARD</button>
-                        <button href="#"
-                            class="btn heart-icon {{ in_array($product->id, $favorit) ? 'active' : '' }}"><span
-                                class="icon_heart_alt"></span></button>
+                        <button class="btn primary-btn" v-on:click="addToCart({{ $product->id }})">ADD TO CART</button>
+                        <button class="btn heart-icon {{ in_array($product->id, $favorit) ? 'active' : '' }}"
+                            v-on:click="addFavorit({{ $product->id }})"><span class="icon_heart_alt"></span></button>
                         <ul>
                             <li><b>Ketersediaan</b> <span>{{ $product->stock }} tersedia</span></li>
                             <li><b>Toko</b> <span><a

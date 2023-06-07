@@ -65,7 +65,7 @@ class Index extends Controller
             product::where('shop_id', $this->data['product']->shop_id)
             ->inRandomOrder()->limit(4)->get();
 
-
+        $this->data['script']           = 'guest.script.shop_detail';
         return view('guest.shop_detail', $this->data);
     }
 }

@@ -39,4 +39,6 @@ Route::group(['middleware' => ['auth', 'role:member']], function () {
     Route::post('/save_profile', [Profile::class, 'save_profile'])->name("save_profile");
 
     Route::post("/add_favorit", [Cart::class, "add_favorit"])->name("add-favorit");
+
+    Route::post("/check_cart", [Cart::class, "check_cart"])->name("check-cart");
 });
