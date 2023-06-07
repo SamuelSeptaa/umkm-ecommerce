@@ -19,7 +19,6 @@ class CreateShoppingCartsTable extends Migration
             $table->foreignId('product_id');
             $table->foreignId('shop_id');
             $table->integer('qty');
-            $table->integer('sub_total');
             $table->timestamps();
         });
     }

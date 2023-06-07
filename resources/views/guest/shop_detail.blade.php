@@ -33,6 +33,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="product__details__text" id="product-detail">
+
                         <h3>{{ $product->product_name }}</h3>
                         <div class="product__details__price">
                             @if ($product->discount > 0)
@@ -42,6 +43,11 @@
                                 {{ currencyIDR($product->price) }}
                             @endif
                         </div>
+                        <div v-if="successAlert">
+                            <div class="alert alert-success" role="alert" v-text="alertMessage">
+                            </div>
+                        </div>
+
                         <div class="product__details__quantity">
                             <div class="quantity">
                                 <div class="pro-qty">

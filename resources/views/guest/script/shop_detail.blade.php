@@ -3,7 +3,9 @@
         el: '#product-detail',
         data: {
             quantity: 1,
-            max: {{ $product->stock }}
+            max: {{ $product->stock }},
+            alertMessage: "",
+            successAlert: false
         },
         methods: {
             addFavorit: function(product_id) {
@@ -77,6 +79,7 @@
 
             },
             addToCart: function(product_id) {
+                let self = this;
                 $.ajax({
                     type: "post",
                     url: `{{ route('check-cart') }}`,
@@ -92,7 +95,11 @@
                         showLoading();
                     },
                     success: function(response) {
-                        alert('success');
+                        self.successAlert = true;
+                        self.alertMessage = response.message;
+                        setTimeout(() => {
+                            self.successAlert = false;
+                        }, 1500);
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         const statusCode = jqXHR.status;
@@ -105,6 +112,66 @@
                                 );
                                 break;
                             case 400:
+                                const data = jqXHR.responseJSON.data;
+                                Swal.fire({
+                                    title: data.title,
+                                    text: data.body,
+                                    showCancelButton: true,
+                                    confirmButtonText: 'Iya',
+                                    cancelButtonText: 'Nggak jadi',
+                                    icon: 'question',
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        self.confirmAddToCart(product_id);
+                                    }
+                                })
+                                break;
+                            default:
+                                Swal.fire(
+                                    textStatus,
+                                    jqXHR.responseJSON.message,
+                                    'error'
+                                );
+                        }
+
+                    },
+                    complete: function() {
+                        hideLoading();
+                    }
+                });
+            },
+            confirmAddToCart: function(product_id) {
+                let self = this;
+                $.ajax({
+                    type: "post",
+                    url: `{{ route('add-to-cart') }}`,
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    data: {
+                        product_id: product_id,
+                        qty: this.quantity
+                    },
+                    processData: true,
+                    beforeSend: function() {
+                        showLoading();
+                    },
+                    success: function(response) {
+                        self.successAlert = true;
+                        self.alertMessage = response.message;
+                        setTimeout(() => {
+                            self.successAlert = false;
+                        }, 1500);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        const statusCode = jqXHR.status;
+                        switch (statusCode) {
+                            case 401:
+                                Swal.fire(
+                                    'Gagal',
+                                    'Anda harus login untuk menambahkan ke dalam Keranjang',
+                                    'error'
+                                );
                                 break;
                             default:
                                 Swal.fire(
