@@ -10,6 +10,7 @@ use App\Models\shop;
 use App\Models\shopping_cart;
 use App\Models\wishlist;
 use Illuminate\Http\Request;
+use SebastianBergmann\CodeUnit\FunctionUnit;
 
 class Index extends Controller
 {
@@ -67,5 +68,24 @@ class Index extends Controller
 
         $this->data['script']           = 'guest.script.shop_detail';
         return view('guest.shop_detail', $this->data);
+    }
+
+    public function blog()
+    {
+        $this->headData();
+        $this->data['active']               = "Blog";
+        $this->data['sub_title']            = "Blog";
+        $this->data['blog']     = blog::paginate(12);
+        return view('guest.blog', $this->data);
+    }
+
+    public function blog_detail($slug)
+    {
+        $data['blog']           = blog::where('slug', $slug)->firstOrFail();
+        $this->headData();
+        $this->data['active']               = "Blog";
+        $this->data['sub_title']            = $data['blog']->title;
+
+        return view('guest.blog_detail', $this->data);
     }
 }

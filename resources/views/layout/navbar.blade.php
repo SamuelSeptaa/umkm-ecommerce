@@ -20,7 +20,7 @@
         <ul>
             <li class="{{ $active == 'Home' ? 'active' : '' }}"><a href="{{ route('index') }}">Home</a></li>
             <li class="{{ $active == 'Shop' ? 'active' : '' }}"><a href="{{ route('shop') }}">Shop</a></li>
-            <li><a href="./blog.html">Blog</a></li>
+            <li class="{{ $active == 'Blog' ? 'active' : '' }}"><a href="{{ route('blog') }}">Blog</a></li>
             <li><a href="./contact.html">Contact</a></li>
         </ul>
     </nav>
@@ -63,7 +63,8 @@
                         </li>
                         <li class="{{ $active == 'Shop' ? 'active' : '' }}"><a href="{{ route('shop') }}">Shop</a>
                         </li>
-                        <li><a href="./blog.html">Blog</a></li>
+                        <li class="{{ $active == 'Blog' ? 'active' : '' }}"><a href="{{ route('blog') }}">Blog</a>
+                        </li>
                         <li><a href="./contact.html">Contact</a></li>
                     </ul>
                 </nav>

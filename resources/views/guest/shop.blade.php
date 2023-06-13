@@ -223,10 +223,6 @@
                                             <li><button class="{{ in_array($p->id, $favorit) ? 'active' : '' }}"
                                                     v-on:click="addFavorit('{{ $p->id }}')"><i
                                                         class="fa fa-heart"></i></button></li>
-                                            <li><button class="{{ in_array($p->id, $cart) ? 'active' : '' }}"
-                                                    v-on:click="addToCart('{{ $p->id }}')"><i
-                                                        class="fa fa-shopping-cart"></i></button>
-                                            </li>
                                         </ul>
                                     </div>
                                     <div class="product__discount__item__text">

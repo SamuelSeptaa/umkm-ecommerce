@@ -101,8 +101,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-
+            <div class="row" id="product-list">
                 @foreach ($related as $p)
                     <div class="col-lg-3 col-md-4 col-sm-6">
                         <div class="product__discount__item mb-5">
@@ -114,10 +113,6 @@
                                     <li><button class="{{ in_array($p->id, $favorit) ? 'active' : '' }}"
                                             v-on:click="addFavorit('{{ $p->id }}')"><i
                                                 class="fa fa-heart"></i></button></li>
-                                    <li><button class="{{ in_array($p->id, $cart) ? 'active' : '' }}"
-                                            v-on:click="addToCart('{{ $p->id }}')"><i
-                                                class="fa fa-shopping-cart"></i></button>
-                                    </li>
                                 </ul>
                             </div>
                             <div class="product__discount__item__text">

@@ -1,5 +1,5 @@
 <script>
-    new Vue({
+    let productIndex = new Vue({
         el: '#product-list',
         methods: {
             addFavorit: function(product_id) {
