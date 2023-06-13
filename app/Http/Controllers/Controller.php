@@ -23,6 +23,7 @@ class Controller extends BaseController
         $this->data['favorit']          = [];
         $this->data['total_favorit']    = 0;
         $this->data['cart']             = [];
+        $this->data['total_cart']       = 0;
     }
 
     protected function headData()
@@ -33,6 +34,7 @@ class Controller extends BaseController
 
 
             $this->data['cart']             = shopping_cart::where('user_id', auth()->user()->id)->get()->pluck('product_id')->toArray();
+            $this->data['total_cart']       = count($this->data['cart']);
         }
     }
 }

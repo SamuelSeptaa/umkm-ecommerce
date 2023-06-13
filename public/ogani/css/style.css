@@ -1976,6 +1976,7 @@ ol {
 .shoping__cart__table table tbody tr td.shoping__cart__item img {
 	display: inline-block;
 	margin-right: 25px;
+    width: 120px;
 }
 
 .shoping__cart__table table tbody tr td.shoping__cart__item h5 {
@@ -2125,6 +2126,13 @@ ol {
   Checkout
 -----------------------*/
 
+.del{
+    text-decoration: line-through;
+}
+
+.text-sm{
+    font-size: 12px;
+}
 .checkout {
 	padding-top: 80px;
 	padding-bottom: 60px;

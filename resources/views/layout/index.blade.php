@@ -124,7 +124,8 @@
         var cartAndFavorite = new Vue({
             el: '#fav-and-cart',
             data: {
-                counterFav: {{ $total_favorit }}
+                counterFav: {{ $total_favorit }},
+                counterCart: {{ $total_cart }}
             }
         })
     </script>

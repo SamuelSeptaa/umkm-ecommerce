@@ -9,4 +9,9 @@ class shopping_cart extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
+    public function product()
+    {
+        return $this->belongsTo(product::class);
+    }
 }

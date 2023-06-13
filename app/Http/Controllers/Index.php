@@ -81,10 +81,10 @@ class Index extends Controller
 
     public function blog_detail($slug)
     {
-        $data['blog']           = blog::where('slug', $slug)->firstOrFail();
         $this->headData();
+        $this->data['blog']                 = blog::where('slug', $slug)->firstOrFail();
         $this->data['active']               = "Blog";
-        $this->data['sub_title']            = $data['blog']->title;
+        $this->data['sub_title']            = $this->data['blog']->title;
 
         return view('guest.blog_detail', $this->data);
     }

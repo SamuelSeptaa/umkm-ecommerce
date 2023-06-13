@@ -65,7 +65,21 @@ class Cart extends Controller
 
         return response()->json([
             'status'        => 'success',
-            'message'       => 'Berhasil menambahkan kedalam keranjang'
+            'message'       => 'Berhasil menambahkan kedalam keranjang',
+            'data'          => [
+                'total_cart'    => count(shopping_cart::where('user_id', auth()->user()->id)->get()->pluck('product_id')->toArray())
+            ]
         ], 201);
+    }
+
+    public function cart()
+    {
+        $this->headData();
+        $this->data['sub_title']            = "Keranjang Belanja";
+        $this->data['carts']                = shopping_cart::with('product')->where('user_id',  auth()->user()->id)->get();
+        $this->data['cart_total']           = 0;
+
+        $this->data['script']               = 'guest.script.cart';
+        return view('guest.cart', $this->data);
     }
 }

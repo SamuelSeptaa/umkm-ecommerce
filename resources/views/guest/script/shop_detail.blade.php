@@ -100,6 +100,8 @@
                         setTimeout(() => {
                             self.successAlert = false;
                         }, 1500);
+
+                        cartAndFavorite.$data.counterCart = response.data.total_cart;
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         const statusCode = jqXHR.status;
@@ -162,6 +164,7 @@
                         setTimeout(() => {
                             self.successAlert = false;
                         }, 1500);
+                        cartAndFavorite.$data.counterCart = response.data.total_cart;
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         const statusCode = jqXHR.status;
@@ -216,6 +219,7 @@
                             $button.removeClass('active');
                             cartAndFavorite.$data.counterFav--;
                         }
+
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         const statusCode = jqXHR.status;
