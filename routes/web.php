@@ -48,4 +48,5 @@ Route::group(['middleware' => ['auth', 'role:member']], function () {
 
 
     Route::get("/cart", [Cart::class, "cart"])->name("cart");
+    Route::post("/update_cart", [Cart::class, "update_cart"])->name("update-cart");
 });

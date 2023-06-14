@@ -16,6 +16,9 @@
 
     let cart = new Vue({
         el: '#cart-el',
+        data: {
+            totalIdr: currencyIDR({{ $cart_total }})
+        },
         methods: {
             decreaseQty: function() {
                 const $input = $(event.target).closest('.pro-qty').find('input');
@@ -57,11 +60,52 @@
             updatePrice: function($input) {
                 const price = parseFloat($input.data("price"));
                 const qty = $input.val();
-
                 const total = price * qty;
-
                 $input.closest("tr").find(".shoping__cart__total").html(currencyIDR(total));
+            },
+            removeItem: function() {
+                $(event.target).closest('tr').remove();
             }
         }
     });
+
+    $(document).on('click', '#update-cart', function() {
+        const formData = new FormData($("#cart-form")[0]);
+
+        $.ajax({
+            url: "{{ route('update-cart') }}",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            beforeSend: function() {
+                showLoading();
+            },
+            success: function(response) {
+                const data = response;
+                cart.$data.totalIdr = currencyIDR(response.data.total);
+                Swal.fire(
+                    response.status,
+                    response.message,
+                    'success'
+                );
+
+                if (response.data.total === 0)
+                    window.location.reload()
+            },
+            error: function(xhr, status, error) {
+                Swal.fire(
+                    "Failed",
+                    error,
+                    'error'
+                );
+            },
+            complete: function() {
+                hideLoading()
+            }
+        });
+    })
 </script>

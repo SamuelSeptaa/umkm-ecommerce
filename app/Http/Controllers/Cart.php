@@ -6,6 +6,8 @@ use App\Models\product;
 use App\Models\shopping_cart;
 use App\Models\wishlist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class Cart extends Controller
 {
@@ -77,9 +79,52 @@ class Cart extends Controller
         $this->headData();
         $this->data['sub_title']            = "Keranjang Belanja";
         $this->data['carts']                = shopping_cart::with('product')->where('user_id',  auth()->user()->id)->get();
-        $this->data['cart_total']           = 0;
 
+        $user_id                            = auth()->user()->id;
+        $results = DB::select("select SUM(temp_table.sub_total) as total FROM (
+            SELECT *, (SELECT
+              CASE
+                WHEN discount > 0 THEN (price - (price * discount / 100)) * shopping_carts.qty
+                ELSE price * shopping_carts.qty
+              END AS discounted_price
+            FROM products WHERE products.id = shopping_carts.product_id) AS sub_total FROM shopping_carts WHERE user_id = $user_id) AS temp_table");
+        $this->data['cart_total']           = ($results[0]->total != null) ? $results[0]->total : 0;
         $this->data['script']               = 'guest.script.cart';
         return view('guest.cart', $this->data);
+    }
+
+    public function update_cart(Request $request)
+    {
+        $data = $request->post();
+
+        shopping_cart::where('user_id', auth()->user()->id)->delete();
+
+        if (empty($data))
+            for ($i = 0; $i < count($data['product_id']); $i++) {
+                $product            = product::findOrFail($data['product_id'][$i]);
+                shopping_cart::create([
+                    'user_id'       => auth()->user()->id,
+                    'product_id'    => $product->id,
+                    'shop_id'       => $product->shop_id,
+                    'qty'           => $data['qty'][$i]
+                ]);
+            }
+
+        $user_id                            = auth()->user()->id;
+        $results = DB::select("select SUM(temp_table.sub_total) as total FROM (
+            SELECT *, (SELECT
+              CASE
+                WHEN discount > 0 THEN (price - (price * discount / 100)) * shopping_carts.qty
+                ELSE price * shopping_carts.qty
+              END AS discounted_price
+            FROM products WHERE products.id = shopping_carts.product_id) AS sub_total FROM shopping_carts WHERE user_id = $user_id) AS temp_table");
+
+        return response()->json([
+            'status'        => 'Success',
+            'message'       => 'Berhasil update Keranjang',
+            'data'          => [
+                'total'     => ($results[0]->total != null) ? $results[0]->total : 0
+            ]
+        ], 201);
     }
 }

@@ -7,7 +7,7 @@ function currencyIDR($nominal, $symbol = true)
 {
     $val = "";
     if ($symbol) {
-        $val .= "Rp. ";
+        $val .= "Rp ";
     }
 
     $val .= number_format($nominal, 0, ",", ".");
