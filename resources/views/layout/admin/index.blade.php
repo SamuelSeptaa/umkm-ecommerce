@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="{{ asset('coreui/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
 
     <!-- Main styles for this application-->
+    <link href="{{ asset('ogani') }}/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ asset('coreui') }}/css/style.css" rel="stylesheet">
     <!-- We use those styles to show code examples, you should remove them in your application.-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism.css">
@@ -84,7 +85,7 @@
     <script src="{{ asset('coreui') }}/js/main.js"></script>
     <script src="{{ asset('coreui/vendors/datatables.net/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('coreui/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
@@ -99,6 +100,13 @@
         $("#preloder").delay(50).fadeOut("fast");
     }
 
+    var debounce = function(func, delay) {
+        var timeoutId;
+        return function() {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(func, delay);
+        };
+    };
 
     $(window).on('load', function() {
         $(".loader").fadeOut();

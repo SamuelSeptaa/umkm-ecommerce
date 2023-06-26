@@ -37,4 +37,60 @@ class Controller extends BaseController
             $this->data['total_cart']       = count($this->data['cart']);
         }
     }
+
+    protected function YajraFilterValue(
+        $filterValue,
+        $query,
+        $columnFilter,
+        $join = false,
+        $table = null,
+        $columnRelation = null,
+        $tableJoin = null
+    ) {
+        if ($join)
+            $query->join($tableJoin, "$table.$columnRelation", '=', "$tableJoin.id");
+
+        $filterValue = json_decode($filterValue);
+        if (!empty($filterValue)) {
+            $query->whereIn($columnFilter, $filterValue);
+        }
+    }
+
+    /**
+     * YajraColumnSearch
+     *
+     * @param  mixed $query
+     * @param  array $columnSearch
+     * @param  string $searchValue
+     * @return void
+     */
+    protected function YajraColumnSearch($query, $columnSearch, $searchValue)
+    {
+        $query->where(function ($query) use ($columnSearch, $searchValue) {
+            $i = 0;
+            foreach ($columnSearch as $item) {
+                if ($i == 0)
+                    $query->where($item, 'like', "%{$searchValue}%");
+                else
+                    $query->orWhere($item, 'like', "%{$searchValue}%");
+                $i++;
+            }
+        });
+    }
+
+    /**
+     * filterDateRange
+     *
+     * @param  mixed $query
+     * @param  string $columnFilter
+     * @param  object $request
+     * @return void
+     */
+    protected function filterDateRange($query, $columnFilter, $request)
+    {
+        if ($request->startDate && $request->endDate) {
+            $query->where($columnFilter, '>=', "$request->startDate 00:00:00");
+            $query->where($columnFilter, '<=', "$request->endDate 23:59:59");
+        }
+    }
 }

@@ -52,8 +52,9 @@ Route::group(['middleware' => ['auth', 'role:member']], function () {
     Route::post("/update_cart", [Cart::class, "update_cart"])->name("update-cart");
 });
 
-// Route::group(['middleware' => ['auth', 'role:merchant']], function () {
-Route::get('/dashboard', [Dashboard::class, 'index'])->name("dashboard");
-Route::get('/product', [Dashboard::class, 'product'])->name("product");
-Route::post('/show-product', [Dashboard::class, 'show'])->name("show-product");
-// });
+Route::group(['middleware' => ['auth', 'role:merchant']], function () {
+    Route::get('/dashboard', [Dashboard::class, 'index'])->name("dashboard");
+    Route::get('/product', [Dashboard::class, 'product'])->name("product");
+    Route::post('/show-product', [Dashboard::class, 'show'])->name("show-product");
+    Route::post('/toggle-status-product', [Dashboard::class, 'toggle_status'])->name("toggle-status-product");
+});

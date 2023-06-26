@@ -1,4 +1,58 @@
 <script>
+    function togleStatus(id, status) {
+        let textAlert = '';
+        if (status == "PUBLISH")
+            textAlert = 'Draft';
+        else
+            textAlert = 'Publish';
+
+        Swal.fire({
+            icon: "question",
+            title: `${textAlert} produk yang dipilih?`,
+            showCancelButton: true,
+            cancelButtonText: "Batal",
+            confirmButtonText: "Ya",
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                showLoading();
+                $.ajax({
+                    type: "post",
+                    dataType: "json",
+                    url: "{{ route('toggle-status-product') }}",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {
+                        id: id,
+                    },
+                    beforeSend: function() {
+                        showLoading();
+                    },
+                    complete: function() {
+                        hideLoading();
+                    },
+                    success: function(response) {
+                        Swal.fire({
+                            confirmButtonColor: "#3ab50d",
+                            icon: "success",
+                            title: `${response.message}`,
+                        }).then((result) => {
+                            $("#the-table").DataTable().ajax.reload();
+                        });
+                    },
+                    error: function(request, status, error) {
+                        Swal.fire({
+                            confirmButtonColor: "#3ab50d",
+                            icon: "error",
+                            title: `${status}`,
+                            text: `${error}`,
+                        });
+                    },
+                });
+            }
+        });
+    }
     $(document).ready(function() {
         var table = $("#the-table").DataTable({
             pageLength: 30,
@@ -10,7 +64,7 @@
                 url: `{{ route('show-product') }}`,
                 type: "POST",
                 data: function(d) {
-                    // d.search = $("#search").val()
+                    d.search = $("#search-column").val()
                 },
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -51,8 +105,8 @@
                     name: 'total_sold'
                 },
                 {
-                    data: 'status',
-                    name: 'status',
+                    data: 'statusbadge',
+                    name: 'statusbadge',
                     orderable: false,
                     searchable: false
                 },
@@ -74,7 +128,13 @@
         $('#the-table').on('page.dt', function() {
             $('html, body').animate({
                 scrollTop: 0
-            }, 1000);
+            }, 500);
         });
+
+        $("#search-column").keyup(
+            debounce(function() {
+                table.ajax.reload();
+            }, 1200)
+        );
     })
 </script>
