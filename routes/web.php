@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Cart;
+use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Index;
 use App\Http\Controllers\Login;
 use App\Http\Controllers\Profile;
@@ -50,3 +51,7 @@ Route::group(['middleware' => ['auth', 'role:member']], function () {
     Route::get("/cart", [Cart::class, "cart"])->name("cart");
     Route::post("/update_cart", [Cart::class, "update_cart"])->name("update-cart");
 });
+
+// Route::group(['middleware' => ['auth', 'role:merchant']], function () {
+Route::get('/dashboard', [Dashboard::class, 'index'])->name("dashboard");
+// });
