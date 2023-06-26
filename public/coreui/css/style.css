@@ -14081,5 +14081,6 @@ html:not([dir=rtl]) .wrapper {
 .table-image>img{
     width: 200px;
     height: auto;
+    border-radius: 10px;
 }
 

@@ -4,6 +4,7 @@ use App\Http\Controllers\Cart;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Index;
 use App\Http\Controllers\Login;
+use App\Http\Controllers\Product;
 use App\Http\Controllers\Profile;
 use Illuminate\Support\Facades\Route;
 
@@ -54,7 +55,7 @@ Route::group(['middleware' => ['auth', 'role:member']], function () {
 
 Route::group(['middleware' => ['auth', 'role:merchant']], function () {
     Route::get('/dashboard', [Dashboard::class, 'index'])->name("dashboard");
-    Route::get('/product', [Dashboard::class, 'product'])->name("product");
-    Route::post('/show-product', [Dashboard::class, 'show'])->name("show-product");
-    Route::post('/toggle-status-product', [Dashboard::class, 'toggle_status'])->name("toggle-status-product");
+    Route::get('/product', [Product::class, 'index'])->name("product");
+    Route::post('/show-product', [Product::class, 'show'])->name("show-product");
+    Route::post('/toggle-status-product', [Product::class, 'toggle_status'])->name("toggle-status-product");
 });

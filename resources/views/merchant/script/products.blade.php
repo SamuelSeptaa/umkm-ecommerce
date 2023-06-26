@@ -54,6 +54,8 @@
         });
     }
     $(document).ready(function() {
+        let filterValue = [];
+
         var table = $("#the-table").DataTable({
             pageLength: 30,
             scrollX: true,
@@ -64,6 +66,7 @@
                 url: `{{ route('show-product') }}`,
                 type: "POST",
                 data: function(d) {
+                    d.filterValue = JSON.stringify(filterValue)
                     d.search = $("#search-column").val()
                 },
                 headers: {
@@ -136,5 +139,50 @@
                 table.ajax.reload();
             }, 1200)
         );
+
+        function resetFilterStatus() {
+            filterValue = []
+            toggleFilterStatus(".btn-filter", false)
+            toggleFilterStatus(".btn-filter[data-block_id='all']", true)
+            // table.column(10).search(JSON.stringify(filterValue))
+        }
+
+        function toggleFilterStatus(selector, status) {
+            if (status) {
+                $(selector).addClass("active");
+            } else {
+                $(selector).removeClass("active");
+            }
+        }
+
+        $(".btn-filter").click(function(e) {
+            e.preventDefault();
+            let value = $(this).data('status');
+            if (value == "ALL") {
+                resetFilterStatus()
+            } else {
+                toggleFilterStatus(".btn-filter[data-status='ALL']", false)
+                let filterExist = filterValue.includes(value)
+                if (!filterExist) {
+                    toggleFilterStatus(this, true)
+                    filterValue.push(value);
+                } else {
+                    toggleFilterStatus(this, false)
+                    let index = filterValue.indexOf(value);
+                    if (index !== -1) {
+                        filterValue.splice(index, 1);
+                    }
+                }
+            }
+
+            if (filterValue.length == 0 || filterValue.length == $('.btn-filter').length - 1) {
+                resetFilterStatus();
+                toggleFilterStatus(".btn-filter[data-status='ALL']", true)
+            }
+            table.ajax.reload();
+
+            console.log(filterValue)
+
+        });
     })
 </script>

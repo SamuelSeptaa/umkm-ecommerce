@@ -5,11 +5,26 @@
         <div class="card-body">
             <div class="example">
                 <div class="row mb-3">
-                    <div class="col-sm-6 d-flex">
-                        <label class="col-sm-3 col-form-label" for="inputPassword">Cari</label>
-                        <div class="col-sm-9">
+                    <div class="col-md-6 col-sm-12 row">
+                        <label class="col-3 col-form-label" for="inputPassword">Cari</label>
+                        <div class="col-9">
                             <input class="form-control" id="search-column" type="text">
                         </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="float-right d-sm-none d-md-block">
+                            <a href="" class="btn btn-info">Tambah Produk</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="filter-list mb-2">
+                        <button type="button" class="btn btn-outline-primary mr-1 my-1 btn-sm btn-filter"
+                            data-status="ALL">Semua</button>
+                        @foreach ($status as $s)
+                            <button type="button" class="btn btn-outline-primary mr-1 my-1 btn-sm btn-filter"
+                                data-status="{{ $s }}"><b>{{ $s }}</b></button>
+                        @endforeach
                     </div>
                 </div>
                 <div class="tab-content rounded-bottom">
