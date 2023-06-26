@@ -14076,3 +14076,10 @@ html:not([dir=rtl]) .wrapper {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+
+.table-image>img{
+    width: 200px;
+    height: auto;
+}
+

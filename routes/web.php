@@ -54,4 +54,6 @@ Route::group(['middleware' => ['auth', 'role:member']], function () {
 
 // Route::group(['middleware' => ['auth', 'role:merchant']], function () {
 Route::get('/dashboard', [Dashboard::class, 'index'])->name("dashboard");
+Route::get('/product', [Dashboard::class, 'product'])->name("product");
+Route::post('/show-product', [Dashboard::class, 'show'])->name("show-product");
 // });
