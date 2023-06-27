@@ -26,7 +26,7 @@
                     <div class="col-lg-4 col-md-4 col-sm-6">
                         <div class="blog__item">
                             <div class="blog__item__pic">
-                                <img src="{{ asset($b->image_url) }}" alt="">
+                                <img src="{{ asset('storage/' . $b->image_url) }}" alt="">
                             </div>
                             <div class="blog__item__text">
                                 <ul>

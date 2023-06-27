@@ -26,8 +26,8 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="product__details__pic">
                         <div class="product__details__pic__item">
-                            <img class="product__details__pic__item--large" src="{{ asset($product->image_url) }}"
-                                alt="">
+                            <img class="product__details__pic__item--large"
+                                src="{{ asset('storage/' . $product->image_url) }}" alt="">
                         </div>
                     </div>
                 </div>
@@ -73,14 +73,13 @@
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
-                                    aria-selected="true">Description</a>
+                                    aria-selected="true">Deskripsi Produk</a>
                             </li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="tabs-1" role="tabpanel">
                                 <div class="product__details__tab__desc">
-                                    <h6>Informasi Produk</h6>
-                                    {{ $product->description }}
+                                    {!! $product->description !!}
                                 </div>
                             </div>
                         </div>
@@ -105,7 +104,8 @@
                 @foreach ($related as $p)
                     <div class="col-lg-3 col-md-4 col-sm-6">
                         <div class="product__discount__item mb-5">
-                            <div class="product__discount__item__pic set-bg" data-setbg="{{ asset($p->image_url) }}">
+                            <div class="product__discount__item__pic set-bg"
+                                data-setbg="{{ asset('storage/' . $p->image_url) }}">
                                 @if ($p->discount > 0)
                                     <div class="product__discount__percent">{{ "-$p->discount%" }}</div>
                                 @endif

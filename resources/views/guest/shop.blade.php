@@ -215,7 +215,7 @@
                             <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="product__discount__item mb-5">
                                     <div class="product__discount__item__pic set-bg"
-                                        data-setbg="{{ asset($p->image_url) }}">
+                                        data-setbg="{{ asset('storage/' . $p->image_url) }}">
                                         @if ($p->discount > 0)
                                             <div class="product__discount__percent">{{ "-$p->discount%" }}</div>
                                         @endif

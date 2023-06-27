@@ -1916,6 +1916,10 @@ ol {
 .product__details__tab .product__details__tab__desc p {
 	color: #666666;
 }
+.product__details__tab .product__details__tab__desc ul li {
+    margin-left: 2rem !important;
+	color: #666666;
+}
 
 /*---------------------
   Shop Details

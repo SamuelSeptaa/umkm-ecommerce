@@ -55,7 +55,7 @@
                 <div class="categories__slider owl-carousel">
                     @foreach ($categories as $c)
                         <div class="col-lg-3">
-                            <div class="categories__item set-bg" data-setbg="{{ url($c->thumbnail) }}">
+                            <div class="categories__item set-bg" data-setbg="{{ asset('storage/' . $c->thumbnail) }}">
                                 <h5><a href="{{ route('shop', ['category' => $c->slug]) }}">{{ $c->category }}</a></h5>
                             </div>
                         </div>
@@ -88,7 +88,8 @@
                 @foreach ($featured as $f)
                     <div class="col-lg-3 col-md-4 col-sm-6 mix {{ $f->product->category->slug }}">
                         <div class="featured__item">
-                            <div class="featured__item__pic set-bg" data-setbg="{{ asset($f->product->image_url) }}">
+                            <div class="featured__item__pic set-bg"
+                                data-setbg="{{ asset('storage/' . $f->product->image_url) }}">
                                 <ul class="featured__item__pic__hover">
                                     <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                     <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -119,7 +120,7 @@
                                 @foreach ($latest_product_1 as $l)
                                     <a href="#" class="latest-product__item">
                                         <div class="latest-product__item__pic">
-                                            <img src="{{ asset($l->image_url) }}" alt="">
+                                            <img src="{{ asset('storage/' . $l->image_url) }}" alt="">
                                         </div>
                                         <div class="latest-product__item__text">
                                             <h6>{{ $l->product_name }}</h6>
@@ -132,7 +133,7 @@
                                 @foreach ($latest_product_2 as $l)
                                     <a href="#" class="latest-product__item">
                                         <div class="latest-product__item__pic">
-                                            <img src="{{ asset($l->image_url) }}" alt="">
+                                            <img src="{{ asset('storage/' . $l->image_url) }}" alt="">
                                         </div>
                                         <div class="latest-product__item__text">
                                             <h6>{{ $l->product_name }}</h6>
@@ -152,7 +153,7 @@
                                 @foreach ($best_selling_1 as $l)
                                     <a href="#" class="latest-product__item">
                                         <div class="latest-product__item__pic">
-                                            <img src="{{ asset($l->image_url) }}" alt="">
+                                            <img src="{{ asset('storage/' . $l->image_url) }}" alt="">
                                         </div>
                                         <div class="latest-product__item__text">
                                             <h6>{{ $l->product_name }}</h6>
@@ -165,7 +166,7 @@
                                 @foreach ($best_selling_2 as $l)
                                     <a href="#" class="latest-product__item">
                                         <div class="latest-product__item__pic">
-                                            <img src="{{ asset($l->image_url) }}" alt="">
+                                            <img src="{{ asset('storage/' . $l->image_url) }}" alt="">
                                         </div>
                                         <div class="latest-product__item__text">
                                             <h6>{{ $l->product_name }}</h6>
@@ -197,7 +198,7 @@
                     <div class="col-lg-4 col-md-4 col-sm-6">
                         <div class="blog__item">
                             <div class="blog__item__pic">
-                                <img src="{{ asset($b->image_url) }}" alt="">
+                                <img src="{{ asset('storage/' . $b->image_url) }}" alt="">
                             </div>
                             <div class="blog__item__text">
                                 <ul>

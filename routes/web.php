@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
 Route::get('/', [Index::class, 'index'])->name('index');
 Route::get('/shop', [Index::class, 'shop'])->name('shop');
 Route::get('/shop/{slug}', [Index::class, 'shop_detail'])->name('shop-detail');
@@ -60,4 +62,6 @@ Route::group(['middleware' => ['auth', 'role:merchant']], function () {
     Route::post('/toggle-status-product', [Product::class, 'toggle_status'])->name("toggle-status-product");
     Route::get('/add-product', [Product::class, 'add'])->name("add-product");
     Route::post('/store-product', [Product::class, 'store'])->name("store-product");
+    Route::get('/product-detail/{product_id}', [Product::class, 'detail'])->name("detail-product");
+    Route::post('/update-product', [Product::class, 'update'])->name("update-product");
 });

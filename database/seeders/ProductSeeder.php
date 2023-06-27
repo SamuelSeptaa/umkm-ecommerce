@@ -27,7 +27,7 @@ class ProductSeeder extends Seeder
                 'category_id'   => $categoryId,
                 'shop_id'       => $shopId,
                 'product_name'  => $productName,
-                'image_url'     => "ogani/img/product/product-details-$categoryId.jpg",
+                'image_url'     => "img/product/product-details-$categoryId.jpg",
                 'slug'          => $slug,
                 'description'   => "Description of $productName",
                 'price'         => rand(10000, 250000),
