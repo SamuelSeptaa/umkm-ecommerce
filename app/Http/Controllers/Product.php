@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\category;
 use Illuminate\Http\Request;
 use App\Models\product as productModel;
 use App\Models\shop;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 
 class Product extends Controller
@@ -93,5 +95,51 @@ class Product extends Controller
             ['message' => 'Berhasil mengubah status'],
             200
         );
+    }
+
+    public function add()
+    {
+        $this->data['title']        = "Daftar Produk - Tambah";
+
+        $category = category::all();
+
+        $category = $category->map(function ($item) {
+            return (object) [
+                'id'    => $item->id,
+                'text'  => $item->category,
+            ];
+        });
+
+        $this->data['action']       = route('store-product');
+        $this->data['back']         = route('product');
+        $forms = [
+            array('product_name', 'text', 'Nama Produk'),
+            array('category_id', 'select', 'Kategori', $category),
+            array('image_url', 'image', 'Gambar Produk'),
+            array('description', 'description', 'Deskripsi Produk'),
+            array('price', 'number', 'Harga Produk'),
+            array('discount', 'number', 'Diskon (%)'),
+            array('stock', 'number', 'Stok Produk'),
+        ];
+        $this->data['forms']        = $forms;
+
+        return view('layout.admin.add', $this->data);
+    }
+
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'product_name'  => ['required', 'unique:products', 'max:100', 'min:5', 'regex:/^[a-zA-Z\s]+$/'],
+            'image_url' => ['required', 'max:2048'],
+        ]);
+        $file       = $request->file('image_url');
+        $filename   = createSlug($request->product_name);
+        $ext        = $file->getClientOriginalExtension();
+        $path       = Storage::putFileAs(
+            'ogani/img/product',
+            $file,
+            $filename . ".$ext"
+        );
+        dd($path);
     }
 }

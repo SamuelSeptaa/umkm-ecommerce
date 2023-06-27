@@ -14078,9 +14078,33 @@ html:not([dir=rtl]) .wrapper {
 /*# sourceMappingURL=style.css.map */
 
 
-.table-image>img{
+.table-image>img, .img-preview >img{
     width: 200px;
     height: auto;
     border-radius: 10px;
 }
 
+.img-preview >img{
+    margin-bottom: 1.5rem !important;
+}
+
+.select2-container--bootstrap .select2-selection--single {
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid var(--cui-input-border-color, #b1b7c1);
+    border-radius: 0.375rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+
+  .select2-container--bootstrap .select2-results__option--highlighted {
+    background-color: #007bff;
+    color: #fff;
+  }
+
+  .select2-container--bootstrap {
+    width: 100% !important;
+  }

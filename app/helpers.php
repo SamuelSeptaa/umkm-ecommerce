@@ -148,3 +148,11 @@ function parseTanggal($date)
     $hIs = date('H:i:s', strtotime($date));
     return "$day_name, $day $month $year $hIs";
 }
+
+function createSlug($string)
+{
+    $string = strtolower($string);
+    $string = preg_replace('/[^a-z0-9]+/', '-', $string);
+    $string = trim($string, '-');
+    return $string;
+}

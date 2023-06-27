@@ -58,4 +58,6 @@ Route::group(['middleware' => ['auth', 'role:merchant']], function () {
     Route::get('/product', [Product::class, 'index'])->name("product");
     Route::post('/show-product', [Product::class, 'show'])->name("show-product");
     Route::post('/toggle-status-product', [Product::class, 'toggle_status'])->name("toggle-status-product");
+    Route::get('/add-product', [Product::class, 'add'])->name("add-product");
+    Route::post('/store-product', [Product::class, 'store'])->name("store-product");
 });

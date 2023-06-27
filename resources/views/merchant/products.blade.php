@@ -12,8 +12,8 @@
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-12">
-                        <div class="float-right d-sm-none d-md-block">
-                            <a href="" class="btn btn-info">Tambah Produk</a>
+                        <div class="float-right">
+                            <a href="{{ route('add-product') }}" class="btn btn-info">Tambah Produk</a>
                         </div>
                     </div>
                 </div>

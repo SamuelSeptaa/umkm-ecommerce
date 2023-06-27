@@ -29,6 +29,7 @@
     <link rel="stylesheet" href="{{ asset('coreui') }}/vendors/simplebar/css/simplebar.css">
     <link rel="stylesheet" href="{{ asset('coreui') }}/css/vendors/simplebar.css">
     <link rel="stylesheet" href="{{ asset('coreui/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
+    <link rel="stylesheet" href="{{ asset('coreui/vendors/select2/select2.min.css') }}">
 
     <!-- Main styles for this application-->
     <link href="{{ asset('ogani') }}/css/bootstrap.min.css" rel="stylesheet">
@@ -85,6 +86,9 @@
     <script src="{{ asset('coreui') }}/js/main.js"></script>
     <script src="{{ asset('coreui/vendors/datatables.net/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('coreui/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
+    <script src="{{ asset('coreui') }}/vendors/select2/select2.min.js"></script>
+    <script src="https://cdn.tiny.cloud/1/3rxy4sgehgdwoqfquqa3mbf1wpkkm4cq4lbg9lt4yk9gg3us/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
@@ -108,9 +112,63 @@
         };
     };
 
+    $('.select2').select2({
+        theme: 'bootstrap'
+    });
+
     $(window).on('load', function() {
         $(".loader").fadeOut();
         $("#preloder").delay(200).fadeOut("slow");
+    });
+
+    $('.image-input').on('change', function(event) {
+        const file = event.target.files[0];
+        var reader = new FileReader();
+
+        const container = $(this).closest('.form-group').find('.img-preview');
+        reader.onload = function() {
+            var image = $('<img>');
+            image.attr('src', reader.result);
+            container.empty().append(image);
+        }
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    });
+
+    $(document).on('keyup', '.only-number', function() {
+        var value = $(this).val();
+        value = value.replace(/\D/g, '');
+        $(this).val(value);
+
+        const elementId = $(this).prop('id');
+        if (elementId == 'discount' && value > 100)
+            $(this).val(100);
+    });
+
+    $(document).on('keyup change', '#form-manipulation input, #form-manipulation textarea, #form-manipulation select',
+        function() {
+            $(this).removeClass('is-invalid');
+        });
+
+    tinymce.init({
+        selector: '.tinymce',
+        height: 250,
+        menubar: false,
+        plugins: 'link lists visualblocks wordcount checklist casechange formatpainter tinymcespellchecker powerpaste tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
+        toolbar: 'undo redo | bold italic underline strikethrough | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent',
+        tinycomments_mode: 'embedded',
+        tinycomments_author: 'Author name',
+        mergetags_list: [{
+                value: 'First.Name',
+                title: 'First Name'
+            },
+            {
+                value: 'Email',
+                title: 'Email'
+            },
+        ]
     });
 </script>
 @isset($script)
