@@ -99,7 +99,7 @@ class Cart extends Controller
 
         shopping_cart::where('user_id', auth()->user()->id)->delete();
 
-        if (empty($data))
+        if (!empty($data))
             for ($i = 0; $i < count($data['product_id']); $i++) {
                 $product            = product::findOrFail($data['product_id'][$i]);
                 shopping_cart::create([

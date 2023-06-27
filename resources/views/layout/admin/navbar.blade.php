@@ -25,7 +25,7 @@
                             </use>
                         </svg> Profil Akun
                     </a>
-                    <a class="dropdown-item" href="{{ asset('coreui') }}/#">
+                    <a class="dropdown-item" href="{{ route('logout') }}">
                         <svg class="icon me-2">
                             <use
                                 xlink:href="{{ asset('coreui') }}/vendors/@coreui/icons/svg/free.svg#cil-account-logout">

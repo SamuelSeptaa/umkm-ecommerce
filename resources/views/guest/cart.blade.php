@@ -25,7 +25,8 @@
                                         @foreach ($carts as $c)
                                             <tr>
                                                 <td class="shoping__cart__item">
-                                                    <img src="{{ asset($c->product->image_url) }}" alt="">
+                                                    <img src="{{ asset('storage/' . $c->product->image_url) }}"
+                                                        alt="">
                                                     <h5>{{ $c->product->product_name }}</h5>
                                                     <input type="hidden" name="product_id[]" value="{{ $c->product_id }}">
                                                 </td>
