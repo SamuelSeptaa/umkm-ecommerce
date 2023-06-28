@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Cart;
+use App\Http\Controllers\Checkout;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Index;
 use App\Http\Controllers\Login;
@@ -53,6 +54,8 @@ Route::group(['middleware' => ['auth', 'role:member']], function () {
 
     Route::get("/cart", [Cart::class, "cart"])->name("cart");
     Route::post("/update_cart", [Cart::class, "update_cart"])->name("update-cart");
+
+    Route::get("/checkout", [Checkout::class, "index"])->name("checkout");
 });
 
 Route::group(['middleware' => ['auth', 'role:merchant']], function () {
