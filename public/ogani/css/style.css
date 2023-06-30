@@ -2313,7 +2313,18 @@ ol {
 	padding-top: 15px;
 }
 
-.checkout__order .checkout__order__subtotal span {
+.checkout__order .checkout__order__shipping {
+	font-size: 16px;
+	color: #1c1c1c;
+	font-weight: 700;
+	border-bottom: 1px solid #e1e1e1;
+	border-top: 1px solid #e1e1e1;
+	padding-bottom: 15px;
+	margin-bottom: 15px;
+	padding-top: 15px;
+}
+
+.checkout__order .checkout__order__subtotal span,  .checkout__order .checkout__order__shipping span{
 	float: right;
 }
 
@@ -2340,6 +2351,12 @@ ol {
 	letter-spacing: 2px;
 	width: 100%;
 	margin-top: 10px;
+}
+
+.checkout__order button.btn-apply-coupon {
+	font-size: 16px;
+	letter-spacing: 2px;
+	width: 100%;
 }
 
 .btn-hover-green:hover{

@@ -49,6 +49,7 @@
                 $input.closest("tr").find(".shoping__cart__total").html(currencyIDR(total));
             },
             removeItem: function() {
+                cartAndFavorite.$data.counterCart--;
                 $(event.target).closest('tr').remove();
             }
         }

@@ -243,8 +243,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 
 -- Dumping data for table rezas_ecommerce.vouchers: ~1 rows (approximately)
 DELETE FROM `vouchers`;
-INSERT INTO `vouchers` (`id`, `shop_id`, `code`, `valid_from`, `valid_until`, `created_at`, `updated_at`) VALUES
-	(1, 1, 'CODE1', '2023-06-28 00:50:46', '2023-07-28 00:50:48', '2023-06-28 00:50:55', '2023-06-28 00:50:55');
+INSERT INTO `vouchers` VALUES (1, 1, 'CODE', 30000.00, 75000.00, '2023-06-30 22:12:55', '2023-07-30 22:12:56', '2023-06-30 22:13:03', '2023-06-30 22:13:04');
+
 
 -- Dumping data for table rezas_ecommerce.wishlists: ~1 rows (approximately)
 DELETE FROM `wishlists`;

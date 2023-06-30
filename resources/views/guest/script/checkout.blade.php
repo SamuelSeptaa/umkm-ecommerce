@@ -6,10 +6,23 @@
             lat: "{{ $profile->member->latitude }}",
             long: "{{ $profile->member->longitude }}",
             rate: 0,
-            rateIDR: "Rp 0",
+            rateIDR: "",
+            original_total:{{$cart_total}},
+            total: {{$cart_total}},
+            totalIDR: "",
             rates: [],
             type: "",
-            counter: 0
+            counter: 0,
+            coupon: "",
+            discount: 0,
+            disountIDR: "",
+            successMessage: "",
+            errorMessage: "",
+        },
+        created() {
+            this.rateIDR = currencyIDR(this.rate);
+            this.totalIDR = currencyIDR(this.total);
+            this.disountIDR = currencyIDR(this.discount);
         },
         methods: {
             checkRates: function() {
@@ -31,7 +44,12 @@
                     },
                     processData: true,
                     beforeSend: function() {
+                        self.total = self.original_total;
                         self.type = "";
+                        self.coupon = "";
+
+                        self.rate = 0;
+                        self.rateIDR = currencyIDR(self.rate);
                         showLoading();
                     },
                     success: function(response) {
@@ -50,6 +68,7 @@
 
                     },
                     complete: function() {
+                        self.totalIDR = currencyIDR(self.total);
                         hideLoading();
                     }
                 });
@@ -60,8 +79,56 @@
                 const price = selectedOption.price;
                 this.rate = price;
                 this.rateIDR = currencyIDR(price);
-                // Use the dataAttribute value as needed
-                console.log(this.rateIDR);
+                this.total = this.total + this.rate;
+                this.totalIDR = currencyIDR(this.total);
+            },
+            applyCoupon:function(){
+                const self = this;
+                const coupon = self.coupon;
+                const purchase_value = self.total;
+                $.ajax({
+                    type: "post",
+                    url: `{{ route('apply-coupon') }}`,
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    data: {
+                        coupon: coupon,
+                        purchase_value : purchase_value,
+                    },
+                    processData: true,
+                    beforeSend: function() {
+                        self.total = self.original_total;
+                        self.totalIDR = currencyIDR(self.total);
+                        self.errorMessage ="";
+                        self.successMessage ="";
+                        showLoading();
+                    },
+                    success: function(response) {
+                        self.successMessage = response.message;
+                        self.discount = response.data.discount;
+                        self.total = self.total - self.discount;
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        const statusCode = jqXHR.status;
+                        switch (statusCode) {
+                            case 404:
+                                self.errorMessage = jqXHR.responseJSON.message
+                                break;
+                            default:
+                                Swal.fire(
+                                    textStatus,
+                                    jqXHR.responseJSON.message,
+                                    'error'
+                                );
+                        }
+
+                    },
+                    complete: function() {
+                        self.totalIDR = currencyIDR(self.total);
+                        hideLoading();
+                    }
+                });
             }
         },
     });
