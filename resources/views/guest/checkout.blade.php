@@ -11,7 +11,8 @@
             </div>
             <div class="checkout__form">
                 <h4>Billing Details</h4>
-                <form action="#">
+
+                <form action="#" id="form-checkout">
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
                             <div class="form-group">
@@ -60,11 +61,38 @@
                                 @error('latitude')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
-                                <input type="hidden" name="latitude" id="latitude"
-                                    value="{{ $profile->member->latitude }}">
-                                <input type="hidden" name="longitude" id="longitude"
-                                    value="{{ $profile->member->longitude }}">
+                                <input type="hidden" name="latitude" id="latitude" v-model="lat">
+                                <input type="hidden" name="longitude" id="longitude" v-model="long">
                                 <div class="map" id="map"></div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <p>Metode Pengiriman<span>*</span></p>
+                                    <select class="form-control w-100" name="shipping_method" id="shipping_method"
+                                        v-model="selectedCourier" v-on:change="checkRates">
+                                        <option selected disabled value="">Pilih Kurir</option>
+                                        @foreach ($courier as $c)
+                                            <option value="{{ $c->code }}">{{ $c->courier_name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('shipping_method')
+                                        <div class="invalid-feedback" for="shipping_method">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-lg-6">
+                                    <p>Tipe<span>*</span></p>
+                                    <select class="form-control w-100" name="tipe_pengiriman" id="tipe_pengiriman"
+                                        v-model="type" v-on:change="applyRate">
+                                        <option selected disabled value="" data-price="0">Pilih Tipe Pengiriman
+                                        </option>
+                                        <option v-for="rate in rates" :value="rate.courier_service_code"
+                                            :key="rate.courier_service_code" v-html="rate.courier_service_name"
+                                            v-bind:data-price="rate.price"></option>
+                                    </select>
+                                    @error('tipe_pengiriman')
+                                        <div class="invalid-feedback" for="shipping_method">{{ $message }}</div>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6">

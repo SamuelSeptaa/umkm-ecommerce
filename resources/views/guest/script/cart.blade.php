@@ -1,19 +1,4 @@
 <script>
-    function roundToNearestInteger(number) {
-        const rounded = Math.round(number);
-        return parseInt(rounded);
-    }
-
-    function currencyIDR(number) {
-        number = roundToNearestInteger(number);
-        return new Intl.NumberFormat('id-ID', {
-            style: 'currency',
-            currency: 'IDR',
-            minimumFractionDigits: 0
-        }).format(number);
-    }
-
-
     let cart = new Vue({
         el: '#cart-el',
         data: {

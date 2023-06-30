@@ -94,6 +94,10 @@ textarea:focus {
 	outline: none;
 }
 
+select.form-control{
+    height: calc(2em + 0.75rem + 2px) !important;
+}
+
 a:hover,
 a:focus {
 	text-decoration: none;
@@ -2852,7 +2856,7 @@ ol {
 -----------------------*/
 
 .map {
-	height: 500px;
+	height: 250px;
 	position: relative;
 }
 

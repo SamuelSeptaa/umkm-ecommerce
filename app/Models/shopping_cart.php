@@ -14,4 +14,8 @@ class shopping_cart extends Model
     {
         return $this->belongsTo(product::class);
     }
+    public function shop()
+    {
+        return $this->belongsTo(shop::class);
+    }
 }

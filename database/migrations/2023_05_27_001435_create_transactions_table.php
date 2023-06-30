@@ -32,11 +32,11 @@ class CreateTransactionsTable extends Migration
             $table->string('shipping_method');
             $table->string('latitude');
             $table->string('longitude');
-            $table->string('waybill');
-            $table->string('payment_channel');
-            $table->timestamp('paid_date');
-            $table->string('payment_url');
-            $table->string('sid');
+            $table->string('waybill')->nullable();
+            $table->string('payment_channel')->nullable();
+            $table->timestamp('paid_date')->nullable();
+            $table->string('payment_url')->nullable();
+            $table->string('sid')->nullable();
             $table->timestamps();
         });
     }

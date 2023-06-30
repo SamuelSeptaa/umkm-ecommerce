@@ -97,7 +97,7 @@
                                 <ul>
                                     <li>Total <span v-text="totalIdr"></span></li>
                                 </ul>
-                                <a href="{{ $carts->isEmpty() ? '#' : '' }}" class="primary-btn">PROCEED TO
+                                <a href="{{ $carts->isEmpty() ? '#' : route('checkout') }}" class="primary-btn">LANJUT
                                     CHECKOUT</a>
                             </div>
                         </div>
