@@ -2359,7 +2359,7 @@ ol {
 	width: 100%;
 }
 
-.btn-hover-green:hover{
+.btn-hover-green:hover, .btn-hover-green.active{
     background-color: #7fad39;
     color: #F3F6FA;
 }

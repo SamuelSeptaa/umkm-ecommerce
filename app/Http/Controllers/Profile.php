@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\member;
+use App\Models\transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -11,6 +12,7 @@ class Profile extends Controller
 {
     public function index()
     {
+        $this->data['active']  = $this->data['sub_title'] = 'Profil';
         $this->data['profile']  = User::with('member')->find(auth()->user()->id);
         $this->data['script']   = "guest.script.profile";
 
@@ -59,5 +61,15 @@ class Profile extends Controller
             ]);
 
         return redirect()->route('profile')->with('success', 'Berhasil mengubah data');
+    }
+
+    public function transaction_history()
+    {
+        $this->data['sub_title']        = $this->data['active'] = "Riwayat Transaksi";
+
+        $member                         = member::where('user_id', auth()->user()->id)->firstOrFail();
+        $this->data['transactions']     = transaction::where('member_id', $member->user_id)->get();
+
+        return view('guest.profile', $this->data);
     }
 }

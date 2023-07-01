@@ -46,8 +46,6 @@
                     beforeSend: function() {
                         self.total = self.original_total;
                         self.type = "";
-                        self.coupon = "";
-
                         self.rate = 0;
                         self.rateIDR = currencyIDR(self.rate);
                         showLoading();
@@ -68,7 +66,8 @@
 
                     },
                     complete: function() {
-                        self.totalIDR = currencyIDR(self.total);
+                        const newtotal = self.total-self.discount+self.rate;
+                        self.totalIDR = currencyIDR(newtotal);
                         hideLoading();
                     }
                 });
@@ -79,8 +78,8 @@
                 const price = selectedOption.price;
                 this.rate = price;
                 this.rateIDR = currencyIDR(price);
-                this.total = this.total + this.rate;
-                this.totalIDR = currencyIDR(this.total);
+                const newtotal = this.total - this.discount + this.rate;
+                this.totalIDR = currencyIDR(newtotal);
             },
             applyCoupon:function(){
                 const self = this;
@@ -100,6 +99,7 @@
                     beforeSend: function() {
                         self.total = self.original_total;
                         self.totalIDR = currencyIDR(self.total);
+                        self.discount = 0;
                         self.errorMessage ="";
                         self.successMessage ="";
                         showLoading();
@@ -107,7 +107,6 @@
                     success: function(response) {
                         self.successMessage = response.message;
                         self.discount = response.data.discount;
-                        self.total = self.total - self.discount;
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         const statusCode = jqXHR.status;
@@ -125,10 +124,15 @@
 
                     },
                     complete: function() {
-                        self.totalIDR = currencyIDR(self.total);
+                        const newtotal = self.total-self.discount+self.rate;
+                        self.totalIDR = currencyIDR(newtotal);
+                        self.disountIDR = currencyIDR(self.discount);
                         hideLoading();
                     }
                 });
+            },
+            resetCoupon:function(){
+
             }
         },
     });

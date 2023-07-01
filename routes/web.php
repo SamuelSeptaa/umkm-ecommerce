@@ -46,6 +46,9 @@ Route::group(['middleware' => ['auth', 'role:member']], function () {
     Route::get('/profile', [Profile::class, 'index'])->name("profile");
     Route::post('/save_profile', [Profile::class, 'save_profile'])->name("save_profile");
 
+    Route::get('/transaction-history', [Profile::class, 'transaction_history'])->name("transaction-history");
+
+
     Route::post("/add_favorit", [Cart::class, "add_favorit"])->name("add-favorit");
 
     Route::post("/check_cart", [Cart::class, "check_cart"])->name("check-cart");
