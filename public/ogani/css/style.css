@@ -2134,6 +2134,22 @@ ol {
   Checkout
 -----------------------*/
 
+.icon-payment-container{
+    height: 65px;
+}
+
+.icon-payment-container.active{
+    box-shadow:0px 0px 0px 4px rgba(127, 173, 57,.6);
+}
+
+.icon-payment-container:hover{
+    cursor:pointer;
+}
+
+.payment-method > div{
+    margin: auto;
+}
+
 .del{
     text-decoration: line-through;
 }

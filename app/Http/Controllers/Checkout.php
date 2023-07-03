@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\courier;
+use App\Models\payment_method;
 use Illuminate\Http\Request;
 use App\Models\shopping_cart;
 use App\Models\voucher;
@@ -30,6 +31,8 @@ class Checkout extends Controller
                   END AS discounted_price
                 FROM products WHERE products.id = shopping_carts.product_id) AS sub_total FROM shopping_carts WHERE user_id = $user_id) AS temp_table");
         $this->data['cart_total']           = ($results[0]->total != null) ? $results[0]->total : 0;
+
+        $this->data['payment_methods']      = payment_method::all();
         $this->data['script']   = "guest.script.checkout";
 
         return view('guest.checkout', $this->data);

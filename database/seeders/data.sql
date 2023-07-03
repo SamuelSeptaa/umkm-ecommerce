@@ -55,7 +55,7 @@ DELETE FROM `members`;
 INSERT INTO `members` (`id`, `user_id`, `name`, `address`, `phone`, `latitude`, `longitude`, `created_at`, `updated_at`) VALUES
 	(1, 5, 'Samuel Septa Munthe', 'Jalan Palangka Raya', '082252961155', '-2.2142566506905155', '113.90092947082178', '2023-06-27 01:25:19', '2023-06-27 18:36:46');
 
--- Dumping data for table rezas_ecommerce.migrations: ~17 rows (approximately)
+-- Dumping data for table rezas_ecommerce.migrations: ~18 rows (approximately)
 DELETE FROM `migrations`;
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(1, '2014_10_12_000000_create_users_table', 1),
@@ -74,7 +74,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(14, '2023_05_27_011058_create_members_table', 1),
 	(15, '2023_05_29_084710_create_featured_products_table', 1),
 	(16, '2023_05_31_065255_create_wishlists_table', 1),
-	(17, '2023_06_30_055934_create_couriers_table', 2);
+	(17, '2023_06_30_055934_create_couriers_table', 2),
+	(18, '2023_07_03_082446_create_payment_methods_table', 3),
+	(19, '2023_07_03_093452_create_voucher_logs_table', 4);
 
 -- Dumping data for table rezas_ecommerce.model_has_permissions: ~0 rows (approximately)
 DELETE FROM `model_has_permissions`;
@@ -90,6 +92,14 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 
 -- Dumping data for table rezas_ecommerce.password_resets: ~0 rows (approximately)
 DELETE FROM `password_resets`;
+
+-- Dumping data for table rezas_ecommerce.payment_methods: ~4 rows (approximately)
+DELETE FROM `payment_methods`;
+INSERT INTO `payment_methods` (`id`, `code`, `icon_url`, `created_at`, `updated_at`) VALUES
+	(1, 'bca_va', 'img/payment/bca-icon.png', '2023-07-03 08:34:15', '2023-07-03 08:34:16'),
+	(2, 'bri_va', 'img/payment/bri-icon.png', '2023-07-03 08:34:15', '2023-07-03 08:34:16'),
+	(3, 'other_qris', 'img/payment/qris.png', '2023-07-03 08:34:15', '2023-07-03 08:34:16'),
+	(4, 'indomaret', 'img/payment/indomaret.png', '2023-07-03 08:34:15', '2023-07-03 08:34:16');
 
 -- Dumping data for table rezas_ecommerce.permissions: ~0 rows (approximately)
 DELETE FROM `permissions`;
@@ -221,10 +231,10 @@ INSERT INTO `shopping_carts` (`id`, `user_id`, `product_id`, `shop_id`, `qty`, `
 
 -- Dumping data for table rezas_ecommerce.shops: ~3 rows (approximately)
 DELETE FROM `shops`;
-INSERT INTO `shops` (`id`, `user_id`, `shop_name`, `slug`, `created_at`, `updated_at`) VALUES
-	(1, 2, 'Nikita Fried Chicken', 'nikita-fried-chicken', '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
-	(2, 3, 'Bubur Ayam Ceria', 'bubur-ayam-ceria', '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
-	(3, 4, 'Ayam Geprek Goldchick', 'ayam-geprek-goldchick', '2023-06-26 22:43:38', '2023-06-26 22:43:38');
+INSERT INTO `shops` (`id`, `user_id`, `shop_name`, `slug`, `lat`, `long`, `created_at`, `updated_at`) VALUES
+	(1, 2, 'Nikita Fried Chicken', 'nikita-fried-chicken', '-2.2136', '113.9108', '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
+	(2, 3, 'Bubur Ayam Ceria', 'bubur-ayam-ceria', '-2.2136', '113.9108', '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
+	(3, 4, 'Ayam Geprek Goldchick', 'ayam-geprek-goldchick', '-2.2136', '113.9108', '2023-06-26 22:43:38', '2023-06-26 22:43:38');
 
 -- Dumping data for table rezas_ecommerce.transactions: ~0 rows (approximately)
 DELETE FROM `transactions`;
@@ -243,8 +253,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 
 -- Dumping data for table rezas_ecommerce.vouchers: ~1 rows (approximately)
 DELETE FROM `vouchers`;
-INSERT INTO `vouchers` VALUES (1, 1, 'CODE', 30000.00, 75000.00, '2023-06-30 22:12:55', '2023-07-30 22:12:56', '2023-06-30 22:13:03', '2023-06-30 22:13:04');
-
+INSERT INTO `vouchers` (`id`, `shop_id`, `code`, `discount`, `min_purchase`, `valid_from`, `valid_until`, `created_at`, `updated_at`) VALUES
+	(1, 1, 'CODE', 30000.00, 75000.00, '2023-06-30 22:12:55', '2023-07-30 22:12:56', '2023-06-30 22:13:03', '2023-06-30 22:13:04');
 
 -- Dumping data for table rezas_ecommerce.wishlists: ~1 rows (approximately)
 DELETE FROM `wishlists`;
