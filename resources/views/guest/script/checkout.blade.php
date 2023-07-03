@@ -150,7 +150,7 @@
                 const formContainer = event.target;
                 let formData = new FormData(formContainer)
                 formData.append('total', this.total);
-                formData.append('total', this.total);
+                formData.append('shipping_fee', this.rate);
 
             }
         },
