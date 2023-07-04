@@ -61,6 +61,7 @@ Route::group(['middleware' => ['auth', 'role:member']], function () {
     Route::get("/checkout", [Checkout::class, "index"])->name("checkout");
     Route::post("/rates", [Checkout::class, "rates"])->name("rates");
     Route::post("/apply-coupon", [Checkout::class, "apply_coupon"])->name("apply-coupon");
+    Route::post("/make-transaction", [Checkout::class, "make_transaction"])->name("make-transaction");
 });
 
 Route::group(['middleware' => ['auth', 'role:merchant']], function () {

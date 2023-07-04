@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\shopping_cart;
 use App\Models\voucher;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class Checkout extends Controller
 {
@@ -140,5 +141,27 @@ class Checkout extends Controller
                 'discount'  => $isExist->discount,
             ]
         ], 200);
+    }
+
+    public function make_transaction(Request $request)
+    {
+        $data       = $request->validate([
+            'email'                 => ['required', 'email:dns', 'max:100'],
+            'name'                  => ['required', 'min:5', 'max:100', 'regex:/^[a-zA-Z\s]+$/'],
+            'phone'                 => ['required', 'numeric', 'digits_between:10,13'],
+            'address'               => ['required'],
+            'latitude'              => ['required'],
+            'longitude'             => ['required'],
+            'shipping_method'       => ['required'],
+            'type'                  => ['required'],
+            'payment_channel'       => ['required'],
+        ], [
+            'latitude.required' => 'Titik lokasi Anda wajib diisi'
+        ]);
+
+        \Midtrans\Config::$serverKey = config('midtrans.server_key');
+        \Midtrans\Config::$isProduction = config('midtrans.is_production');
+        \Midtrans\Config::$isSanitized = config('midtrans.is_sanitized');
+        \Midtrans\Config::$is3ds = config('midtrans.is_3ds');
     }
 }

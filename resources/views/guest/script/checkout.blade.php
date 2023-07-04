@@ -151,10 +151,50 @@
                 let formData = new FormData(formContainer)
                 formData.append('total', this.total);
                 formData.append('shipping_fee', this.rate);
+                formData.append('payment_channel', this.payment_code);
+                formData.append('sub_total', this.original_total);
+                formData.append('total_products', cartAndFavorite.$data.counterCart);
+                formData.append('voucher_discount', this.discount);
+                formData.append('coupon', this.coupon)
+                formData.append('total', this.total);
 
+                $.ajax({
+                    url: "{{ route('make-transaction') }}",
+                    type: "POST",
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    dataType: 'json',
+                    beforeSend: function() {
+                        showLoading();
+                    },
+                    success: function(response) {
+                        console.log(response);
+                    },
+                    error: function(jqXHR, status, error) {
+                        const response = jqXHR.responseJSON;
+                        if (jqXHR.status == 422) {
+                            let result = Object.entries(response.errors);
+                            result.forEach(function([field, message], index) {
+                                $(`div[for="${field}"]`).html(message);
+                                $(`#${field}`).addClass('is-invalid');
+                            });
+                        }
+                    },
+                    complete: function() {
+                        hideLoading();
+                    }
+                });
             }
         },
     });
+    $(document).on('keyup change', '#form-checkout input, #form-checkout textarea, #form-checkout select', function() {
+        $(this).removeClass('is-invalid');
+    });
+
     let lat = "-2.2136";
     let long = "113.9108";
 

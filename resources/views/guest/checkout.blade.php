@@ -11,50 +11,36 @@
                         <div class="col-lg-7 col-md-6">
                             <div class="form-group">
                                 <p>Nama<span>*</span></p>
-                                <input type="text" name="nama"
-                                    class="form-control mb-0 @error('nama') is-invalid @enderror" placeholder="Nama Lengkap"
+                                <input type="text" name="name" class="form-control mb-0" placeholder="Nama Lengkap"
                                     value="{{ $profile->member->name }}" autocomplete="off">
-                                @error('nama')
-                                    <div class="invalid-feedback" for="nama">{{ $message }}</div>
-                                @enderror
+                                <div class="invalid-feedback" for="name"></div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <p>Phone<span>*</span></p>
-                                        <input type="text" name="phone"
-                                            class="form-control mb-0 @error('phone') is-invalid @enderror"
+                                        <input type="text" name="phone" class="form-control mb-0"
                                             placeholder="Nomor Handphone" value="{{ $profile->member->phone }}"
                                             autocomplete="off">
-                                        @error('phone')
-                                            <div class="invalid-feedback" for="phone">{{ $message }}</div>
-                                        @enderror
+                                        <div class="invalid-feedback" for="phone"></div>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <p>Email<span>*</span></p>
-                                        <input type="text" name="email"
-                                            class="form-control mb-0 @error('email') is-invalid @enderror"
-                                            placeholder="Email" value="{{ $profile->email }}" autocomplete="off">
-                                        @error('email')
-                                            <div class="invalid-feedback" for="email">{{ $message }}</div>
-                                        @enderror
+                                        <input type="text" name="email" class="form-control mb-0 " placeholder="Email"
+                                            value="{{ $profile->email }}" autocomplete="off">
+                                        <div class="invalid-feedback" for="email"></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <p>Alamat<span>*</span></p>
-                                <textarea class="form-control mb-0 @error('address') is-invalid @enderror" name="address" id="address" rows="3"
-                                    placeholder="Alamat Lengkap">{{ $profile->member->address }}</textarea>
-                                @error('address')
-                                    <div class="invalid-feedback" for="address">{{ $message }}</div>
-                                @enderror
+                                <textarea class="form-control mb-0 " name="address" id="address" rows="3" placeholder="Alamat Lengkap">{{ $profile->member->address }}</textarea>
+                                <div class="invalid-feedback" for="address"></div>
                             </div>
                             <div class="form-group">
-                                @error('latitude')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
+                                <div class="text-danger" for="latitude"></div>
                                 <input type="hidden" name="latitude" id="latitude" v-model="lat" v-on:change="resetRate">
                                 <input type="hidden" name="longitude" id="longitude" v-model="long">
                                 <div class="map" id="map"></div>
@@ -69,9 +55,7 @@
                                             <option value="{{ $c->code }}">{{ $c->courier_name }}</option>
                                         @endforeach
                                     </select>
-                                    @error('shipping_method')
-                                        <div class="invalid-feedback" for="shipping_method">{{ $message }}</div>
-                                    @enderror
+                                    <div class="invalid-feedback" for="shipping_method"></div>
                                 </div>
                                 <div class="col-lg-6">
                                     <p>Tipe<span>*</span></p>
@@ -83,9 +67,7 @@
                                             :key="rate.courier_service_code" v-html="rate.courier_service_name"
                                             v-bind:data-price="rate.price"></option>
                                     </select>
-                                    @error('tipe_pengiriman')
-                                        <div class="invalid-feedback" for="shipping_method">{{ $message }}</div>
-                                    @enderror
+                                    <div class="invalid-feedback" for="type"></div>
                                 </div>
                             </div>
                         </div>
@@ -134,7 +116,9 @@
                                                 </div>
                                             </div>
                                         @endforeach
-
+                                    </div>
+                                    <div class="mt-1">
+                                        <div class="text-danger text-sm" for="payment_channel"></div>
                                     </div>
                                 </div>
                                 <button type="submit" class="site-btn">BUAT PESANAN</button>
