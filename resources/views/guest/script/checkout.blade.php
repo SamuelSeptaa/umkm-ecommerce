@@ -72,8 +72,8 @@
 
                     },
                     complete: function() {
-                        const newtotal = self.total - self.discount + self.rate;
-                        self.totalIDR = currencyIDR(newtotal);
+                        self.total = self.total - self.discount + self.rate;
+                        self.totalIDR = currencyIDR(self.total);
                         hideLoading();
                     }
                 });
@@ -84,8 +84,9 @@
                 const price = selectedOption.price;
                 this.rate = price;
                 this.rateIDR = currencyIDR(price);
-                const newtotal = this.total - this.discount + this.rate;
-                this.totalIDR = currencyIDR(newtotal);
+                this.total = this.original_total;
+                this.total = this.total - this.discount + this.rate;
+                this.totalIDR = currencyIDR(this.total);
             },
             applyCoupon: function() {
                 const self = this;
@@ -103,11 +104,7 @@
                     },
                     processData: true,
                     beforeSend: function() {
-                        self.total = self.original_total;
-                        self.totalIDR = currencyIDR(self.total);
-                        self.discount = 0;
-                        self.errorMessage = "";
-                        self.successMessage = "";
+                        self.resetCoupon();
                         showLoading();
                     },
                     success: function(response) {
@@ -130,15 +127,23 @@
 
                     },
                     complete: function() {
-                        const newtotal = self.total - self.discount + self.rate;
-                        self.totalIDR = currencyIDR(newtotal);
+                        self.total = self.total - self.discount + self.rate;
+                        self.totalIDR = currencyIDR(self.total);
                         self.disountIDR = currencyIDR(self.discount);
                         hideLoading();
                     }
                 });
             },
             resetCoupon: function() {
+                this.total = this.original_total;
+                this.totalIDR = currencyIDR(this.total);
+                this.discount = 0;
+                this.errorMessage = "";
+                this.successMessage = "";
 
+                this.total = this.total - this.discount + this.rate;
+                this.totalIDR = currencyIDR(this.total);
+                this.disountIDR = currencyIDR(this.discount);
             },
             selectPaymentMethod: function(payment_code) {
                 this.payment_code = payment_code;

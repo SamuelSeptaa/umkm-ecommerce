@@ -91,7 +91,7 @@
                                 <div class="row align-items-center mb-3">
                                     <div class="col-8">
                                         <input class="form-control" v-model="coupon" type="text"
-                                            placeholder="Pakai kode kupon kamu">
+                                            placeholder="Pakai kode kupon kamu" v-on:keyup="resetCoupon">
                                     </div>
                                     <div class="col-4">
                                         <button class="btn btn-secondary mt-0 btn-apply-coupon" v-on:click="applyCoupon"
