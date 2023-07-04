@@ -22,6 +22,7 @@ function get_enum_values($table, $field)
     return $enum;
 }
 
+
 function lastNomor($prefix, $table, $column)
 {
 
@@ -38,7 +39,7 @@ function lastNomor($prefix, $table, $column)
 function generateOrderNumber()
 {
     $prefix = date('y') . date('m');
-    $last_code = lastNomor($prefix, 'transaction_headers', 'document_number');
+    $last_code = lastNomor($prefix, 'transactions', 'receipt_number');
     $new_code = str_pad(($last_code + 1), 4, "0", STR_PAD_LEFT);
     return $prefix . $new_code;
 }

@@ -156,7 +156,6 @@
                 formData.append('total_products', cartAndFavorite.$data.counterCart);
                 formData.append('voucher_discount', this.discount);
                 formData.append('coupon', this.coupon)
-                formData.append('total', this.total);
 
                 $.ajax({
                     url: "{{ route('make-transaction') }}",

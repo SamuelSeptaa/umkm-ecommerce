@@ -163,5 +163,58 @@ class Checkout extends Controller
         \Midtrans\Config::$isProduction = config('midtrans.is_production');
         \Midtrans\Config::$isSanitized = config('midtrans.is_sanitized');
         \Midtrans\Config::$is3ds = config('midtrans.is_3ds');
+
+        $receipt_number     = "ORDER" . generateOrderNumber();
+        $shopping_carts     = shopping_cart::with('product')
+            ->where('user_id', auth()->user()->id)->get();
+
+        $transaction_details = [
+            'order_id'      => "ORDER1",
+            'gross_amount'  => $request->total
+        ];
+
+        $item_details       = array();
+        foreach ($shopping_carts as $s) {
+            $item_details[] = [
+                'id'            => $s->product->id,
+                'price'         => intval(($s->product->discount > 0)
+                    ? $s->product->price - ($s->product->price * $s->product->discount / 100)
+                    : $s->product->price),
+                'quantity'      => $s->qty,
+                'name'          => $s->product->product_name,
+                'category'      => $s->product->category->category,
+            ];
+        }
+        array_push($item_details, [
+            'id'        => 0,
+            'price'     => intval($request->shipping_fee),
+            'quantity'  => 1,
+            'name'      => 'Ongkos kirim',
+            'category'  => 'Ongkir'
+        ]);
+
+        $customer_details = [
+            "first_name"    => $request->name,
+            "email"         => $request->email,
+            "phone"         => $request->phone
+        ];
+
+        $enabled_payments = [$request->payment_channel];
+
+        $expiry         = [
+            'start_time'  => date('Y-m-d H:i:s') . " +0700",
+            'unit'        => "minutes",
+            'duration'    => 120
+        ];
+
+        $requestBody = [
+            'transaction_details'   => $transaction_details,
+            'item_details'          => $item_details,
+            'customer_details'      => $customer_details,
+            'enabled_payments'      => $enabled_payments,
+            'expiry'                => $expiry,
+        ];
+
+        dd(json_encode($requestBody));
     }
 }
