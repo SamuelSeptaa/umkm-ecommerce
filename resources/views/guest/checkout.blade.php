@@ -79,7 +79,7 @@
                                     @foreach ($shopping_carts as $s)
                                         <li>{{ $s->product->product_name . ' x ' . $s->qty }} <span>
                                                 {{ $s->product->discount > 0
-                                                    ? currencyIDR($s->product->price - ($s->product->price * $s->product->discount) / 100) * $s->qty
+                                                    ? currencyIDR(($s->product->price - ($s->product->price * $s->product->discount) / 100) * $s->qty)
                                                     : currencyIDR($s->product->price * $s->qty) }}</span>
                                         </li>
                                     @endforeach

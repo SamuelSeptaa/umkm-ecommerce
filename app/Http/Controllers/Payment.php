@@ -11,14 +11,18 @@ class Payment extends Controller
 {
     public function index(Request $request)
     {
-        if ($request->fraud_status === "accept") {
-            $transaction_code   = $request->transaction_id;
-            $status             = $request->transaction_status;
-            $transaction_time   = $request->transaction_time;
-            $transaction        = transaction::with('transaction_detail', 'shop')->where('transaction_code', $transaction_code)->firstOrFail();
-            // return response()->json($transaction);
+        \Midtrans\Config::$serverKey = config('midtrans.server_key');
+        \Midtrans\Config::$isProduction = config('midtrans.is_production');
+        \Midtrans\Config::$isSanitized = config('midtrans.is_sanitized');
+        \Midtrans\Config::$is3ds = config('midtrans.is_3ds');
+        $notif = new \Midtrans\Notification();
+        if ($notif->fraud_status === "accept") {
+            $receipt_number     = $notif->order_id;
+            $status             = $notif->transaction_status;
+            $transaction_time   = $notif->transaction_time;
+            $transaction        = transaction::with('transaction_detail', 'shop')->where('receipt_number', $receipt_number)->firstOrFail();
             if ($status === "settlement") {
-                transaction::where('transaction_code', $transaction_code)->update([
+                transaction::where('receipt_number', $receipt_number)->update([
                     'payment_status'    => strtoupper($status),
                     'status'            => 'PROCESSING',
                     'paid_date'         => $transaction_time
@@ -26,7 +30,7 @@ class Payment extends Controller
 
                 Mail::to($transaction->email)->send(new TransactionPaid($transaction));
             } else {
-                transaction::where('transaction_code', $transaction_code)->update([
+                transaction::where('receipt_number', $receipt_number)->update([
                     'payment_status'    => strtoupper($status),
                     'status'            => 'DONE',
                     'paid_date'         => NULL
