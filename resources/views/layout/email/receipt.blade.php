@@ -198,14 +198,23 @@
                                 <tr>
                                     <td align="left" width="40%"
                                         style="padding: 6px 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-                                        Email
+                                        Metode Pembayaran
                                     </td>
                                     <td align="left" width="60%"
                                         style="padding: 6px 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-                                        : {{ $transaction->email }}
+                                        : {{ str_replace('_', ' ', strtoupper($transaction->payment_channel)) }}
                                     </td>
                                 </tr>
-
+                                <tr>
+                                    <td align="left" width="40%"
+                                        style="padding: 6px 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
+                                        Waktu Bayar
+                                    </td>
+                                    <td align="left" width="60%"
+                                        style="padding: 6px 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
+                                        : {{ parseTanggal($transaction->paid_date) }}
+                                    </td>
+                                </tr>
                             </table>
                         </td>
                     </tr>
