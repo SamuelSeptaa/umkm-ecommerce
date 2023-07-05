@@ -104,7 +104,7 @@
                     },
                     processData: true,
                     beforeSend: function() {
-                        self.resetCoupon();
+                        self.resetCoupon(false);
                         showLoading();
                     },
                     success: function(response) {
@@ -124,7 +124,6 @@
                                     'error'
                                 );
                         }
-
                     },
                     complete: function() {
                         self.total = self.total - self.discount + self.rate;
@@ -134,16 +133,18 @@
                     }
                 });
             },
-            resetCoupon: function() {
+            resetCoupon: function(isfromkeyup = true) {
                 this.total = this.original_total;
                 this.totalIDR = currencyIDR(this.total);
                 this.discount = 0;
                 this.errorMessage = "";
                 this.successMessage = "";
 
-                this.total = this.total - this.discount + this.rate;
-                this.totalIDR = currencyIDR(this.total);
-                this.disountIDR = currencyIDR(this.discount);
+                if (isfromkeyup) {
+                    this.total = this.total - this.discount + this.rate;
+                    this.totalIDR = currencyIDR(this.total);
+                    this.disountIDR = currencyIDR(this.discount);
+                }
             },
             selectPaymentMethod: function(payment_code) {
                 this.payment_code = payment_code;
@@ -176,16 +177,33 @@
                         showLoading();
                     },
                     success: function(response) {
-                        console.log(response);
+                        const data = response.data.data;
+                        window.location.href = data.redirect_url;
                     },
-                    error: function(jqXHR, status, error) {
+                    error: function(jqXHR, textStatus, error) {
                         const response = jqXHR.responseJSON;
-                        if (jqXHR.status == 422) {
-                            let result = Object.entries(response.errors);
-                            result.forEach(function([field, message], index) {
-                                $(`div[for="${field}"]`).html(message);
-                                $(`#${field}`).addClass('is-invalid');
-                            });
+                        const statusCode = jqXHR.status;
+                        switch (statusCode) {
+                            case 422:
+                                let result = Object.entries(response.errors);
+                                result.forEach(function([field, message], index) {
+                                    $(`div[for="${field}"]`).html(message);
+                                    $(`#${field}`).addClass('is-invalid');
+                                });
+                                break;
+                            case 404:
+                                Swal.fire(
+                                    response.message,
+                                    response.message,
+                                    'error'
+                                );
+                                break;
+                            default:
+                                Swal.fire(
+                                    "Terjadi Kesalahan",
+                                    response.message,
+                                    'error'
+                                );
                         }
                     },
                     complete: function() {

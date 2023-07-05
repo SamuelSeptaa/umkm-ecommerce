@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\member;
+use App\Models\payment_method;
 use App\Models\transaction;
+use App\Models\transaction_detail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -68,7 +70,23 @@ class Profile extends Controller
         $this->data['sub_title']        = $this->data['active'] = "Riwayat Transaksi";
 
         $member                         = member::where('user_id', auth()->user()->id)->firstOrFail();
-        $this->data['transactions']     = transaction::where('member_id', $member->user_id)->get();
+        $this->data['transactions']     = transaction::where('member_id', $member->id)->get();
+
+        return view('guest.profile', $this->data);
+    }
+
+    public function transaction_history_detail($receipt_number)
+    {
+        $member                             = member::where('user_id', auth()->user()->id)->firstOrFail();
+        $transaction                        = transaction::where('member_id', $member->id)->where('receipt_number', $receipt_number)->firstOrFail();
+        $this->data['transaction']          = $transaction;
+        $this->data['transaction_details']  = transaction_detail::where('transaction_id', $transaction->id)->get();
+
+        $this->data['receipt_number']       = $transaction->receipt_number;
+        $this->data['sub_title']            = $receipt_number;
+        $this->data['active']               = "Detail Riwayat Transaksi";
+
+        $this->data['payment_method']      = payment_method::where('code', $transaction->payment_channel)->first();
 
         return view('guest.profile', $this->data);
     }

@@ -17,6 +17,7 @@ class CreateVoucherLogsTable extends Migration
             $table->id();
             $table->foreignId('shop_id');
             $table->foreignId('voucher_id');
+            $table->foreignId('transaction_id');
             $table->timestamps();
         });
     }

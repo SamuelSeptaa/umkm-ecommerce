@@ -5,6 +5,7 @@ use App\Http\Controllers\Checkout;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Index;
 use App\Http\Controllers\Login;
+use App\Http\Controllers\Payment;
 use App\Http\Controllers\Product;
 use App\Http\Controllers\Profile;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,7 @@ Route::group(['middleware' => ['auth', 'role:member']], function () {
     Route::post('/save_profile', [Profile::class, 'save_profile'])->name("save_profile");
 
     Route::get('/transaction-history', [Profile::class, 'transaction_history'])->name("transaction-history");
+    Route::get('/transaction-history/{receipt_number}', [Profile::class, 'transaction_history_detail'])->name("transaction-history-detail");
 
 
     Route::post("/add_favorit", [Cart::class, "add_favorit"])->name("add-favorit");
@@ -74,3 +76,5 @@ Route::group(['middleware' => ['auth', 'role:merchant']], function () {
     Route::get('/product-detail/{product_id}', [Product::class, 'detail'])->name("detail-product");
     Route::post('/update-product', [Product::class, 'update'])->name("update-product");
 });
+
+Route::post('/callback-payment', [Payment::class, 'index']);

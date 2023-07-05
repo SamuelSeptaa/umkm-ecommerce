@@ -36,9 +36,9 @@ function lastNomor($prefix, $table, $column)
     return 0;
 }
 
-function generateOrderNumber()
+function generateOrderNumber($prefix)
 {
-    $prefix = date('y') . date('m');
+    $prefix = $prefix .  date('y') . date('m');
     $last_code = lastNomor($prefix, 'transactions', 'receipt_number');
     $new_code = str_pad(($last_code + 1), 4, "0", STR_PAD_LEFT);
     return $prefix . $new_code;
