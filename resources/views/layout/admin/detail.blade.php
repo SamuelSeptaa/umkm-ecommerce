@@ -1,15 +1,23 @@
 @extends('layout.admin.index')
 @section('content')
     <div class="card mb-4">
-        <div class="card-header"><strong>{{ $title }}</strong></div>
-        <div class="card-body">
-            @if (session('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ session('success') }}
-                    <button class="btn-close" type="button" data-coreui-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
-            <form action="{{ $action }}" id="form-manipulation" method="POST" enctype="multipart/form-data">
+        <form action="{{ $action }}" id="form-manipulation" method="POST" enctype="multipart/form-data">
+
+            <div class="card-header d-flex align-items-center"><strong>{{ $title }}</strong></strong>
+                <a class="btn btn-sm btn-secondary ms-auto me-1" href="{{ $back }}"><i
+                        class="fa-solid fa-arrow-left"></i>
+                    Kembali</a>
+                <button type="submit" class="btn btn-sm btn-info me-1 d-print-none">
+                    <i class="fa-solid fa-floppy-disk"></i> Save
+                </button>
+            </div>
+            <div class="card-body">
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button class="btn-close" type="button" data-coreui-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
                 @csrf
                 <div class="row">
                     <div class="col-12 mb-3">
@@ -114,7 +122,7 @@
                         </div>
                     @endif
                 @endforeach
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 @endsection

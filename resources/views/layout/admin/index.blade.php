@@ -37,6 +37,7 @@
     <!-- We use those styles to show code examples, you should remove them in your application.-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism.css">
     <link href="{{ asset('coreui') }}/css/examples.css" rel="stylesheet">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -90,10 +91,15 @@
     <script src="https://cdn.tiny.cloud/1/3rxy4sgehgdwoqfquqa3mbf1wpkkm4cq4lbg9lt4yk9gg3us/tinymce/6/tinymce.min.js"
         referrerpolicy="origin"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+
 </body>
 
 </html>
 <script>
+    const mapboxKey = 'pk.eyJ1Ijoic2FtdWVsc2VwdGEiLCJhIjoiY2t6czJvYTkwMzliODJ1cGFhaThpMGs4NCJ9.OsDTB6dWDaNla3EJTNpThQ';
+
+
     function showLoading() {
         $(".loader").show();
         $("#preloder").delay(50).fadeIn("fast");

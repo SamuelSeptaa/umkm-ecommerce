@@ -177,7 +177,7 @@ class Checkout extends Controller
         \Midtrans\Config::$isSanitized = config('midtrans.is_sanitized');
         \Midtrans\Config::$is3ds = config('midtrans.is_3ds');
 
-        $receipt_number     = generateOrderNumber("D");
+        $receipt_number     = generateOrderNumber("E");
         $shopping_carts     = shopping_cart::with('product')
             ->where('user_id', auth()->user()->id)->get();
 

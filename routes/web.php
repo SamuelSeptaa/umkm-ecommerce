@@ -5,9 +5,12 @@ use App\Http\Controllers\Checkout;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Index;
 use App\Http\Controllers\Login;
+use App\Http\Controllers\MerchantProfile;
 use App\Http\Controllers\Payment;
 use App\Http\Controllers\Product;
 use App\Http\Controllers\Profile;
+use App\Http\Controllers\Transaction;
+use App\Http\Controllers\Voucher;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -75,6 +78,18 @@ Route::group(['middleware' => ['auth', 'role:merchant']], function () {
     Route::post('/store-product', [Product::class, 'store'])->name("store-product");
     Route::get('/product-detail/{product_id}', [Product::class, 'detail'])->name("detail-product");
     Route::post('/update-product', [Product::class, 'update'])->name("update-product");
+
+    Route::get('/transaction', [Transaction::class, 'index'])->name("transaction");
+    Route::post('/show-transaction', [Transaction::class, 'show'])->name("show-transaction");
+    Route::get('/transaction/{id}', [Transaction::class, 'detail'])->name("transaction-detail");
+
+
+    Route::get('/voucher-log', [Voucher::class, 'voucher_log'])->name("voucher-log");
+    Route::post('/show-voucher-log', [Voucher::class, 'show_log'])->name("show-voucher-log");
+
+
+    Route::get('/detail-merchant', [MerchantProfile::class, 'detail_merchant'])->name("detail-merchant");
+    Route::post('/update-merchant', [MerchantProfile::class, 'update'])->name("update-merchant");
 });
 
 Route::post('/callback-payment', [Payment::class, 'index']);

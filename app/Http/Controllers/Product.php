@@ -52,10 +52,10 @@ class Product extends Controller
                     </div>
                 ';
             })
-            ->addColumn('statusbadge', function ($kavlings) {
-                if ($kavlings->status == 'PUBLISH')
-                    return '<span class="badge bg-success">' . $kavlings->status . '</span>';
-                return '<span class="badge bg-danger">' . $kavlings->status . '</span>';
+            ->addColumn('statusbadge', function ($query) {
+                if ($query->status == 'PUBLISH')
+                    return '<span class="badge bg-success">' . $query->status . '</span>';
+                return '<span class="badge bg-danger">' . $query->status . '</span>';
             })
             ->editColumn('discount', function ($query) {
                 if ($query->discount)

@@ -24,6 +24,27 @@
                 </div>
                 <div>Daftar Produk</div>
             </a>
+            <a class="nav-link" href="{{ route('transaction') }}">
+                <div class="mx-2">
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                </div>
+                <div>Daftar Transaksi</div>
+            </a>
+            <a class="nav-link" href="{{ route('voucher-log') }}">
+                <div class="mx-2">
+                    <i class="fa-solid fa-list-ol"></i>
+                </div>
+                <div>Riwayat Voucher</div>
+            </a>
+        </li>
+        <li class="nav-title">Toko</li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('detail-merchant') }}">
+                <div class="mx-2">
+                    <i class="fa-solid fa-box"></i>
+                </div>
+                <div>Profil Toko</div>
+            </a>
         </li>
     </ul>
     <button class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>
