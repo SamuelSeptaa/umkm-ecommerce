@@ -177,7 +177,7 @@ class Checkout extends Controller
         \Midtrans\Config::$isSanitized = config('midtrans.is_sanitized');
         \Midtrans\Config::$is3ds = config('midtrans.is_3ds');
 
-        $receipt_number     = generateOrderNumber("E");
+        $receipt_number     = generateOrderNumber("F");
         $shopping_carts     = shopping_cart::with('product')
             ->where('user_id', auth()->user()->id)->get();
 
@@ -261,7 +261,8 @@ class Checkout extends Controller
                 'email'                 => $request->email,
                 'phone'                 => $request->phone,
                 'address'               => $request->address,
-                'shipping_method'       => "$request->shipping_method - $request->type",
+                'shipping_method'       => $request->shipping_method,
+                'shipping_type'         => $request->type,
                 'latitude'              => $request->latitude,
                 'longitude'             => $request->longitude,
                 'payment_channel'       => $request->payment_channel,

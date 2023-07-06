@@ -76,7 +76,7 @@
                                         <label class="col-3 col-form-label" for="shipping_method">Kurir</label>
                                         <div class="col-9">
                                             <input class="form-control" disabled id="shipping_method" type="text"
-                                                value="{{ strtoupper($transaction->shipping_method) }}">
+                                                value="{{ strtoupper("$transaction->shipping_method - $transaction->shipping_type") }}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -153,30 +153,24 @@
                         <div class="tab-pane fade" id="details" role="tabpanel" aria-labelledby="details-tab">
                             <div class="row mb-4">
                                 <div class="col-sm-4">
-                                    <h6 class="mb-3">From:</h6>
-                                    <div><strong>Your Great Company Inc.</strong></div>
-                                    <div>724 John Ave.</div>
-                                    <div>Cupertino, CA 95014</div>
-                                    <div>Email: email@your-great-company.com</div>
-                                    <div>Phone: +1 123-456-7890</div>
+                                    <h6 class="mb-3">Dari:</h6>
+                                    <div><strong>{{ $shop->shop_name }}</strong></div>
+                                    <div>{{ $shop->address }}</div>
+                                    <div>Email: {{ $shop->user->email }}</div>
                                 </div>
                                 <!-- /.col-->
                                 <div class="col-sm-4">
-                                    <h6 class="mb-3">To:</h6>
-                                    <div><strong>Acme Inc.</strong></div>
-                                    <div>159 Manor Station Road</div>
-                                    <div>San Diego, CA 92154</div>
-                                    <div>Email: email@acme.com</div>
-                                    <div>Phone: +1 123-456-7890</div>
+                                    <h6 class="mb-3">Kepada:</h6>
+                                    <div><strong>{{ $transaction->name }}</strong></div>
+                                    <div>{{ $transaction->address }}</div>
+                                    <div>Email: {{ $transaction->email }}</div>
+                                    <div>Phone: {{ $transaction->phone }}</div>
                                 </div>
                                 <!-- /.col-->
                                 <div class="col-sm-4">
-                                    <h6 class="mb-3">Details:</h6>
-                                    <div>Invoice<strong>#90-98792</strong></div>
-                                    <div>March 30, 2020</div>
-                                    <div>VAT: EU9877281777</div>
-                                    <div>Account Name: ACME</div>
-                                    <div><strong>SWIFT code: 99 8888 7777 6666 5555</strong></div>
+                                    <h6 class="mb-3">Detail:</h6>
+                                    <div>Invoice #<strong>{{ $transaction->receipt_number }}</strong></div>
+                                    <div>{{ parseTanggal($transaction->created_at) }}</div>
                                 </div>
                                 <!-- /.col-->
                             </div>
@@ -187,78 +181,59 @@
                                         <tr>
                                             <th class="center">#</th>
                                             <th>Item</th>
-                                            <th>Description</th>
-                                            <th class="center">Quantity</th>
-                                            <th class="right">Unit Cost</th>
+                                            <th class="center">Jumlah</th>
+                                            <th class="right">Harga</th>
                                             <th class="right">Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td class="center">1</td>
-                                            <td class="left">Origin License</td>
-                                            <td class="left">Extended License</td>
-                                            <td class="center">1</td>
-                                            <td class="right">$999,00</td>
-                                            <td class="right">$999,00</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="center">2</td>
-                                            <td class="left">Custom Services</td>
-                                            <td class="left">Instalation and Customization (cost per hour)</td>
-                                            <td class="center">20</td>
-                                            <td class="right">$150,00</td>
-                                            <td class="right">$3.000,00</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="center">3</td>
-                                            <td class="left">Hosting</td>
-                                            <td class="left">1 year subcription</td>
-                                            <td class="center">1</td>
-                                            <td class="right">$499,00</td>
-                                            <td class="right">$499,00</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="center">4</td>
-                                            <td class="left">Platinum Support</td>
-                                            <td class="left">1 year subcription 24/7</td>
-                                            <td class="center">1</td>
-                                            <td class="right">$3.999,00</td>
-                                            <td class="right">$3.999,00</td>
-                                        </tr>
+                                        @php
+                                            $i = 0;
+                                        @endphp
+                                        @foreach ($transaction->transaction_detail as $td)
+                                            @php
+                                                $i++;
+                                            @endphp
+                                            <tr>
+                                                <td class="center">{{ $i }}</td>
+                                                <td class="left">{{ $td->product_name }}</td>
+                                                <td class="center">{{ $td->qty }}</td>
+                                                <td class="right">{{ currencyIDR($td->price) }}</td>
+                                                <td class="right">{{ currencyIDR($td->sub_total) }}</td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
                             <div class="row">
-                                <div class="col-lg-4 col-sm-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                    veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                                    eu fugiat nulla pariatur.</div>
-                                <div class="col-lg-4 col-sm-5 ms-auto">
+                                <div class="col-lg-4 col-sm-5">Receipt ini merupakan receipt yang sah</div>
+                                <div class="col-lg-6 col-sm-5 ms-auto">
                                     <table class="table table-clear">
                                         <tbody>
                                             <tr>
                                                 <td class="left"><strong>Subtotal</strong></td>
-                                                <td class="right">$8.497,00</td>
+                                                <td class="right">{{ currencyIDR($transaction->sub_total) }}</td>
                                             </tr>
                                             <tr>
-                                                <td class="left"><strong>Discount (20%)</strong></td>
-                                                <td class="right">$1,699,40</td>
+                                                <td class="left"><strong>Diskon</strong></td>
+                                                <td class="right">{{ currencyIDR($transaction->voucher_discount) }}</td>
                                             </tr>
                                             <tr>
-                                                <td class="left"><strong>VAT (10%)</strong></td>
-                                                <td class="right">$679,76</td>
+                                                <td class="left"><strong>Ongkos Kirim
+                                                        ({{ strtoupper("$transaction->shipping_method - $transaction->shipping_type") }})</strong>
+                                                </td>
+                                                <td class="right">{{ currencyIDR($transaction->shipping_fee) }}</td>
                                             </tr>
                                             <tr>
                                                 <td class="left"><strong>Total</strong></td>
-                                                <td class="right"><strong>$7.477,36</strong></td>
+                                                <td class="right"><strong>{{ currencyIDR($transaction->total) }}</strong>
+                                                </td>
                                             </tr>
                                         </tbody>
-                                    </table><a class="btn btn-success" href="#">
-                                        <svg class="icon">
-                                            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-dollar"></use>
-                                        </svg> Proceed to Payment</a>
+                                    </table>
+                                    <btn class="btn btn-warning" id="request-pickup">
+                                        <i class="fa-solid fa-truck-pickup"></i> Request Pick Up Barang
+                                    </btn>
                                 </div>
                             </div>
                         </div>

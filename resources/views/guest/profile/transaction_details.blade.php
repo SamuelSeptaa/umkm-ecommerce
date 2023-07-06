@@ -2,7 +2,7 @@
     <div class="col-lg-6 col-md-6">
         <div class="form-group">
             <p>Nama Penerima<span>*</span></p>
-            <input type="text" name="name" class="form-control mb-0" placeholder="Nama Lengkap"
+            <input type="text" disabled name="name" class="form-control mb-0" placeholder="Nama Lengkap"
                 value="{{ $transaction->name }}" autocomplete="off">
             <div class="invalid-feedback" for="name"></div>
         </div>
@@ -10,15 +10,15 @@
             <div class="col-lg-6">
                 <div class="form-group">
                     <p>Phone<span>*</span></p>
-                    <input type="text" name="phone" class="form-control mb-0" placeholder="Nomor Handphone"
-                        value="{{ $transaction->phone }}" autocomplete="off">
+                    <input type="text" disabled name="phone" class="form-control mb-0"
+                        placeholder="Nomor Handphone" value="{{ $transaction->phone }}" autocomplete="off">
                     <div class="invalid-feedback" for="phone"></div>
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="form-group">
                     <p>Email<span>*</span></p>
-                    <input type="text" name="email" class="form-control mb-0 " placeholder="Email"
+                    <input type="text" disabled name="email" class="form-control mb-0 " placeholder="Email"
                         value="{{ $transaction->email }}" autocomplete="off">
                     <div class="invalid-feedback" for="email"></div>
                 </div>
@@ -26,13 +26,14 @@
         </div>
         <div class="form-group">
             <p>Alamat<span>*</span></p>
-            <textarea class="form-control mb-0 " name="address" id="address" rows="3" placeholder="Alamat Lengkap">{{ $transaction->address }}</textarea>
+            <textarea class="form-control mb-0 " disabled name="address" id="address" rows="3" placeholder="Alamat Lengkap">{{ $transaction->address }}</textarea>
             <div class="invalid-feedback" for="address"></div>
         </div>
         <div class="form-group"">
             <p>Metode Pengiriman<span>*</span></p>
-            <input type="text" name="shipping_method" class="form-control mb-0 " placeholder="Method Shipping"
-                value="{{ $transaction->shipping_method }}" autocomplete="off">
+            <input type="text" disabled name="shipping_method" class="form-control mb-0 "
+                placeholder="Method Shipping"
+                value="{{ "$transaction->shipping_method - $transaction->shipping_type" }}" autocomplete="off">
         </div>
         <div class="form-group row">
             <div class="col-lg-6">

@@ -26,6 +26,16 @@
                     </div>
                 </div>
                 <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="phone">Nomor Handphone</label>
+                    <div class="col-sm-10">
+                        <input class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone"
+                            value="{{ $shop->phone }}" type="text">
+                        @error('phone')
+                            <div class="invalid-feedback" for="phone">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label class="col-sm-2 col-form-label" for="shop-name">Nama Toko</label>
                     <div class="col-sm-10">
                         <input class="form-control @error('shop-name') is-invalid @enderror" id="shop-name" name="shop-name"

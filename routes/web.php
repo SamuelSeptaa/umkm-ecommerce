@@ -7,6 +7,7 @@ use App\Http\Controllers\Index;
 use App\Http\Controllers\Login;
 use App\Http\Controllers\MerchantProfile;
 use App\Http\Controllers\Payment;
+use App\Http\Controllers\Pickup;
 use App\Http\Controllers\Product;
 use App\Http\Controllers\Profile;
 use App\Http\Controllers\Transaction;
@@ -82,6 +83,7 @@ Route::group(['middleware' => ['auth', 'role:merchant']], function () {
     Route::get('/transaction', [Transaction::class, 'index'])->name("transaction");
     Route::post('/show-transaction', [Transaction::class, 'show'])->name("show-transaction");
     Route::get('/transaction/{id}', [Transaction::class, 'detail'])->name("transaction-detail");
+    Route::post('/request-pickup', [Pickup::class, 'pickup'])->name("request-pickup");
 
 
     Route::get('/voucher-log', [Voucher::class, 'voucher_log'])->name("voucher-log");

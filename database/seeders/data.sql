@@ -231,10 +231,10 @@ INSERT INTO `shopping_carts` (`id`, `user_id`, `product_id`, `shop_id`, `qty`, `
 
 -- Dumping data for table rezas_ecommerce.shops: ~3 rows (approximately)
 DELETE FROM `shops`;
-INSERT INTO `shops` (`id`, `user_id`, `shop_name`, `slug`, `lat`, `long`, `created_at`, `updated_at`) VALUES
-	(1, 2, 'Nikita Fried Chicken', 'nikita-fried-chicken', '-2.2136', '113.9108', '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
-	(2, 3, 'Bubur Ayam Ceria', 'bubur-ayam-ceria', '-2.2136', '113.9108', '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
-	(3, 4, 'Ayam Geprek Goldchick', 'ayam-geprek-goldchick', '-2.2136', '113.9108', '2023-06-26 22:43:38', '2023-06-26 22:43:38');
+INSERT INTO `shops` (`id`, `user_id`, `shop_name`, `slug`, `address`, `lat`, `long`, `created_at`, `updated_at`, `phone`) VALUES
+	(1, 2, 'Nikita Fried Chicken', 'nikita-fried-chicken', '', '-2.2136', '113.9108', '2023-06-26 22:43:38', '2023-06-26 22:43:38', '082252961155'),
+	(2, 3, 'Bubur Ayam Ceria', 'bubur-ayam-ceria', '', '-2.2136', '113.9108', '2023-06-26 22:43:38', '2023-06-26 22:43:38', '082252961155'),
+	(3, 4, 'Ayam Geprek Goldchick', 'ayam-geprek-goldchick', '', '-2.2136', '113.9108', '2023-06-26 22:43:38', '2023-06-26 22:43:38', '082252961155');
 
 -- Dumping data for table rezas_ecommerce.transactions: ~0 rows (approximately)
 DELETE FROM `transactions`;

@@ -83,6 +83,7 @@ class Transaction extends Controller
     public function detail($id)
     {
         $shop                       = shop::where('user_id', auth()->user()->id)->firstOrFail();
+        $this->data['shop']         = $shop;
         $this->data['transaction']  = ModelsTransaction::select('transactions.*', 'vouchers.code', 'payment_methods.icon_url')->with('transaction_detail')
             ->where('transactions.id', $id)->where('transactions.shop_id', $shop->id)
             ->leftJoin('voucher_logs', 'voucher_logs.transaction_id', '=', 'transactions.id')
@@ -92,7 +93,7 @@ class Transaction extends Controller
 
         $this->data['title']        = 'Detail Transaksi ' . $this->data['transaction']->receipt_number;
 
-        // $this->data['script']       = 'merchant.script.transaction';
+        $this->data['script']       = 'merchant.script.transaction_detail';
         return view('merchant.transaction_detail', $this->data);
     }
 }

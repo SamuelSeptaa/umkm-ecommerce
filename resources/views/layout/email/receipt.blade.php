@@ -259,7 +259,8 @@
                                 <tr>
                                     <td align="left" width="75%"
                                         style="padding: 6px 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-                                        Ongkos Kirim ({{ strtoupper($transaction->shipping_method) }})
+                                        Ongkos Kirim
+                                        ({{ strtoupper("$transaction->shipping_method - $transaction->shipping_type") }})
                                     </td>
                                     <td align="left" width="25%"
                                         style="padding: 6px 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">

@@ -30,6 +30,8 @@ class CreateTransactionsTable extends Migration
             $table->string('phone');
             $table->text('address');
             $table->string('shipping_method');
+            $table->string('shipping_type');
+            $table->string('waybill')->nullable();
             $table->string('latitude');
             $table->string('longitude');
             $table->string('payment_channel')->nullable();
