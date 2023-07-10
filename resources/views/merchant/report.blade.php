@@ -2,9 +2,9 @@
 @section('content')
     <div class="card mb-4">
         <div class="card-header d-flex align-items-center"><strong>{{ $title }}</strong></strong>
-            <a target="_blank" class="btn btn-sm btn-primary ms-auto d-print-none"
+            <a target="_blank" class="btn btn-sm btn-success ms-auto d-print-none"
                 href="{{ route('export-laporan-penjualan') }}">
-                <i class="fa-solid fa-file-csv"></i> Excell
+                <i class="fa-solid fa-file-csv"></i> Download Sheet
             </a>
         </div>
         <div class="card-body">
