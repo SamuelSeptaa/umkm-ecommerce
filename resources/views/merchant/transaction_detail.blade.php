@@ -73,6 +73,13 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
+                                        <label class="col-3 col-form-label" for="updated_at">Diperbarui Pada</label>
+                                        <div class="col-9">
+                                            <input class="form-control" disabled id="updated_at" type="text"
+                                                value="{{ parseTanggal($transaction->updated_at) }}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
                                         <label class="col-3 col-form-label" for="shipping_method">Kurir</label>
                                         <div class="col-9">
                                             <input class="form-control" disabled id="shipping_method" type="text"
@@ -231,9 +238,11 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <btn class="btn btn-warning" id="request-pickup">
-                                        <i class="fa-solid fa-truck-pickup"></i> Request Pick Up Barang
-                                    </btn>
+                                    @if (in_array($transaction->status, ['PROCESSING']))
+                                        <btn class="btn btn-warning" id="request-pickup">
+                                            <i class="fa-solid fa-truck-pickup"></i> Request Pick Up Barang
+                                        </btn>
+                                    @endif
                                 </div>
                             </div>
                         </div>

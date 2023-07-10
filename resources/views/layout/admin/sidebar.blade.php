@@ -45,6 +45,12 @@
                 </div>
                 <div>Profil Toko</div>
             </a>
+            <a class="nav-link" href="{{ route('voucher') }}">
+                <div class="mx-2">
+                    <i class="fa-solid fa-tags"></i>
+                </div>
+                <div>Voucher Toko</div>
+            </a>
         </li>
     </ul>
     <button class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>

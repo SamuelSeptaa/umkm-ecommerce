@@ -19,11 +19,17 @@
                     response.status,
                     response.message,
                     'success'
-                );
+                ).then((result) => {
+                    location.reload();
+                })
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                const statusCode = jqXHR.status;
-                console.log(jqXHR);
+                const response = jqXHR.responseJSON;
+                Swal.fire(
+                    response.status,
+                    response.message,
+                    'error'
+                );
             },
             complete: function() {
                 hideLoading();

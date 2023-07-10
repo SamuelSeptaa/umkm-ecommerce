@@ -76,7 +76,7 @@ class Pickup extends Controller
         if ($data['success']) {
             transaction::where('shop_id', $shop->id)
                 ->where('transactions.id', $request->id)->update([
-                    'status'        => 'SHIPPING',
+                    'status'        => 'SHIPPED',
                 ]);
             return response()->json([
                 'status'        => 'Success',

@@ -11,4 +11,12 @@ class voucher extends Model
     protected $guarded = [
         'id'
     ];
+
+    public function jumlah_penggunaan($voucher_id)
+    {
+        return voucher_log::where('voucher_logs.voucher_id', $voucher_id)
+            ->whereNotIn('transactions.payment_status', ['EXPIRED', 'FAILED'])
+            ->join('vouchers', 'vouchers.id', '=', 'voucher_logs.voucher_id')
+            ->join('transactions', 'transactions.id', '=', 'voucher_logs.transaction_id')->count();
+    }
 }

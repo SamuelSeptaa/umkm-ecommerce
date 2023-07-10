@@ -75,14 +75,14 @@ Route::group(['middleware' => ['auth', 'role:merchant']], function () {
     Route::get('/product', [Product::class, 'index'])->name("product");
     Route::post('/show-product', [Product::class, 'show'])->name("show-product");
     Route::post('/toggle-status-product', [Product::class, 'toggle_status'])->name("toggle-status-product");
-    Route::get('/add-product', [Product::class, 'add'])->name("add-product");
-    Route::post('/store-product', [Product::class, 'store'])->name("store-product");
-    Route::get('/product-detail/{product_id}', [Product::class, 'detail'])->name("detail-product");
+    Route::get('/product/add', [Product::class, 'add'])->name("add-product");
+    Route::post('/product/store', [Product::class, 'store'])->name("store-product");
+    Route::get('/product/detail/{product_id}', [Product::class, 'detail'])->name("detail-product");
     Route::post('/update-product', [Product::class, 'update'])->name("update-product");
 
     Route::get('/transaction', [Transaction::class, 'index'])->name("transaction");
     Route::post('/show-transaction', [Transaction::class, 'show'])->name("show-transaction");
-    Route::get('/transaction/{id}', [Transaction::class, 'detail'])->name("transaction-detail");
+    Route::get('/transaction/detail/{id}', [Transaction::class, 'detail'])->name("transaction-detail");
     Route::post('/request-pickup', [Pickup::class, 'pickup'])->name("request-pickup");
 
 
@@ -92,6 +92,12 @@ Route::group(['middleware' => ['auth', 'role:merchant']], function () {
 
     Route::get('/detail-merchant', [MerchantProfile::class, 'detail_merchant'])->name("detail-merchant");
     Route::post('/update-merchant', [MerchantProfile::class, 'update'])->name("update-merchant");
+
+    Route::get('/voucher', [Voucher::class, 'index'])->name("voucher");
+    Route::post('/show-voucher', [Voucher::class, 'show'])->name("show-voucher");
+    Route::get('/voucher/add', [Voucher::class, 'add'])->name("add-voucher");
+    Route::post('/voucher/store', [Voucher::class, 'store'])->name("store-voucher");
+    Route::get('/voucher/detail/{id}', [Voucher::class, 'detail'])->name("voucher-detail");
 });
 
 Route::post('/callback-payment', [Payment::class, 'index']);

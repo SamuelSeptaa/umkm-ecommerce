@@ -107,6 +107,19 @@
                                 @enderror
                             </div>
                         </div>
+                    @elseif ($rowtype == 'daterange')
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="{{ $rowname }}">{{ $label }}</label>
+                            <div class="col-sm-10">
+                                <input class="form-control daterange @error($rowname) is-invalid @enderror"
+                                    id="{{ $rowname }}" name="{{ $rowname }}" value="{{ old($rowname) }}"
+                                    type="text" autocomplete="off">
+                                @error($rowname)
+                                    <div class="invalid-feedback" for="{{ $rowname }}">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                        </div>
                     @endif
                 @endforeach
             </div>

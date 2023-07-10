@@ -38,6 +38,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism.css">
     <link href="{{ asset('coreui') }}/css/examples.css" rel="stylesheet">
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -92,7 +94,8 @@
         referrerpolicy="origin"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
-
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 </body>
 
 </html>
@@ -151,6 +154,29 @@
         const elementId = $(this).prop('id');
         if (elementId == 'discount' && value > 100)
             $(this).val(100);
+    });
+
+    const date = new Date();
+
+    $(".daterange").daterangepicker({
+        autoUpdateInput: false,
+        minDate: date,
+        timePicker: true,
+        timePicker24Hour: true,
+        timePickerIncrement: 15,
+        timePickerSeconds: false,
+        locale: {
+            cancelLabel: 'Clear'
+        }
+    });
+
+    $('.daterange').on('apply.daterangepicker', function(ev, picker) {
+        $(this).val(picker.startDate.format('YYYY-MM-DD HH:mm:ss') + ' s/d ' + picker.endDate.format(
+            'YYYY-MM-DD HH:mm:ss'));
+    });
+
+    $('.daterange').on('cancel.daterangepicker', function(ev, picker) {
+        $(this).val('');
     });
 
     $(document).on('keyup change', '#form-manipulation input, #form-manipulation textarea, #form-manipulation select',
