@@ -12,8 +12,7 @@
         <ul class="header-nav ms-3">
             <li class="nav-item dropdown"><a class="nav-link py-0" data-coreui-toggle="dropdown"
                     href="{{ asset('coreui') }}/#" role="button" aria-haspopup="true" aria-expanded="false">
-                    <div class="avatar avatar-md"><img class="avatar-img"
-                            src="{{ asset('coreui') }}/assets/img/avatars/8.jpg" alt="user@email.com"></div>
+                    <div class="avatar avatar-md"><i class="fa-solid fa-circle-user fa-xl"></i></div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end pt-0">
                     <div class="dropdown-header bg-light py-2">
