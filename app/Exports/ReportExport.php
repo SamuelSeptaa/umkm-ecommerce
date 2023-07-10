@@ -1,0 +1,83 @@
+<?php
+
+namespace App\Exports;
+
+use App\Models\shop;
+use App\Models\transaction;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Concerns\FromQuery;
+use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMapping;
+
+class ReportExport implements FromQuery, WithHeadings, WithMapping
+{
+    use Exportable;
+
+    public function __construct(Request $request)
+    {
+        $this->$request = $request;
+    }
+
+    public function query()
+    {
+        $shop           = shop::where('user_id', auth()->user()->id)->firstOrFail();
+        return transaction::query()->select(DB::raw("
+                    YEAR(created_at) AS tahun,
+                    SUM( IF( MONTH(created_at) = 1, total, 0) ) AS jan,
+                    SUM( IF( MONTH(created_at) = 2, total, 0) ) AS feb,
+                    SUM( IF( MONTH(created_at) = 3, total, 0) ) AS mar,
+                    SUM( IF( MONTH(created_at) = 4, total, 0) ) AS apr,
+                    SUM( IF( MONTH(created_at) = 5, total, 0) ) AS mei,
+                    SUM( IF( MONTH(created_at) = 6, total, 0) ) AS jun,
+                    SUM( IF( MONTH(created_at) = 7, total, 0) ) AS jul,
+                    SUM( IF( MONTH(created_at) = 8, total, 0) ) AS agt,
+                    SUM( IF( MONTH(created_at) = 9, total, 0) ) AS sep,
+                    SUM( IF( MONTH(created_at) = 10, total, 0) ) AS okt,
+                    SUM( IF( MONTH(created_at) = 11, total, 0) ) AS nov,
+                    SUM( IF( MONTH(created_at) = 12, total, 0) ) AS des
+                     "))
+            ->whereIn('status', ["SHIPPED", "DONE"])
+            ->where('shop_id', $shop->id)
+            ->groupBy(DB::raw("YEAR(created_at)"));
+    }
+
+    public function headings(): array
+    {
+        return [
+            'Tahun',
+            'Januari',
+            'Februari',
+            'Maret',
+            'April',
+            'Mei',
+            'Juni',
+            'Juli',
+            'Agustus',
+            'September',
+            'Oktober',
+            'November',
+            'Desember',
+        ];
+    }
+
+    public function map($transaction): array
+    {
+        return [
+            $transaction->tahun,
+            $transaction->jan ? $transaction->jan : "0",
+            $transaction->feb  ? $transaction->feb : "0",
+            $transaction->mar  ? $transaction->mar : "0",
+            $transaction->apr  ? $transaction->apr : "0",
+            $transaction->mei  ? $transaction->mei : "0",
+            $transaction->jun  ? $transaction->jun : "0",
+            $transaction->jul  ? $transaction->jul : "0",
+            $transaction->agt  ? $transaction->agt : "0",
+            $transaction->sep  ? $transaction->sep : "0",
+            $transaction->des  ? $transaction->des : "0",
+            $transaction->okt  ? $transaction->okt : "0",
+            $transaction->des  ? $transaction->des : "0",
+        ];
+    }
+}

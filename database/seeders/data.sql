@@ -50,12 +50,12 @@ INSERT INTO `featured_products` (`id`, `product_id`, `created_at`, `updated_at`)
 	(7, 45, '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
 	(8, 18, '2023-06-26 22:43:38', '2023-06-26 22:43:38');
 
--- Dumping data for table rezas_ecommerce.members: ~1 rows (approximately)
+-- Dumping data for table rezas_ecommerce.members: ~0 rows (approximately)
 DELETE FROM `members`;
 INSERT INTO `members` (`id`, `user_id`, `name`, `address`, `phone`, `latitude`, `longitude`, `created_at`, `updated_at`) VALUES
 	(1, 5, 'Samuel Septa Munthe', 'Jalan Palangka Raya', '082252961155', '-2.2142566506905155', '113.90092947082178', '2023-06-27 01:25:19', '2023-06-27 18:36:46');
 
--- Dumping data for table rezas_ecommerce.migrations: ~18 rows (approximately)
+-- Dumping data for table rezas_ecommerce.migrations: ~19 rows (approximately)
 DELETE FROM `migrations`;
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(1, '2014_10_12_000000_create_users_table', 1),
@@ -139,7 +139,7 @@ INSERT INTO `products` (`id`, `category_id`, `shop_id`, `product_name`, `image_u
 	(27, 3, 2, 'Product 27', 'img/product/product-details-3.jpg', 'product-27', 'Description of Product 27', 68457.00, NULL, 100, NULL, 'PUBLISH', '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
 	(28, 1, 1, 'Product 28', 'img/product/product-details-1.jpg', 'product-28', 'Description of Product 28', 44784.00, NULL, 100, NULL, 'PUBLISH', '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
 	(29, 4, 1, 'Product 29', 'img/product/product-details-4.jpg', 'product-29', 'Description of Product 29', 179422.00, NULL, 100, NULL, 'PUBLISH', '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
-	(30, 2, 1, 'Product 30', 'img/product/product-details-2.jpg', 'product-30', 'Description of Product 30', 95528.00, NULL, 100, NULL, 'PUBLISH', '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
+	(30, 2, 1, 'Product 30', 'img/product/product-details-2.jpg', 'product-30', 'Description of Product 30', 95528.00, NULL, 98, NULL, 'PUBLISH', '2023-06-26 22:43:38', '2023-07-06 08:15:05'),
 	(31, 4, 3, 'Product 31', 'img/product/product-details-4.jpg', 'product-31', 'Description of Product 31', 163669.00, NULL, 100, NULL, 'PUBLISH', '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
 	(32, 4, 2, 'Product 32', 'img/product/product-details-4.jpg', 'product-32', 'Description of Product 32', 90526.00, NULL, 100, NULL, 'PUBLISH', '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
 	(33, 2, 1, 'Product 33', 'img/product/product-details-2.jpg', 'product-33', 'Description of Product 33', 117923.00, NULL, 100, NULL, 'PUBLISH', '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
@@ -209,7 +209,7 @@ INSERT INTO `products` (`id`, `category_id`, `shop_id`, `product_name`, `image_u
 	(97, 3, 2, 'Product 97', 'img/product/product-details-3.jpg', 'product-97', 'Description of Product 97', 182065.00, NULL, 100, NULL, 'PUBLISH', '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
 	(98, 3, 3, 'Product 98', 'img/product/product-details-3.jpg', 'product-98', 'Description of Product 98', 113213.00, NULL, 100, NULL, 'PUBLISH', '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
 	(99, 4, 1, 'Product 99', 'img/product/product-details-4.jpg', 'product-99', 'Description of Product 99', 212433.00, NULL, 100, NULL, 'PUBLISH', '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
-	(100, 3, 1, 'Product 100', 'img/product/product-details-3.jpg', 'product-100', 'Description of Product 100', 155191.00, NULL, 100, NULL, 'PUBLISH', '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
+	(100, 3, 1, 'Product 100', 'img/product/product-details-3.jpg', 'product-100', 'Description of Product 100', 155191.00, NULL, 98, NULL, 'PUBLISH', '2023-06-26 22:43:38', '2023-07-06 08:15:05'),
 	(101, 3, 1, 'Snack Keripik', 'img/product/snack-keripik.png', 'snack-keripik', '<p><strong>Snack Pringles Keripik Kentang&nbsp;</strong></p>\r\n<p>Pringles keripik kentang terbuat dari bahan berkualitas dengan taburan bumbu di atas keripik yang bertekstur tipis sehingga terasa renyah dan gurih. Cocok di nikmati saat santai dan berbagai momen bersama orang spesial dan keluarga.&nbsp;</p>\r\n<p>Dibuat dari kentang asli dengan kemasan yang praktis sehingga mudah di bawa kemana-mana. Cocok untuk snack sehari hari karena rendah kalori. Masa kadaluarsanya 2024 sehingga masih lama.&nbsp;</p>\r\n<p>Snack Prigles punya isi 10 pack untuk satu boxnya. Yuk, nikmati snack kekinian ini yang nikmat dan gurih. Ada juga varian rasa lain seperti BBQ, keju, dan balado yang bisa kamu pilih sesukamu!</p>', 30000.00, 10.00, 50, NULL, 'PUBLISH', '2023-06-26 22:54:27', '2023-06-26 23:31:49');
 
 -- Dumping data for table rezas_ecommerce.roles: ~4 rows (approximately)
@@ -223,24 +223,26 @@ INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VAL
 -- Dumping data for table rezas_ecommerce.role_has_permissions: ~0 rows (approximately)
 DELETE FROM `role_has_permissions`;
 
--- Dumping data for table rezas_ecommerce.shopping_carts: ~2 rows (approximately)
+-- Dumping data for table rezas_ecommerce.shopping_carts: ~0 rows (approximately)
 DELETE FROM `shopping_carts`;
-INSERT INTO `shopping_carts` (`id`, `user_id`, `product_id`, `shop_id`, `qty`, `created_at`, `updated_at`) VALUES
-	(6, 5, 100, 1, 3, '2023-06-27 01:27:46', '2023-06-27 01:27:46'),
-	(7, 5, 30, 1, 1, '2023-06-27 01:27:46', '2023-06-27 01:27:46');
 
 -- Dumping data for table rezas_ecommerce.shops: ~3 rows (approximately)
 DELETE FROM `shops`;
 INSERT INTO `shops` (`id`, `user_id`, `shop_name`, `slug`, `address`, `lat`, `long`, `created_at`, `updated_at`, `phone`) VALUES
-	(1, 2, 'Nikita Fried Chicken', 'nikita-fried-chicken', '', '-2.2136', '113.9108', '2023-06-26 22:43:38', '2023-06-26 22:43:38', '082252961155'),
-	(2, 3, 'Bubur Ayam Ceria', 'bubur-ayam-ceria', '', '-2.2136', '113.9108', '2023-06-26 22:43:38', '2023-06-26 22:43:38', '082252961155'),
-	(3, 4, 'Ayam Geprek Goldchick', 'ayam-geprek-goldchick', '', '-2.2136', '113.9108', '2023-06-26 22:43:38', '2023-06-26 22:43:38', '082252961155');
+	(1, 2, 'Nikita Fried Chicken', 'nikita-fried-chicken', 'Jl. Beliang, Palangka, Jekan Raya, Kota Palangka Raya, Kalimantan Tengah 74874, Indonesia', '-2.2022776027974516', '113.89824459007355', '2023-06-26 22:43:38', '2023-07-06 09:14:48', '082252961155'),
+	(2, 3, 'Bubur Ayam Ceria', 'bubur-ayam-ceria', 'Jalan kota palangka raya', '-2.2136', '113.9108', '2023-06-26 22:43:38', '2023-06-26 22:43:38', '082252961155'),
+	(3, 4, 'Ayam Geprek Goldchick', 'ayam-geprek-goldchick', 'Jalan kota palangka raya', '-2.2136', '113.9108', '2023-06-26 22:43:38', '2023-06-26 22:43:38', '082252961155');
 
--- Dumping data for table rezas_ecommerce.transactions: ~0 rows (approximately)
+-- Dumping data for table rezas_ecommerce.transactions: ~1 rows (approximately)
 DELETE FROM `transactions`;
+INSERT INTO `transactions` (`id`, `member_id`, `shop_id`, `transaction_code`, `receipt_number`, `status`, `total_products`, `sub_total`, `voucher_discount`, `shipping_fee`, `total`, `name`, `email`, `phone`, `address`, `shipping_method`, `shipping_type`, `waybill`, `latitude`, `longitude`, `payment_channel`, `payment_status`, `paid_date`, `payment_url`, `created_at`, `updated_at`) VALUES
+	(1, 1, 1, '22421d03-d36e-4554-9a14-96927b100b5c', 'F23070001', 'SHIPPED', 2, 501438.00, 30000.00, 12500.00, 483938.00, 'Samuel Septa Munthe', 'samuel@gmail.com', '082252961155', 'Jalan Raden Fatah no 5', 'gojek', 'instant', NULL, '-2.2174529537329306', '113.91067991192193', 'bri_va', 'SETTLEMENT', '2023-07-06 08:15:07', 'https://app.sandbox.midtrans.com/snap/v3/redirection/22421d03-d36e-4554-9a14-96927b100b5c', '2023-07-06 08:15:05', '2023-07-07 01:06:16');
 
--- Dumping data for table rezas_ecommerce.transaction_details: ~0 rows (approximately)
+-- Dumping data for table rezas_ecommerce.transaction_details: ~2 rows (approximately)
 DELETE FROM `transaction_details`;
+INSERT INTO `transaction_details` (`id`, `transaction_id`, `product_id`, `price`, `qty`, `sub_total`, `product_name`, `created_at`, `updated_at`) VALUES
+	(1, 1, 100, 155191.00, 2, 310382.00, 'Product 100', '2023-07-06 08:15:05', '2023-07-06 08:15:05'),
+	(2, 1, 30, 95528.00, 2, 191056.00, 'Product 30', '2023-07-06 08:15:05', '2023-07-06 08:15:05');
 
 -- Dumping data for table rezas_ecommerce.users: ~5 rows (approximately)
 DELETE FROM `users`;
@@ -254,9 +256,15 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 -- Dumping data for table rezas_ecommerce.vouchers: ~1 rows (approximately)
 DELETE FROM `vouchers`;
 INSERT INTO `vouchers` (`id`, `shop_id`, `code`, `discount`, `min_purchase`, `valid_from`, `valid_until`, `created_at`, `updated_at`) VALUES
-	(1, 1, 'CODE', 30000.00, 75000.00, '2023-06-30 22:12:55', '2023-07-30 22:12:56', '2023-06-30 22:13:03', '2023-06-30 22:13:04');
+	(1, 1, 'CODE', 30000.00, 75000.00, '2023-06-30 22:12:55', '2023-07-30 22:12:56', '2023-06-30 22:13:03', '2023-06-30 22:13:04'),
+	(2, 1, 'TESTADD', 50000.00, 50000.00, '2023-07-10 01:45:23', '2023-08-31 16:00:00', '2023-07-10 01:50:55', '2023-07-10 01:50:55');
 
--- Dumping data for table rezas_ecommerce.wishlists: ~1 rows (approximately)
+-- Dumping data for table rezas_ecommerce.voucher_logs: ~0 rows (approximately)
+DELETE FROM `voucher_logs`;
+INSERT INTO `voucher_logs` (`id`, `shop_id`, `voucher_id`, `transaction_id`, `created_at`, `updated_at`) VALUES
+	(1, 1, 1, 1, '2023-07-06 08:15:05', '2023-07-06 08:15:05');
+
+-- Dumping data for table rezas_ecommerce.wishlists: ~0 rows (approximately)
 DELETE FROM `wishlists`;
 INSERT INTO `wishlists` (`id`, `user_id`, `product_id`, `shop_id`, `created_at`, `updated_at`) VALUES
 	(1, 5, 1, 2, '2023-06-27 01:25:33', '2023-06-27 01:25:33');

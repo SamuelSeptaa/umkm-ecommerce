@@ -32,7 +32,7 @@ class Payment extends Controller
             } else {
                 transaction::where('receipt_number', $receipt_number)->update([
                     'payment_status'    => strtoupper($status),
-                    'status'            => 'DONE',
+                    'status'            => 'FAILED',
                     'paid_date'         => NULL
                 ]);
             }

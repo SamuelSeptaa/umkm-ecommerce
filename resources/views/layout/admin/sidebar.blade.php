@@ -37,6 +37,15 @@
                 <div>Riwayat Voucher</div>
             </a>
         </li>
+        <li class="nav-title">Laporan</li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('laporan-penjualan') }}">
+                <div class="mx-2">
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                </div>
+                <div>Laporan Penjualan</div>
+            </a>
+        </li>
         <li class="nav-title">Toko</li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('detail-merchant') }}">

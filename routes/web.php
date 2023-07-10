@@ -10,6 +10,7 @@ use App\Http\Controllers\Payment;
 use App\Http\Controllers\Pickup;
 use App\Http\Controllers\Product;
 use App\Http\Controllers\Profile;
+use App\Http\Controllers\ReportSales;
 use App\Http\Controllers\Transaction;
 use App\Http\Controllers\Voucher;
 use Illuminate\Support\Facades\Route;
@@ -98,6 +99,13 @@ Route::group(['middleware' => ['auth', 'role:merchant']], function () {
     Route::get('/voucher/add', [Voucher::class, 'add'])->name("add-voucher");
     Route::post('/voucher/store', [Voucher::class, 'store'])->name("store-voucher");
     Route::get('/voucher/detail/{id}', [Voucher::class, 'detail'])->name("voucher-detail");
+
+    Route::get('laporan-penjualan', [ReportSales::class, 'index'])->name("laporan-penjualan");
+    Route::post('laporan-penjualan/show', [ReportSales::class, 'show'])->name("show-laporan-penjualan");
+    Route::get('laporan-penjualan/export', [ReportSales::class, 'export'])->name("export-laporan-penjualan");
 });
 
 Route::post('/callback-payment', [Payment::class, 'index']);
+
+
+Route::get('/export', [Payment::class, 'export']);

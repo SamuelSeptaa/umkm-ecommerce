@@ -19,7 +19,7 @@ class CreateTransactionsTable extends Migration
             $table->foreignId('shop_id');
             $table->string('transaction_code');
             $table->string('receipt_number');
-            $table->enum('status', ['PAYMENT', 'PROCESSING', 'SHIPPED', 'DONE'])->default('PAYMENT');
+            $table->enum('status', ['PAYMENT', 'PROCESSING', 'SHIPPED', 'DONE', 'FAILED'])->default('PAYMENT');
             $table->integer('total_products');
             $table->float('sub_total');
             $table->float('voucher_discount');
