@@ -106,6 +106,3 @@ Route::group(['middleware' => ['auth', 'role:merchant']], function () {
 });
 
 Route::post('/callback-payment', [Payment::class, 'index']);
-
-
-Route::get('/export', [Payment::class, 'export']);
