@@ -12,7 +12,7 @@ You can use this project with this step
         MIDTRANS_IS_PRODUCTION=false
         MIDTRANS_MERCHAT_ID=<your merchant id>
         MIDTRANS_CLIENT_KEY=<your client key>
-        MIDTRANS_SERVER_KEY=r=<your server key>
+        MIDTRANS_SERVER_KEY=<your server key>
 
         BITESHIP_TEST_KEY=<Your biteship key>
 
