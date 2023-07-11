@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\Cart;
+use App\Http\Controllers\Category;
 use App\Http\Controllers\Checkout;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Index;
 use App\Http\Controllers\Login;
+use App\Http\Controllers\Member;
 use App\Http\Controllers\MerchantProfile;
 use App\Http\Controllers\Payment;
 use App\Http\Controllers\Pickup;
@@ -95,7 +97,6 @@ Route::group(['middleware' => ['auth', 'role:merchant']], function () {
     Route::post('/update-merchant', [MerchantProfile::class, 'update'])->name("update-merchant");
 
     Route::get('/voucher', [Voucher::class, 'index'])->name("voucher");
-    Route::post('/show-voucher', [Voucher::class, 'show'])->name("show-voucher");
     Route::get('/voucher/add', [Voucher::class, 'add'])->name("add-voucher");
     Route::post('/voucher/store', [Voucher::class, 'store'])->name("store-voucher");
     Route::get('/voucher/detail/{id}', [Voucher::class, 'detail'])->name("voucher-detail");
@@ -109,6 +110,9 @@ Route::post('/callback-payment', [Payment::class, 'index']);
 
 Route::group(['middleware' => ['auth', 'role:admin|merchant']], function () {
     Route::get('/dashboard', [Dashboard::class, 'index'])->name("dashboard");
+
+    Route::get('/voucher', [Voucher::class, 'index'])->name("voucher");
+    Route::post('/show-voucher', [Voucher::class, 'show'])->name("show-voucher");
 });
 
 Route::group(['middleware' => ['auth', 'role:admin']], function () {
@@ -118,4 +122,12 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::post('/shop-list/update', [Shop::class, 'update'])->name("update-shop");
     Route::get('/shop-list/add', [Shop::class, 'add'])->name("add-shop");
     Route::post('/shop-list/store', [Shop::class, 'store'])->name("store-shop");
+    Route::get('/member-list', [Member::class, 'index'])->name("member-list");
+    Route::post('/member-list/show', [Member::class, 'show'])->name("show-member-list");
+
+
+    Route::get('/category-list', [Category::class, 'index'])->name("category-list");
+    Route::post('/category-list/show', [Category::class, 'show'])->name("show-category-list");
+    Route::get('/category-list/add', [Category::class, 'add'])->name("add-category");
+    Route::post('/category-list/store', [Category::class, 'store'])->name("store-category");
 });

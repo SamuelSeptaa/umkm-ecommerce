@@ -6,6 +6,7 @@ use App\Models\shop;
 use App\Models\voucher as ModelsVoucher;
 use App\Models\voucher_log;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 
 
@@ -19,8 +20,14 @@ class Voucher extends Controller
     public function index()
     {
         $this->data['title']        = 'Daftar Voucher';
-        $this->data['script']       = 'merchant.script.voucher';
-        return view('merchant.voucher', $this->data);
+        if (Auth::user()->hasRole('admin')) {
+            $this->data['script']       = 'admin.script.voucher';
+            return view('admin.voucher', $this->data);
+        }
+        if (Auth::user()->hasRole('merchant')) {
+            $this->data['script']       = 'merchant.script.voucher';
+            return view('merchant.voucher', $this->data);
+        }
     }
 
     public function add()
@@ -48,9 +55,13 @@ class Voucher extends Controller
      */
     public function show(Request $request)
     {
-        $shop           = shop::where('user_id', auth()->user()->id)->firstOrFail();
-        $query          = ModelsVoucher::where('shop_id', $shop->id);
-
+        if (Auth::user()->hasRole('admin')) {
+            $query      = ModelsVoucher::select('vouchers.*', 'shops.shop_name')
+                ->join('shops', 'shops.id', '=', 'vouchers.shop_id');
+        } else if (Auth::user()->hasRole('merchant')) {
+            $shop           = shop::where('user_id', auth()->user()->id)->firstOrFail();
+            $query          = ModelsVoucher::where('shop_id', $shop->id);
+        }
         return DataTables::of($query)
             ->addColumn('action', function ($query) {
                 return '
@@ -69,11 +80,18 @@ class Voucher extends Controller
                 return currencyIDR($query->discount);
             })
             ->filter(function ($query) use ($request) {
-                $this->YajraColumnSearch(
-                    $query,
-                    ['vouchers.code'],
-                    $request->search
-                );
+                if (Auth::user()->hasRole('admin'))
+                    $this->YajraColumnSearch(
+                        $query,
+                        ['vouchers.code', 'shops.shop_name'],
+                        $request->search
+                    );
+                else
+                    $this->YajraColumnSearch(
+                        $query,
+                        ['vouchers.code'],
+                        $request->search
+                    );
             })
             ->rawColumns(['action'])
             ->removeColumn(['id'])

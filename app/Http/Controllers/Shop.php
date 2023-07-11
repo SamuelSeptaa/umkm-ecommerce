@@ -120,5 +120,19 @@ class Shop extends Controller
             'password'              => ['required', 'min:5'],
             'password_confirmation' => ['same:password']
         ]);
+
+        $user           = User::create([
+            'name'      => $request->username,
+            'email'     => $request->email,
+            'password'  => bcrypt($request->password)
+        ]);
+        $user->assignRole('merchant');
+        ModelsShop::create([
+            'user_id'       => $user->id,
+            'shop_name'     => $request->shop_name,
+            'phone'         => $request->phone
+        ]);
+
+        return redirect()->route('add-shop')->with('success', 'Berhasil menambahkan data');
     }
 }

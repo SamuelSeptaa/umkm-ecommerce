@@ -20,21 +20,27 @@
         <li class="nav-item">
             <a class="nav-link" href="{{ route('shop-list') }}">
                 <div class="mx-2">
-                    <i class="fa-solid fa-users"></i>
+                    <i class="fa-solid fa-shop"></i>
                 </div>
                 <div>Daftar Toko</div>
             </a>
-            <a class="nav-link" href="{{ route('transaction') }}">
+            <a class="nav-link" href="{{ route('member-list') }}">
                 <div class="mx-2">
                     <i class="fa-solid fa-users"></i>
                 </div>
                 <div>Daftar Member</div>
             </a>
-            <a class="nav-link" href="{{ route('voucher-log') }}">
+            <a class="nav-link" href="{{ route('voucher') }}">
                 <div class="mx-2">
                     <i class="fa-solid fa-tags"></i>
                 </div>
                 <div>Daftar Voucher</div>
+            </a>
+            <a class="nav-link" href="{{ route('category-list') }}">
+                <div class="mx-2">
+                    <i class="fa-solid fa-font-awesome"></i>
+                </div>
+                <div>Daftar Kategori</div>
             </a>
         </li>
         <li class="nav-title">Laporan</li>

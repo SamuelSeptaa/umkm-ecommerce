@@ -12,6 +12,11 @@ class voucher extends Model
         'id'
     ];
 
+    public function shop()
+    {
+        return $this->belongsTo(shop::class);
+    }
+
     public function jumlah_penggunaan($voucher_id)
     {
         return voucher_log::where('voucher_logs.voucher_id', $voucher_id)
