@@ -11,6 +11,7 @@ use App\Http\Controllers\Pickup;
 use App\Http\Controllers\Product;
 use App\Http\Controllers\Profile;
 use App\Http\Controllers\ReportSales;
+use App\Http\Controllers\Shop;
 use App\Http\Controllers\Transaction;
 use App\Http\Controllers\Voucher;
 use Illuminate\Support\Facades\Route;
@@ -72,7 +73,6 @@ Route::group(['middleware' => ['auth', 'role:member']], function () {
 });
 
 Route::group(['middleware' => ['auth', 'role:merchant']], function () {
-    Route::get('/dashboard', [Dashboard::class, 'index'])->name("dashboard");
     Route::get('/product', [Product::class, 'index'])->name("product");
     Route::post('/show-product', [Product::class, 'show'])->name("show-product");
     Route::post('/toggle-status-product', [Product::class, 'toggle_status'])->name("toggle-status-product");
@@ -106,3 +106,16 @@ Route::group(['middleware' => ['auth', 'role:merchant']], function () {
 });
 
 Route::post('/callback-payment', [Payment::class, 'index']);
+
+Route::group(['middleware' => ['auth', 'role:admin|merchant']], function () {
+    Route::get('/dashboard', [Dashboard::class, 'index'])->name("dashboard");
+});
+
+Route::group(['middleware' => ['auth', 'role:admin']], function () {
+    Route::get('/shop-list', [Shop::class, 'index'])->name("shop-list");
+    Route::post('/show-shop-list', [Shop::class, 'show'])->name("show-shop-list");
+    Route::get('/shop-list/detail/{id}', [Shop::class, 'detail'])->name("detail-shop");
+    Route::post('/shop-list/update', [Shop::class, 'update'])->name("update-shop");
+    Route::get('/shop-list/add', [Shop::class, 'add'])->name("add-shop");
+    Route::post('/shop-list/store', [Shop::class, 'store'])->name("store-shop");
+});

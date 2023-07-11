@@ -19,14 +19,6 @@
                     </div>
                 @endif
                 @csrf
-                <div class="row">
-                    <div class="col-12 mb-3">
-                        <div class="float-right d-flex">
-                            <a href="{{ $back }}" class="btn btn-secondary mr-3">Kembali</a>
-                            <button type="submit" class="btn btn-info">Simpan Perubahan</button>
-                        </div>
-                    </div>
-                </div>
                 <input type="hidden" name="id" value="{{ $detail->id }}">
                 @foreach ($forms as $form)
                     @php
@@ -39,7 +31,8 @@
                             <label class="col-sm-2 col-form-label" for="{{ $rowname }}">{{ $label }}</label>
                             <div class="col-sm-10">
                                 <input class="form-control @error($rowname) is-invalid @enderror" id="{{ $rowname }}"
-                                    name="{{ $rowname }}" value="{{ $detail->$rowname }}" type="text">
+                                    name="{{ $rowname }}"
+                                    value="{{ old($rowname) ? old($rowname) : $detail->$rowname }}" type="text">
                                 @error($rowname)
                                     <div class="invalid-feedback" for="{{ $rowname }}">{{ $message }}</div>
                                 @enderror
@@ -50,8 +43,8 @@
                             <label class="col-sm-2 col-form-label" for="{{ $rowname }}">{{ $label }}</label>
                             <div class="col-sm-10">
                                 <input class="form-control only-number @error($rowname) is-invalid @enderror"
-                                    id="{{ $rowname }}" name="{{ $rowname }}" value="{{ $detail->$rowname }}"
-                                    type="text">
+                                    id="{{ $rowname }}" name="{{ $rowname }}"
+                                    value="{{ old($rowname) ? old($rowname) : $detail->$rowname }}" type="text">
                                 @error($rowname)
                                     <div class="invalid-feedback" for="{{ $rowname }}">{{ $message }}</div>
                                 @enderror
@@ -102,8 +95,7 @@
                             <label class="col-sm-2 col-form-label" for="{{ $rowname }}">{{ $label }}</label>
                             <div class="col-sm-10">
                                 <input class="form-control image-input @error($rowname) is-invalid @enderror" type="file"
-                                    id="{{ $rowname }}" name="{{ $rowname }}" accept="image/*"
-                                    value="aaaaaaaaaaaaa">
+                                    id="{{ $rowname }}" name="{{ $rowname }}" accept="image/*" value="">
                                 @error($rowname)
                                     <div class="invalid-feedback" for="{{ $rowname }}">{{ $message }}</div>
                                 @enderror
@@ -114,7 +106,7 @@
                             <label class="col-sm-2 col-form-label" for="{{ $rowname }}">{{ $label }}</label>
                             <div class="col-sm-10">
                                 <textarea class="form-control tinymce @error($rowname) is-invalid @enderror" id="{{ $rowname }}"
-                                    name="{{ $rowname }}">{{ $detail->$rowname }}</textarea>
+                                    name="{{ $rowname }}">{{ old($rowname) ? old($rowname) : $detail->$rowname }}</textarea>
                                 @error($rowname)
                                     <div class="invalid-feedback" for="{{ $rowname }}">{{ $message }}</div>
                                 @enderror
