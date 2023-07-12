@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminProfile;
 use App\Http\Controllers\Blog;
 use App\Http\Controllers\Cart;
 use App\Http\Controllers\Category;
@@ -149,4 +150,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
 
     Route::get('/featured-product', [FeaturedProduct::class, 'index'])->name("featured-product");
     Route::post('/featured-product/update', [FeaturedProduct::class, 'update'])->name("update-featured-product");
+
+    Route::get('/admin/profile', [AdminProfile::class, 'index'])->name("admin-profil");
+    Route::post('/admin/profile/update', [AdminProfile::class, 'update'])->name("update-admin-profil");
 });

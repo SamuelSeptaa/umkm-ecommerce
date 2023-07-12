@@ -78,7 +78,7 @@
         </li>
         <li class="nav-title">Admin</li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('detail-merchant') }}">
+            <a class="nav-link" href="{{ route('admin-profil') }}">
                 <div class="mx-2">
                     <i class="fa-solid fa-user-tie"></i>
                 </div>

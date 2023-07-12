@@ -18,12 +18,21 @@
                     <div class="dropdown-header bg-light py-2">
                         <div class="fw-semibold">Pengaturan</div>
                     </div>
-                    <a class="dropdown-item" href="{{ asset('coreui') }}/#">
-                        <svg class="icon me-2">
-                            <use xlink:href="{{ asset('coreui') }}/vendors/@coreui/icons/svg/free.svg#cil-user">
-                            </use>
-                        </svg> Profil Akun
-                    </a>
+                    @role('admin')
+                        <a class="dropdown-item" href="{{ route('admin-profil') }}">
+                            <svg class="icon me-2">
+                                <use xlink:href="{{ asset('coreui') }}/vendors/@coreui/icons/svg/free.svg#cil-user">
+                                </use>
+                            </svg> Profil Akun
+                        </a>
+                        @elserole('merchant')
+                        <a class="dropdown-item" href="{{ route('detail-merchant') }}">
+                            <svg class="icon me-2">
+                                <use xlink:href="{{ asset('coreui') }}/vendors/@coreui/icons/svg/free.svg#cil-user">
+                                </use>
+                            </svg> Profil Toko
+                        </a>
+                    @endrole
                     <a class="dropdown-item" href="{{ route('logout') }}">
                         <svg class="icon me-2">
                             <use
