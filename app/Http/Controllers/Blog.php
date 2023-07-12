@@ -85,7 +85,7 @@ class Blog extends Controller
             ->editColumn('image_url', function ($query) {
                 return '
                 <div class="table-image">
-                    <img src="' . asset("storage/$query->image_url") . '" alt="' . $query->category . '">
+                    <img src="' . asset("storage/$query->image_url") . '" alt="' . $query->slug . '">
                 </div>
             ';
             })

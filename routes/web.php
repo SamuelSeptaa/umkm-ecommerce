@@ -148,4 +148,5 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
 
 
     Route::get('/featured-product', [FeaturedProduct::class, 'index'])->name("featured-product");
+    Route::post('/featured-product/update', [FeaturedProduct::class, 'update'])->name("update-featured-product");
 });

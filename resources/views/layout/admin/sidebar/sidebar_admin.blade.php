@@ -60,6 +60,12 @@
                 </div>
                 <div>Blog</div>
             </a>
+            <a class="nav-link" href="{{ route('featured-product') }}">
+                <div class="mx-2">
+                    <i class="fa-solid fa-feather"></i>
+                </div>
+                <div>Produk Teratas</div>
+            </a>
         </li>
         <li class="nav-title">Laporan</li>
         <li class="nav-item">
