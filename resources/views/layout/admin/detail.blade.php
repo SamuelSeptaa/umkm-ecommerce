@@ -112,6 +112,17 @@
                                 @enderror
                             </div>
                         </div>
+                    @elseif ($rowtype == 'textarea')
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="{{ $rowname }}">{{ $label }}</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control @error($rowname) is-invalid @enderror" id="{{ $rowname }}"
+                                    name="{{ $rowname }}" rows="2" autocomplete="off">{{ old($rowname) ? old($rowname) : $detail->$rowname }}</textarea>
+                                @error($rowname)
+                                    <div class="invalid-feedback" for="{{ $rowname }}">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
                     @endif
                 @endforeach
             </div>

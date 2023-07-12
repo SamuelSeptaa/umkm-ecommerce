@@ -1911,7 +1911,7 @@ ol {
 	padding-top: 44px;
 }
 
-.product__details__tab .product__details__tab__desc h6 {
+.product__details__tab .product__details__tab__desc h6, .product__details__tab .product__details__tab__desc h3, .product__details__tab .product__details__tab__desc h2, .product__details__tab .product__details__tab__desc h1 {
 	font-weight: 700;
 	color: #333333;
 	margin-bottom: 26px;
@@ -2651,7 +2651,7 @@ ol {
 	line-height: 30px;
 }
 
-.blog__details__text h3 {
+.blog__details__text h3, .blog__details__text h2, .blog__details__text h1 {
 	color: #333333;
 	font-weight: 700;
 	line-height: 30px;

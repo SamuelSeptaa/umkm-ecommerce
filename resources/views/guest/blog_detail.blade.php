@@ -25,7 +25,7 @@
                 <div class="blog__details__text">
                     <img src="{{ asset($blog->image_url) }}" alt="">
                     <div class="blog_description">
-                        {{ $blog->description }}
+                        {!! $blog->description !!}
                     </div>
                 </div>
             </div>

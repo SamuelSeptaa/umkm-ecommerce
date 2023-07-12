@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Blog;
 use App\Http\Controllers\Cart;
 use App\Http\Controllers\Category;
 use App\Http\Controllers\Checkout;
@@ -133,4 +134,14 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::post('/category-list/show', [Category::class, 'show'])->name("show-category-list");
     Route::get('/category-list/add', [Category::class, 'add'])->name("add-category");
     Route::post('/category-list/store', [Category::class, 'store'])->name("store-category");
+    Route::get('/category-list/detail/{id}', [Category::class, 'detail'])->name("detail-category");
+    Route::post('/category-list/update', [Category::class, 'update'])->name("update-category");
+
+    Route::get('/blog-list', [Blog::class, 'index'])->name("blogs");
+    Route::post('/blog-list/show', [Blog::class, 'show'])->name("show-blogs");
+    Route::get('/blog-list/add', [Blog::class, 'add'])->name("add-blog");
+    Route::post('/blog-list/store', [Blog::class, 'store'])->name("store-blog");
+    Route::get('/blog-list/detail/{id}', [Blog::class, 'detail'])->name("detail-blog");
+    Route::post('/blog-list/update', [Blog::class, 'update'])->name("update-blog");
+    Route::post('/blog-list/delete', [Blog::class, 'destroy'])->name("delete-blog");
 });

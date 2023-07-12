@@ -52,6 +52,15 @@
                 <div>Daftar Transaksi</div>
             </a>
         </li>
+        <li class="nav-title">Website</li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('blogs') }}">
+                <div class="mx-2">
+                    <i class="fa-solid fa-blog"></i>
+                </div>
+                <div>Blog</div>
+            </a>
+        </li>
         <li class="nav-title">Laporan</li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('laporan-penjualan') }}">
