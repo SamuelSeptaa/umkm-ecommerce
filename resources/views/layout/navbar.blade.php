@@ -5,16 +5,23 @@
         <a href="#"><img src="{{ asset('ogani/') }}/img/logo.png" alt=""></a>
     </div>
     <div class="humberger__menu__cart">
-        <ul>
+        <ul id="mobile-fav-and-cart">
             <li><a href="#"><i class="fa fa-heart"></i> <span v-text="counterFav"></span></a></li>
             <li><a href="{{ route('cart') }}"><i class="fa fa-shopping-bag"></i> <span v-text="counterCart"></span></a>
             </li>
         </ul>
-        <div class="header__cart__price">item: <span>$150.00</span></div>
     </div>
     <div class="humberger__menu__widget">
         <div class="header__top__right__auth">
-            <a href="{{ route('login') }}"><i class="fa fa-user"></i> Login</a>
+            @role('member')
+                <div class="header__top__right__auth">
+                    <a href="{{ route('profile') }}"><i class="fa fa-user"></i> {{ auth()->user()->name }}</a>
+                </div>
+            @else
+                <div class="header__top__right__auth">
+                    <a href="{{ route('login') }}"><i class="fa fa-user"></i> Login</a>
+                </div>
+            @endrole
         </div>
     </div>
     <nav class="humberger__menu__nav mobile-menu">

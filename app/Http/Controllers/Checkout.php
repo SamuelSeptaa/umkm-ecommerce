@@ -275,8 +275,13 @@ class Checkout extends Controller
                 ? $s->product->price - ($s->product->price * $s->product->discount / 100)
                 : $s->product->price);
 
+            $product            = product::find($s->product_id);
+            $total_sold         = $product->total_sold + $s->qty;
             product::where('id', $s->product_id)
-                ->update(['stock' => $s->product->stock - $s->qty]);
+                ->update([
+                    'stock' => $s->product->stock - $s->qty,
+                    'total_sold' => $total_sold,
+                ]);
 
             transaction_detail::create([
                 'transaction_id'    => $transactionHeader->id,

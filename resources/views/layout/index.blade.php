@@ -130,6 +130,13 @@
                 counterCart: {{ $total_cart }}
             }
         })
+        var MobilecartAndFavorite = new Vue({
+            el: '#mobile-fav-and-cart',
+            data: {
+                counterFav: cartAndFavorite.$data.counterFav,
+                counterCart: cartAndFavorite.$data.counterCart,
+            }
+        })
 
         function roundToNearestInteger(number) {
             const rounded = Math.round(number);
@@ -146,7 +153,7 @@
         }
     </script>
     @isset($script)
-    @include($script)
+        @include($script)
     @endisset
 
 </body>
