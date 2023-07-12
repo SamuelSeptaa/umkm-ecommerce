@@ -5,6 +5,7 @@ use App\Http\Controllers\Cart;
 use App\Http\Controllers\Category;
 use App\Http\Controllers\Checkout;
 use App\Http\Controllers\Dashboard;
+use App\Http\Controllers\FeaturedProduct;
 use App\Http\Controllers\Index;
 use App\Http\Controllers\Login;
 use App\Http\Controllers\Member;
@@ -144,4 +145,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/blog-list/detail/{id}', [Blog::class, 'detail'])->name("detail-blog");
     Route::post('/blog-list/update', [Blog::class, 'update'])->name("update-blog");
     Route::post('/blog-list/delete', [Blog::class, 'destroy'])->name("delete-blog");
+
+
+    Route::get('/featured-product', [FeaturedProduct::class, 'index'])->name("featured-product");
 });
