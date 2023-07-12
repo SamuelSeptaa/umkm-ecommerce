@@ -19,7 +19,7 @@ class Payment extends Controller
         if ($notif->fraud_status === "accept") {
             $receipt_number     = $notif->order_id;
             $status             = $notif->transaction_status;
-            $transaction_time   = $notif->transaction_time;
+            $transaction_time   = $notif->settlement_time;
             $transaction        = transaction::with('transaction_detail', 'shop')->where('receipt_number', $receipt_number)->firstOrFail();
             if ($status === "settlement") {
                 transaction::where('receipt_number', $receipt_number)->update([
