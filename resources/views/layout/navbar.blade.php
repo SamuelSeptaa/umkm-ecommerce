@@ -29,7 +29,6 @@
             <li class="{{ $active == 'Home' ? 'active' : '' }}"><a href="{{ route('index') }}">Home</a></li>
             <li class="{{ $active == 'Shop' ? 'active' : '' }}"><a href="{{ route('shop') }}">Shop</a></li>
             <li class="{{ $active == 'Blog' ? 'active' : '' }}"><a href="{{ route('blog') }}">Blog</a></li>
-            <li><a href="./contact.html">Contact</a></li>
         </ul>
     </nav>
     <div id="mobile-menu-wrap"></div>
@@ -73,7 +72,6 @@
                         </li>
                         <li class="{{ $active == 'Blog' ? 'active' : '' }}"><a href="{{ route('blog') }}">Blog</a>
                         </li>
-                        <li><a href="./contact.html">Contact</a></li>
                     </ul>
                 </nav>
             </div>
