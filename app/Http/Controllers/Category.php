@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\category as ModelsCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 use Yajra\DataTables\Facades\DataTables;
 
 class Category extends Controller
@@ -62,7 +63,7 @@ class Category extends Controller
             'slug'          => createSlug($request->category),
             'thumbnail'     => $path
         ]);
-        return redirect()->route('category-list')->with('success', 'Berhasil menambahkan data');
+        return redirect()->route('add-category')->with('success', 'Berhasil menambahkan data');
     }
 
     /**
@@ -78,7 +79,7 @@ class Category extends Controller
             ->addColumn('action', function ($query) {
                 return '
                     <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
-                        <a href="' . route('detail-product', ['product_id' => $query->id]) . '" class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a href="' . route('detail-category', ['id' => $query->id]) . '" class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i></a>
                     </div>
             ';
             })
@@ -100,6 +101,21 @@ class Category extends Controller
             ->make();
     }
 
+    public function detail($id)
+    {
+        $this->data['detail']       = ModelsCategory::findOrFail($id);
+        $this->data['title']        =  "Detail " . $this->data['detail']->category;
+
+        $this->data['forms']        = [
+            array('category', 'text', 'Nama Kategori'),
+            array('thumbnail', 'image', 'Gambar (Thumbnail) Kategori'),
+        ];
+
+        $this->data['action']       = route('update-category');
+        $this->data['back']         = route('category-list');
+        return view('layout.admin.detail', $this->data);
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -107,9 +123,34 @@ class Category extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $request->validate([
+            'category'      => ['required', Rule::unique('blogs', 'title')->ignore($request->id), 'max:20', 'min:5', 'regex:/^[a-zA-Z\s0-9]+$/'],
+            'thumbnail'     => ['nullable', 'max:1024'],
+        ]);
+        $category       = ModelsCategory::findOrFail($request->id);
+        $file           = $request->file('thumbnail');
+        if ($file) {
+            if (Storage::disk('public')->exists($category->thumbnail))
+                Storage::delete($category->thumbnail);
+
+            $filename   = createSlug($request->category);
+            $ext        = $file->getClientOriginalExtension();
+            $path       = Storage::disk('public')->putFileAs(
+                'img/categories',
+                $file,
+                $filename . ".$ext"
+            );
+        }
+
+        ModelsCategory::where('id', $request->id)
+            ->update([
+                'category'      => $request->category,
+                'slug'          => createSlug($request->category),
+                'thumbnail'     => ($file) ? $path : $category->thumbnail
+            ]);
+        return redirect()->route('detail-category', ['id' => $request->id])->with('success', 'Berhasil mengubah data');
     }
 
     /**
