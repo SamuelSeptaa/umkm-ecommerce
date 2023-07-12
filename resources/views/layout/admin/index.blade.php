@@ -30,6 +30,8 @@
     <link rel="stylesheet" href="{{ asset('coreui') }}/css/vendors/simplebar.css">
     <link rel="stylesheet" href="{{ asset('coreui/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
     <link rel="stylesheet" href="{{ asset('coreui/vendors/select2/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('coreui/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('coreui/vendors/daterangepicker/daterangepicker.css') }}">
 
     <!-- Main styles for this application-->
     <link href="{{ asset('ogani') }}/css/bootstrap.min.css" rel="stylesheet">
@@ -39,7 +41,6 @@
     <link href="{{ asset('coreui') }}/css/examples.css" rel="stylesheet">
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -97,13 +98,16 @@
     <script src="{{ asset('coreui') }}/vendors/select2/select2.min.js"></script>
     <script src="https://cdn.tiny.cloud/1/3rxy4sgehgdwoqfquqa3mbf1wpkkm4cq4lbg9lt4yk9gg3us/tinymce/6/tinymce.min.js"
         referrerpolicy="origin"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="text/javascript" src="{{ asset('coreui/vendors/sweetalert/sweetalert.all.min.js') }}"></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script type="text/javascript" src="{{ asset('coreui/vendors/daterangepicker/moment.min.js') }}"></script>
+
+    <script type="text/javascript" src="{{ asset('coreui/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js') }}">
+    </script>
+    <script type="text/javascript" src="{{ asset('coreui/vendors/daterangepicker/daterangepicker.min.js') }}"></script>
 </body>
 
-</html>
+</html>public\coreui\vendors\bootstrap-datepicker\bootstrap-datepicker.min.js
 <script>
     const mapboxKey = 'pk.eyJ1Ijoic2FtdWVsc2VwdGEiLCJhIjoiY2t6czJvYTkwMzliODJ1cGFhaThpMGs4NCJ9.OsDTB6dWDaNla3EJTNpThQ';
 

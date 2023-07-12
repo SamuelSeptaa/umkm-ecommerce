@@ -1,6 +1,11 @@
 <script>
     $(document).ready(function() {
         let filterValue = [];
+        let startDate = null;
+        let endDate = null;
+
+        const defaultStartDate = moment().subtract(29, 'days');
+        const defaultEndDate = moment();
 
         var table = $("#the-table").DataTable({
             pageLength: 30,
@@ -12,8 +17,10 @@
                 url: `{{ route('show-transaction') }}`,
                 type: "POST",
                 data: function(d) {
-                    d.filterValue = JSON.stringify(filterValue)
-                    d.search = $("#search-column").val()
+                    d.filterValue = JSON.stringify(filterValue);
+                    d.search = $("#search-column").val();
+                    d.startDate = startDate;
+                    d.endDate = endDate;
                 },
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -118,6 +125,50 @@
                 $(selector).removeClass("active");
             }
         }
+
+        function getDefaultStartDate() {
+            return defaultStartDate.clone();
+        }
+
+        function getDefaultEndDate() {
+            return defaultEndDate.clone();
+        }
+
+        $("#daterangepicker").daterangepicker({
+            autoUpdateInput: false,
+            startDate: getDefaultStartDate(),
+            endDate: getDefaultEndDate(),
+            locale: {
+                cancelLabel: "Clear",
+                format: 'DD-MM-YYYY'
+            },
+        });
+
+        function filterDateRange(start, end) {
+            startDate = start;
+            endDate = end;
+            if (start && end) {
+                startDate = start.format('YYYY-MM-DD');
+                endDate = end.format('YYYY-MM-DD');
+            }
+
+            table.ajax.reload();
+        }
+
+        $("#daterangepicker").on("apply.daterangepicker", function(ev, picker) {
+            $(this).val(
+                picker.startDate.format("DD-MM-YYYY") +
+                " s/d " +
+                picker.endDate.format("DD-MM-YYYY")
+            );
+
+            filterDateRange(picker.startDate, picker.endDate);
+        });
+
+        $("#daterangepicker").on("cancel.daterangepicker", function(ev, picker) {
+            filterDateRange(null, null);
+            $(this).val("");
+        });
 
         $(".btn-filter").click(function(e) {
             e.preventDefault();

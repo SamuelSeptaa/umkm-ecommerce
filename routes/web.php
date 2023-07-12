@@ -83,15 +83,14 @@ Route::group(['middleware' => ['auth', 'role:merchant']], function () {
     Route::get('/product/detail/{product_id}', [Product::class, 'detail'])->name("detail-product");
     Route::post('/update-product', [Product::class, 'update'])->name("update-product");
 
-    Route::get('/transaction', [Transaction::class, 'index'])->name("transaction");
-    Route::post('/show-transaction', [Transaction::class, 'show'])->name("show-transaction");
-    Route::get('/transaction/detail/{id}', [Transaction::class, 'detail'])->name("transaction-detail");
+
     Route::post('/request-pickup', [Pickup::class, 'pickup'])->name("request-pickup");
 
 
     Route::get('/voucher-log', [Voucher::class, 'voucher_log'])->name("voucher-log");
     Route::post('/show-voucher-log', [Voucher::class, 'show_log'])->name("show-voucher-log");
 
+    Route::get('laporan-penjualan/export', [ReportSales::class, 'export'])->name("export-laporan-penjualan");
 
     Route::get('/detail-merchant', [MerchantProfile::class, 'detail_merchant'])->name("detail-merchant");
     Route::post('/update-merchant', [MerchantProfile::class, 'update'])->name("update-merchant");
@@ -100,10 +99,6 @@ Route::group(['middleware' => ['auth', 'role:merchant']], function () {
     Route::get('/voucher/add', [Voucher::class, 'add'])->name("add-voucher");
     Route::post('/voucher/store', [Voucher::class, 'store'])->name("store-voucher");
     Route::get('/voucher/detail/{id}', [Voucher::class, 'detail'])->name("voucher-detail");
-
-    Route::get('laporan-penjualan', [ReportSales::class, 'index'])->name("laporan-penjualan");
-    Route::post('laporan-penjualan/show', [ReportSales::class, 'show'])->name("show-laporan-penjualan");
-    Route::get('laporan-penjualan/export', [ReportSales::class, 'export'])->name("export-laporan-penjualan");
 });
 
 Route::post('/callback-payment', [Payment::class, 'index']);
@@ -113,6 +108,14 @@ Route::group(['middleware' => ['auth', 'role:admin|merchant']], function () {
 
     Route::get('/voucher', [Voucher::class, 'index'])->name("voucher");
     Route::post('/show-voucher', [Voucher::class, 'show'])->name("show-voucher");
+
+    Route::get('/transaction', [Transaction::class, 'index'])->name("transaction");
+    Route::post('/show-transaction', [Transaction::class, 'show'])->name("show-transaction");
+    Route::get('/transaction/detail/{id}', [Transaction::class, 'detail'])->name("transaction-detail");
+
+    Route::get('laporan-penjualan', [ReportSales::class, 'index'])->name("laporan-penjualan");
+    Route::post('laporan-penjualan/show', [ReportSales::class, 'show'])->name("show-laporan-penjualan");
+    Route::get('laporan-penjualan/admin/export', [ReportSales::class, 'export_excell'])->name("export-laporan");
 });
 
 Route::group(['middleware' => ['auth', 'role:admin']], function () {

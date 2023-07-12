@@ -1,5 +1,6 @@
 <script>
     $(document).ready(function() {
+
         var table = $("#the-table").DataTable({
             pageLength: 30,
             scrollX: true,
@@ -10,16 +11,21 @@
                 url: `{{ route('show-laporan-penjualan') }}`,
                 type: "POST",
                 data: function(d) {
-                    d.search = $("#search-column").val()
+                    d.year = $("#yearpicker").val()
                 },
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             },
-            order: [
-                [0, 'desc']
-            ],
-            columns: [{
+            columns: [
+                @role('admin')
+                    {
+                        data: 'shop_name',
+                        name: 'shop_name',
+                        orderable: false,
+                        searchable: false
+                    },
+                @endrole {
                     data: 'tahun',
                     name: 'tahun',
                     orderable: true,
@@ -138,10 +144,26 @@
             }, 500);
         });
 
-        $("#search-column").keyup(
+        $("#yearpicker").keyup(
             debounce(function() {
                 table.ajax.reload();
             }, 1200)
         );
+
+        $("#yearpicker").datepicker({
+            format: "yyyy",
+            viewMode: "years",
+            minViewMode: "years",
+            autoclose: true,
+        }).on('changeYear', debounce(function() {
+            table.ajax.reload();
+        }, 100));
     })
+
+    @role('admin')
+        $(document).on('click', '#download-excell', function() {
+            const year = $("#yearpicker").val();
+            location.href = `{{ route('export-laporan') }}?year=${year}`;
+        })
+    @endrole
 </script>

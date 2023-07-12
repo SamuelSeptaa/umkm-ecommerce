@@ -238,11 +238,13 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    @if (in_array($transaction->status, ['PROCESSING']))
-                                        <btn class="btn btn-warning" id="request-pickup">
-                                            <i class="fa-solid fa-truck-pickup"></i> Request Pick Up Barang
-                                        </btn>
-                                    @endif
+                                    @role('merchant')
+                                        @if (in_array($transaction->status, ['PROCESSING']))
+                                            <btn class="btn btn-warning" id="request-pickup">
+                                                <i class="fa-solid fa-truck-pickup"></i> Request Pick Up Barang
+                                            </btn>
+                                        @endif
+                                    @endrole
                                 </div>
                             </div>
                         </div>

@@ -43,6 +43,15 @@
                 <div>Daftar Kategori</div>
             </a>
         </li>
+        <li class="nav-title">Penjualan</li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('transaction') }}">
+                <div class="mx-2">
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                </div>
+                <div>Daftar Transaksi</div>
+            </a>
+        </li>
         <li class="nav-title">Laporan</li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('laporan-penjualan') }}">

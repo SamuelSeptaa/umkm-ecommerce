@@ -5,10 +5,16 @@
         <div class="card-body">
             <div class="example">
                 <div class="row mb-3">
-                    <div class="col-md-6 col-sm-12 row">
+                    <div class="col-md-6 col-sm-12 row mb-2">
                         <label class="col-3 col-form-label" for="inputPassword">Cari</label>
                         <div class="col-9">
                             <input class="form-control" id="search-column" type="text" placeholder="Nomor Inovice">
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12 row mb-2">
+                        <label class="col-3 col-form-label" for="daterangepicker">Rentang Waktu</label>
+                        <div class="col-9">
+                            <input class="form-control" id="daterangepicker" type="text">
                         </div>
                     </div>
                 </div>

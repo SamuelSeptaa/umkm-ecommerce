@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\shop;
 use App\Models\transaction as ModelsTransaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 
 class Transaction extends Controller
@@ -19,8 +20,12 @@ class Transaction extends Controller
 
     public function show(Request $request)
     {
-        $shop           = shop::where('user_id', auth()->user()->id)->firstOrFail();
-        $query          = ModelsTransaction::where('shop_id', $shop->id);
+        if (Auth::user()->hasRole('merchant')) {
+            $shop           = shop::where('user_id', auth()->user()->id)->firstOrFail();
+            $query          = ModelsTransaction::where('shop_id', $shop->id);
+        } else if (Auth::user()->hasRole('admin')) {
+            $query          = ModelsTransaction::query();
+        }
 
         return DataTables::of($query)
             ->addColumn('action', function ($query) {
@@ -74,6 +79,7 @@ class Transaction extends Controller
                     ['receipt_number'],
                     $request->search
                 );
+                $this->filterDateRange($query, 'created_at', $request);
             })
             ->rawColumns(['action', 'statusbadge', 'receiver', 'paymentstatusbadge'])
             ->removeColumn(['id', 'member_id', 'shop_id', 'transaction_code', 'payment_url'])
@@ -82,14 +88,25 @@ class Transaction extends Controller
 
     public function detail($id)
     {
-        $shop                       = shop::where('user_id', auth()->user()->id)->firstOrFail();
-        $this->data['shop']         = $shop;
-        $this->data['transaction']  = ModelsTransaction::select('transactions.*', 'vouchers.code', 'payment_methods.icon_url')->with('transaction_detail')
-            ->where('transactions.id', $id)->where('transactions.shop_id', $shop->id)
-            ->leftJoin('voucher_logs', 'voucher_logs.transaction_id', '=', 'transactions.id')
-            ->leftJoin('vouchers', 'vouchers.id', '=', 'voucher_logs.voucher_id')
-            ->join('payment_methods', 'payment_methods.code', '=', 'transactions.payment_channel')
-            ->firstOrFail();
+        if (Auth::user()->hasRole('merchant')) {
+            $shop                       = shop::where('user_id', auth()->user()->id)->firstOrFail();
+            $this->data['shop']         = $shop;
+            $this->data['transaction']  = ModelsTransaction::select('transactions.*', 'vouchers.code', 'payment_methods.icon_url')->with('transaction_detail')
+                ->where('transactions.id', $id)->where('transactions.shop_id', $shop->id)
+                ->leftJoin('voucher_logs', 'voucher_logs.transaction_id', '=', 'transactions.id')
+                ->leftJoin('vouchers', 'vouchers.id', '=', 'voucher_logs.voucher_id')
+                ->join('payment_methods', 'payment_methods.code', '=', 'transactions.payment_channel')
+                ->firstOrFail();
+        } else if (Auth::user()->hasRole('admin')) {
+            $this->data['transaction']  = ModelsTransaction::with('shop')->select('transactions.*', 'vouchers.code', 'payment_methods.icon_url')->with('transaction_detail')
+                ->where('transactions.id', $id)
+                ->leftJoin('voucher_logs', 'voucher_logs.transaction_id', '=', 'transactions.id')
+                ->leftJoin('vouchers', 'vouchers.id', '=', 'voucher_logs.voucher_id')
+                ->join('payment_methods', 'payment_methods.code', '=', 'transactions.payment_channel')
+                ->firstOrFail();
+            $this->data['shop']         = $this->data['transaction']->shop;
+        }
+
 
         $this->data['title']        = 'Detail Transaksi ' . $this->data['transaction']->receipt_number;
 
