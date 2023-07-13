@@ -19,12 +19,13 @@ DELETE FROM `blogs`;
 INSERT INTO `blogs` (`id`, `title`, `slug`, `image_url`, `info`, `description`, `created_at`, `updated_at`) VALUES
 	(1, 'First Blog', 'first-blog', 'img/blog/blog-1.jpg', 'This is the first blog post.', 'This is the first blog post.', '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
 	(2, 'Second Blog', 'second-blog', 'img/blog/blog-2.jpg', 'This is the first blog post.', 'This is the second blog post.', '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
-	(3, 'Third Blog', 'third-blog', 'img/blog/blog-3.jpg', 'This is the first blog post.', 'This is the second blog post.', '2023-06-26 22:43:38', '2023-06-26 22:43:38');
+	(3, 'Third Blog', 'third-blog', 'img/blog/blog-3.jpg', 'This is the first blog post.', 'This is the second blog post.', '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
+	(4, 'Test add blog', 'test-add-blog', 'img/blog/test-add-blog.jpg', 'A blog post is any article thats published', '<p>If you&rsquo;ve ever read a blog post, you&rsquo;ve consumed content from a thought leader that is an expert in their industry. Chances are if the blog post was written effectively, you came away with helpful knowledge and a positive opinion about the writer or brand that produced the content.</p>\r\n<p>Anyone can connect with their audience through blogging and enjoy the myriad benefits that blogging provides: organic traffic from search engines, promotional content for social media, and recognition from a new audience you haven&rsquo;t tapped into yet.</p>\r\n<p><span data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;If you&rsquo;ve heard about blogging but are a beginner and don&rsquo;t know where to start, the time for excuses is over. Not only can you create an SEO-friendly blog, but we&rsquo;ll cover how to write and manage your business\'s blog as well as provide helpful templates to simplify your blogging efforts.&quot;}" data-sheets-userformat="{&quot;2&quot;:1059713,&quot;3&quot;:{&quot;1&quot;:0},&quot;10&quot;:1,&quot;11&quot;:4,&quot;12&quot;:0,&quot;14&quot;:{&quot;1&quot;:2,&quot;2&quot;:3032925},&quot;16&quot;:10,&quot;23&quot;:1}" data-sheets-textstyleruns="{&quot;1&quot;:0}{&quot;1&quot;:128,&quot;2&quot;:{&quot;2&quot;:{&quot;1&quot;:2,&quot;2&quot;:1136076},&quot;9&quot;:1}}{&quot;1&quot;:155}" data-sheets-hyperlinkruns="{&quot;1&quot;:128,&quot;2&quot;:&quot;https://www.hubspot.com/products/cms/free-blog-maker&quot;}{&quot;1&quot;:155}">If you&rsquo;ve heard about blogging but are a beginner and don&rsquo;t know where to start, the time for excuses is over. Not only can you&nbsp;<a href="https://www.hubspot.com/products/cms/free-blog-maker?hubs_content=blog.hubspot.com/marketing/how-to-start-a-blog&amp;hubs_content-cta=create%20an%20SEO-friendly%20blog&amp;hubs_post=blog.hubspot.com/marketing/how-to-start-a-blog&amp;hubs_post-cta=create%20an%20SEO-friendly%20blog" target="_blank" rel="noopener">create an SEO-friendly blog</a>, but we&rsquo;ll cover how to write and manage your business\'s blog as well as provide helpful templates to simplify your blogging efforts.</span></p>\r\n<p>Let\'s get started with an important question.</p>\r\n<p>Blogging may mean different things depending on your niche &mdash; so let&rsquo;s begin with this definition.</p>\r\n<h2>What is a blog post?</h2>\r\n<p>A blog post is any article, news piece, or guide that\'s published in the blog section of a website. A blog post typically covers a specific topic or query, is educational in nature, ranges from 600 to 2,000+ words, and contains other media types such as images, videos, infographics, and interactive charts.</p>\r\n<p>Blog posts allow you and your business to publish insights, thoughts, and stories on your website about any topic. They can help you boost brand awareness, credibility, conversions, and revenue. Most importantly, they can help you drive traffic to your website.</p>\r\n<p>But in order to begin making posts for a blog &mdash; you have to learn how to start one, first. Let&rsquo;s dive in.</p>\r\n<p>&nbsp;</p>\r\n<h3>1. Understand your audience</h3>\r\n<p>Before you start writing your blog post, make sure you have a clear understanding of your target audience. To do so, take the following steps.</p>\r\n<h4>Ask yourself exploratory questions.</h4>\r\n<p>To discover your audience, ask questions like: Who are they? Are they like me, or do I know someone like them? What do they want to know about? What will resonate with them?</p>\r\n<p>Jot down your notes in a notepad or a document. This is the time to brainstorm audience attributes from scratch, no matter how out of left field they may feel. You should also think about your audience\'s age, background, goals, and challenges at this stage.</p>\r\n<h4>Carry out market research.</h4>\r\n<p><a href="https://blog.hubspot.com/marketing/market-research-buyers-journey-guide?hubs_content=blog.hubspot.com/marketing/how-to-start-a-blog&amp;hubs_content-cta=Doing%20market%20research" target="_blank" rel="noopener">Doing market research</a>&nbsp;sounds like a big task, but in truth, it can be as simple as accessing a social media platform and browsing user and blog profiles that match with your potential audience.</p>\r\n<p>Use&nbsp;<a href="https://blog.hubspot.com/marketing/market-research-tools-resources?hubs_content=blog.hubspot.com/marketing/how-to-start-a-blog&amp;hubs_content-cta=market%20research%20tools" target="_blank" rel="noopener">market research tools</a> to begin uncovering more specific information about your audience &mdash; or to confirm a hunch or a piece of information you already knew. For instance, if you wanted to create a blog about work-from-home hacks, you can make the reasonable assumption that your audience will be mostly Gen Zers and Millennials. But it&rsquo;s important to confirm this information through research.</p>', '2023-07-12 07:07:07', '2023-07-12 08:17:13');
 
 -- Dumping data for table rezas_ecommerce.categories: ~4 rows (approximately)
 DELETE FROM `categories`;
 INSERT INTO `categories` (`id`, `category`, `slug`, `thumbnail`, `created_at`, `updated_at`) VALUES
-	(1, 'Makanan', 'makanan', 'img/categories/cat-1.jpg', '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
+	(1, 'Makanan', 'makanan', 'img/categories/cat-1.jpg', '2023-06-26 22:43:38', '2023-07-12 07:23:20'),
 	(2, 'Minuman', 'minuman', 'img/categories/cat-2.jpg', '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
 	(3, 'Snack', 'snack', 'img/categories/cat-3.jpg', '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
 	(4, 'Buah-buahan', 'buah-buahan', 'img/categories/cat-4.jpg', '2023-06-26 22:43:38', '2023-06-26 22:43:38');
@@ -41,21 +42,21 @@ DELETE FROM `failed_jobs`;
 -- Dumping data for table rezas_ecommerce.featured_products: ~8 rows (approximately)
 DELETE FROM `featured_products`;
 INSERT INTO `featured_products` (`id`, `product_id`, `created_at`, `updated_at`) VALUES
-	(1, 1, '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
-	(2, 3, '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
-	(3, 9, '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
-	(4, 12, '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
-	(5, 8, '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
-	(6, 4, '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
-	(7, 45, '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
-	(8, 18, '2023-06-26 22:43:38', '2023-06-26 22:43:38');
+	(1, 1, '2023-07-12 09:21:02', '2023-07-12 09:21:02'),
+	(2, 3, '2023-07-12 09:21:02', '2023-07-12 09:21:02'),
+	(3, 4, '2023-07-12 09:21:02', '2023-07-12 09:21:02'),
+	(4, 8, '2023-07-12 09:21:02', '2023-07-12 09:21:02'),
+	(5, 9, '2023-07-12 09:21:02', '2023-07-12 09:21:02'),
+	(6, 12, '2023-07-12 09:21:02', '2023-07-12 09:21:02'),
+	(7, 18, '2023-07-12 09:21:02', '2023-07-12 09:21:02'),
+	(8, 27, '2023-07-12 09:21:02', '2023-07-12 09:21:02');
 
 -- Dumping data for table rezas_ecommerce.members: ~0 rows (approximately)
 DELETE FROM `members`;
 INSERT INTO `members` (`id`, `user_id`, `name`, `address`, `phone`, `latitude`, `longitude`, `created_at`, `updated_at`) VALUES
 	(1, 5, 'Samuel Septa Munthe', 'Jalan Palangka Raya', '082252961155', '-2.2142566506905155', '113.90092947082178', '2023-06-27 01:25:19', '2023-06-27 18:36:46');
 
--- Dumping data for table rezas_ecommerce.migrations: ~19 rows (approximately)
+-- Dumping data for table rezas_ecommerce.migrations: ~20 rows (approximately)
 DELETE FROM `migrations`;
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(1, '2014_10_12_000000_create_users_table', 1),
@@ -76,7 +77,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(16, '2023_05_31_065255_create_wishlists_table', 1),
 	(17, '2023_06_30_055934_create_couriers_table', 2),
 	(18, '2023_07_03_082446_create_payment_methods_table', 3),
-	(19, '2023_07_03_093452_create_voucher_logs_table', 4);
+	(19, '2023_07_03_093452_create_voucher_logs_table', 4),
+	(20, '2023_07_13_091319_create_shipping_logs_table', 5);
 
 -- Dumping data for table rezas_ecommerce.model_has_permissions: ~0 rows (approximately)
 DELETE FROM `model_has_permissions`;
@@ -113,12 +115,12 @@ INSERT INTO `products` (`id`, `category_id`, `shop_id`, `product_name`, `image_u
 	(1, 4, 2, 'Product 1', 'img/product/product-details-4.jpg', 'product-1', 'Description of Product 1', 103793.00, NULL, 100, NULL, 'PUBLISH', '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
 	(2, 1, 2, 'Product 2', 'img/product/product-details-1.jpg', 'product-2', 'Description of Product 2', 245425.00, NULL, 100, NULL, 'PUBLISH', '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
 	(3, 2, 3, 'Product 3', 'img/product/product-details-2.jpg', 'product-3', 'Description of Product 3', 202449.00, NULL, 100, NULL, 'PUBLISH', '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
-	(4, 4, 1, 'Product Keempat', 'img/product/product-details-4.jpg', 'product-keempat', '<p>Produk ini sudah mendapatkan No. BPOM: NA742424207 sehingga aman di aplikasikan pada wajah. Selain Niacinamide, ada juga kandungan lainnya seperti:&nbsp;</p>\r\n<ul>\r\n<li>Beet Extract: mampu mencegah tanda penuaan dini.&nbsp;</li>\r\n<li>Allantoin: meningkatkan kehalusan kulit wajah.&nbsp;</li>\r\n<li>Centella asiatica: mempercepat penyembuhan luka, menenangkan kulit, dan memperkuat barrier.&nbsp;</li>\r\n</ul>', 139886.00, NULL, 100, NULL, 'PUBLISH', '2023-06-26 22:43:38', '2023-06-26 23:34:25'),
-	(5, 4, 1, 'Product 5', 'img/product/product-details-4.jpg', 'product-5', '<p>Jual Bika Ambon asli yang bakalan bikin kangen. Kuenya dibuat dengan menggunakan resep otentik khas Medan yang dijamin kenikmatan rasa dan teksturnya. Rasa manis yang pas dipadu dengan tekstur kue yang lembut menjadikan kue ini pasti bikin nagih.</p>\r\n<ul>\r\n<li>Fresh from the oven</li>\r\n<li>Hanya menggunakan bahan baku premium</li>\r\n<li>Rasa manis kue yang pas dan lembut</li>\r\n<li>Tahan 3 hari di luar kulkas dan 1 minggu di dalam kulkas</li>\r\n</ul>', 35240.00, 5.00, 100, NULL, 'PUBLISH', '2023-06-26 22:43:38', '2023-06-26 23:40:45'),
+	(4, 4, 1, 'Product Keempat', 'img/product/product-details-4.jpg', 'product-keempat', '<p>If you&rsquo;ve ever read a blog post, you&rsquo;ve consumed content from a thought leader that is an expert in their industry. Chances are if the blog post was written effectively, you came away with helpful knowledge and a positive opinion about the writer or brand that produced the content.</p>\r\n<p>Anyone can connect with their audience through blogging and enjoy the myriad benefits that blogging provides: organic traffic from search engines, promotional content for social media, and recognition from a new audience you haven&rsquo;t tapped into yet.</p>\r\n<p><span data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;If you&rsquo;ve heard about blogging but are a beginner and don&rsquo;t know where to start, the time for excuses is over. Not only can you create an SEO-friendly blog, but we&rsquo;ll cover how to write and manage your business\'s blog as well as provide helpful templates to simplify your blogging efforts.&quot;}" data-sheets-userformat="{&quot;2&quot;:1059713,&quot;3&quot;:{&quot;1&quot;:0},&quot;10&quot;:1,&quot;11&quot;:4,&quot;12&quot;:0,&quot;14&quot;:{&quot;1&quot;:2,&quot;2&quot;:3032925},&quot;16&quot;:10,&quot;23&quot;:1}" data-sheets-textstyleruns="{&quot;1&quot;:0}{&quot;1&quot;:128,&quot;2&quot;:{&quot;2&quot;:{&quot;1&quot;:2,&quot;2&quot;:1136076},&quot;9&quot;:1}}{&quot;1&quot;:155}" data-sheets-hyperlinkruns="{&quot;1&quot;:128,&quot;2&quot;:&quot;https://www.hubspot.com/products/cms/free-blog-maker&quot;}{&quot;1&quot;:155}">If you&rsquo;ve heard about blogging but are a beginner and don&rsquo;t know where to start, the time for excuses is over. Not only can you&nbsp;<a href="https://www.hubspot.com/products/cms/free-blog-maker?hubs_content=blog.hubspot.com/marketing/how-to-start-a-blog&amp;hubs_content-cta=create%20an%20SEO-friendly%20blog&amp;hubs_post=blog.hubspot.com/marketing/how-to-start-a-blog&amp;hubs_post-cta=create%20an%20SEO-friendly%20blog" target="_blank" rel="noopener">create an SEO-friendly blog</a>, but we&rsquo;ll cover how to write and manage your business\'s blog as well as provide helpful templates to simplify your blogging efforts.</span></p>\r\n<p>Let\'s get started with an important question.</p>\r\n<p>Blogging may mean different things depending on your niche &mdash; so let&rsquo;s begin with this definition.</p>\r\n<h2>What is a blog post?</h2>\r\n<p>A blog post is any article, news piece, or guide that\'s published in the blog section of a website. A blog post typically covers a specific topic or query, is educational in nature, ranges from 600 to 2,000+ words, and contains other media types such as images, videos, infographics, and interactive charts.</p>\r\n<p>Blog posts allow you and your business to publish insights, thoughts, and stories on your website about any topic. They can help you boost brand awareness, credibility, conversions, and revenue. Most importantly, they can help you drive traffic to your website.</p>\r\n<p>But in order to begin making posts for a blog &mdash; you have to learn how to start one, first. Let&rsquo;s dive in.</p>\r\n<p>&nbsp;</p>\r\n<h3>1. Understand your audience</h3>\r\n<p>Before you start writing your blog post, make sure you have a clear understanding of your target audience. To do so, take the following steps.</p>\r\n<h4>Ask yourself exploratory questions.</h4>\r\n<p>To discover your audience, ask questions like: Who are they? Are they like me, or do I know someone like them? What do they want to know about? What will resonate with them?</p>\r\n<p>Jot down your notes in a notepad or a document. This is the time to brainstorm audience attributes from scratch, no matter how out of left field they may feel. You should also think about your audience\'s age, background, goals, and challenges at this stage.</p>\r\n<h4>Carry out market research.</h4>\r\n<p><a href="https://blog.hubspot.com/marketing/market-research-buyers-journey-guide?hubs_content=blog.hubspot.com/marketing/how-to-start-a-blog&amp;hubs_content-cta=Doing%20market%20research" target="_blank" rel="noopener">Doing market research</a>&nbsp;sounds like a big task, but in truth, it can be as simple as accessing a social media platform and browsing user and blog profiles that match with your potential audience.</p>\r\n<p>Use&nbsp;<a href="https://blog.hubspot.com/marketing/market-research-tools-resources?hubs_content=blog.hubspot.com/marketing/how-to-start-a-blog&amp;hubs_content-cta=market%20research%20tools" target="_blank" rel="noopener">market research tools</a> to begin uncovering more specific information about your audience &mdash; or to confirm a hunch or a piece of information you already knew. For instance, if you wanted to create a blog about work-from-home hacks, you can make the reasonable assumption that your audience will be mostly Gen Zers and Millennials. But it&rsquo;s important to confirm this information through research.</p>', 139886.00, NULL, 100, NULL, 'PUBLISH', '2023-06-26 22:43:38', '2023-06-26 23:34:25'),
+	(5, 4, 1, 'Product 5', 'img/product/product-details-4.jpg', 'product-5', '<p>Jual Bika Ambon asli yang bakalan bikin kangen. Kuenya dibuat dengan menggunakan resep otentik khas Medan yang dijamin kenikmatan rasa dan teksturnya. Rasa manis yang pas dipadu dengan tekstur kue yang lembut menjadikan kue ini pasti bikin nagih.</p>\r\n<ul>\r\n<li>Fresh from the oven</li>\r\n<li>Hanya menggunakan bahan baku premium</li>\r\n<li>Rasa manis kue yang pas dan lembut</li>\r\n<li>Tahan 3 hari di luar kulkas dan 1 minggu di dalam kulkas</li>\r\n</ul>', 35240.00, 5.00, 97, NULL, 'PUBLISH', '2023-06-26 22:43:38', '2023-07-12 05:41:38'),
 	(6, 1, 3, 'Product 6', 'img/product/product-details-1.jpg', 'product-6', 'Description of Product 6', 109803.00, NULL, 100, NULL, 'PUBLISH', '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
 	(7, 2, 2, 'Product 7', 'img/product/product-details-2.jpg', 'product-7', 'Description of Product 7', 175765.00, NULL, 100, NULL, 'PUBLISH', '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
 	(8, 3, 1, 'Product 8', 'img/product/product-details-3.jpg', 'product-8', 'Description of Product 8', 99677.00, NULL, 100, NULL, 'PUBLISH', '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
-	(9, 3, 1, 'Product 9', 'img/product/product-details-3.jpg', 'product-9', 'Description of Product 9', 165508.00, NULL, 100, NULL, 'PUBLISH', '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
+	(9, 3, 1, 'Product 9', 'img/product/product-details-3.jpg', 'product-9', 'Description of Product 9', 165508.00, NULL, 99, 1, 'PUBLISH', '2023-06-26 22:43:38', '2023-07-12 05:47:36'),
 	(10, 1, 3, 'Product 10', 'img/product/product-details-1.jpg', 'product-10', 'Description of Product 10', 210219.00, NULL, 100, NULL, 'PUBLISH', '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
 	(11, 3, 1, 'Product 11', 'img/product/product-details-3.jpg', 'product-11', 'Description of Product 11', 168996.00, NULL, 100, NULL, 'PUBLISH', '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
 	(12, 2, 1, 'Product 12', 'img/product/product-details-2.jpg', 'product-12', 'Description of Product 12', 67495.00, NULL, 100, NULL, 'PUBLISH', '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
@@ -223,37 +225,51 @@ INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VAL
 -- Dumping data for table rezas_ecommerce.role_has_permissions: ~0 rows (approximately)
 DELETE FROM `role_has_permissions`;
 
+-- Dumping data for table rezas_ecommerce.shipping_logs: ~1 rows (approximately)
+DELETE FROM `shipping_logs`;
+INSERT INTO `shipping_logs` (`id`, `transaction_id`, `status`, `created_at`, `updated_at`) VALUES
+	(1, 1, 'REQUESTED', '2023-07-13 02:49:36', '2023-07-13 02:49:36'),
+	(2, 1, 'ALLOCATED', '2023-07-13 02:50:39', '2023-07-13 02:50:39'),
+	(3, 1, 'PICKING_UP', '2023-07-13 02:50:43', '2023-07-13 02:50:43'),
+	(4, 1, 'PICKED', '2023-07-13 02:50:46', '2023-07-13 02:50:46'),
+	(5, 1, 'DROPPING_OFF', '2023-07-13 02:50:49', '2023-07-13 02:50:49'),
+	(6, 1, 'DELIVERED', '2023-07-13 02:50:52', '2023-07-13 02:50:52');
+
 -- Dumping data for table rezas_ecommerce.shopping_carts: ~0 rows (approximately)
 DELETE FROM `shopping_carts`;
 
 -- Dumping data for table rezas_ecommerce.shops: ~3 rows (approximately)
 DELETE FROM `shops`;
 INSERT INTO `shops` (`id`, `user_id`, `shop_name`, `slug`, `address`, `lat`, `long`, `created_at`, `updated_at`, `phone`) VALUES
-	(1, 2, 'Nikita Fried Chicken', 'nikita-fried-chicken', 'Jl. Beliang, Palangka, Jekan Raya, Kota Palangka Raya, Kalimantan Tengah 74874, Indonesia', '-2.2022776027974516', '113.89824459007355', '2023-06-26 22:43:38', '2023-07-06 09:14:48', '082252961155'),
+	(1, 2, 'Nikita Fried Chicken', 'nikita-fried-chicken', 'Jl. Beliang, Palangka, Jekan Raya, Kota Palangka Raya, Kalimantan Tengah 74874, Indonesia', '-2.2022776027974516', '113.89824459007355', '2023-06-26 22:43:38', '2023-07-11 02:48:01', '082252961155'),
 	(2, 3, 'Bubur Ayam Ceria', 'bubur-ayam-ceria', 'Jalan kota palangka raya', '-2.2136', '113.9108', '2023-06-26 22:43:38', '2023-06-26 22:43:38', '082252961155'),
 	(3, 4, 'Ayam Geprek Goldchick', 'ayam-geprek-goldchick', 'Jalan kota palangka raya', '-2.2136', '113.9108', '2023-06-26 22:43:38', '2023-06-26 22:43:38', '082252961155');
 
--- Dumping data for table rezas_ecommerce.transactions: ~1 rows (approximately)
+-- Dumping data for table rezas_ecommerce.transactions: ~3 rows (approximately)
 DELETE FROM `transactions`;
 INSERT INTO `transactions` (`id`, `member_id`, `shop_id`, `transaction_code`, `receipt_number`, `status`, `total_products`, `sub_total`, `voucher_discount`, `shipping_fee`, `total`, `name`, `email`, `phone`, `address`, `shipping_method`, `shipping_type`, `waybill`, `latitude`, `longitude`, `payment_channel`, `payment_status`, `paid_date`, `payment_url`, `created_at`, `updated_at`) VALUES
-	(1, 1, 1, '22421d03-d36e-4554-9a14-96927b100b5c', 'F23070001', 'SHIPPED', 2, 501438.00, 30000.00, 12500.00, 483938.00, 'Samuel Septa Munthe', 'samuel@gmail.com', '082252961155', 'Jalan Raden Fatah no 5', 'gojek', 'instant', NULL, '-2.2174529537329306', '113.91067991192193', 'bri_va', 'SETTLEMENT', '2023-07-06 08:15:07', 'https://app.sandbox.midtrans.com/snap/v3/redirection/22421d03-d36e-4554-9a14-96927b100b5c', '2023-07-06 08:15:05', '2023-07-07 01:06:16');
+	(1, 1, 1, '22421d03-d36e-4554-9a14-96927b100b5c', 'F23070001', 'DONE', 2, 501438.00, 30000.00, 12500.00, 483938.00, 'Samuel Septa Munthe', 'samuel@gmail.com', '082252961155', 'Jalan Raden Fatah no 5', 'gojek', 'instant', 'WYB-1689216576125', '-2.2174529537329306', '113.91067991192193', 'bri_va', 'SETTLEMENT', '2023-07-06 08:15:07', 'https://app.sandbox.midtrans.com/snap/v3/redirection/22421d03-d36e-4554-9a14-96927b100b5c', '2023-07-06 08:15:05', '2023-07-13 02:50:52'),
+	(3, 1, 1, '02a43369-58b6-440f-817b-93dfc990e427', 'F23070002', 'PROCESSING', 1, 100434.00, 0.00, 12500.00, 112934.00, 'Samuel Septa Munthe', 'samuel@gmail.com', '082252961155', 'Jalan Palangka Raya', 'gojek', 'instant', NULL, '-2.2116254704537965', '113.90963721712603', 'bri_va', 'SETTLEMENT', '2023-07-12 06:44:46', 'https://app.sandbox.midtrans.com/snap/v3/redirection/02a43369-58b6-440f-817b-93dfc990e427', '2023-07-12 05:41:38', '2023-07-13 01:58:51'),
+	(4, 1, 1, 'd0e8e1a8-92d1-4b9c-aa95-e6180150673d', 'F23070003', 'PROCESSING', 1, 165508.00, 0.00, 12500.00, 178008.00, 'Samuel Septa Munthe', 'samuel@gmail.com', '082252961155', 'Jalan Palangka Raya', 'gojek', 'instant', NULL, '-2.2142566506905155', '113.90092947082178', 'bca_va', 'SETTLEMENT', '2023-07-12 05:47:39', 'https://app.sandbox.midtrans.com/snap/v3/redirection/d0e8e1a8-92d1-4b9c-aa95-e6180150673d', '2023-07-12 05:47:36', '2023-07-12 06:43:48');
 
--- Dumping data for table rezas_ecommerce.transaction_details: ~2 rows (approximately)
+-- Dumping data for table rezas_ecommerce.transaction_details: ~4 rows (approximately)
 DELETE FROM `transaction_details`;
 INSERT INTO `transaction_details` (`id`, `transaction_id`, `product_id`, `price`, `qty`, `sub_total`, `product_name`, `created_at`, `updated_at`) VALUES
 	(1, 1, 100, 155191.00, 2, 310382.00, 'Product 100', '2023-07-06 08:15:05', '2023-07-06 08:15:05'),
-	(2, 1, 30, 95528.00, 2, 191056.00, 'Product 30', '2023-07-06 08:15:05', '2023-07-06 08:15:05');
+	(2, 1, 30, 95528.00, 2, 191056.00, 'Product 30', '2023-07-06 08:15:05', '2023-07-06 08:15:05'),
+	(3, 3, 5, 33478.00, 3, 100434.00, 'Product 5', '2023-07-12 05:41:38', '2023-07-12 05:41:38'),
+	(4, 4, 9, 165508.00, 1, 165508.00, 'Product 9', '2023-07-12 05:47:36', '2023-07-12 05:47:36');
 
--- Dumping data for table rezas_ecommerce.users: ~5 rows (approximately)
+-- Dumping data for table rezas_ecommerce.users: ~6 rows (approximately)
 DELETE FROM `users`;
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-	(1, 'uadmin', 'admin@gmail.com', NULL, '$2y$10$zRRcd3nky310E.ae6w8RueXtM0K62GZnKC5scDs/fUmbmKpW6hX.O', NULL, '2023-06-26 22:43:37', '2023-06-26 22:43:37'),
-	(2, 'nikitafried', 'nikitafried@gmail.com', NULL, '$2y$10$fbHzTM.HjKYjr64q7XXyTOP75y5VEIWobekYoYuR2up8x8RhTy7l.', NULL, '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
+	(1, 'admin', 'admin@gmail.com', NULL, '$2y$10$zRRcd3nky310E.ae6w8RueXtM0K62GZnKC5scDs/fUmbmKpW6hX.O', NULL, '2023-06-26 22:43:37', '2023-07-12 09:34:11'),
+	(2, 'nikitafried', 'nikitafried@gmail.com', NULL, '$2y$10$fbHzTM.HjKYjr64q7XXyTOP75y5VEIWobekYoYuR2up8x8RhTy7l.', NULL, '2023-06-26 22:43:38', '2023-07-11 02:48:01'),
 	(3, 'buburayam', 'buburceria@gmail.com', NULL, '$2y$10$QOhIb2xQaimv/xoLZcc27udR9YwB8cluvTbHkgqZW6DCPGR.QPmze', NULL, '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
 	(4, 'goldchick', 'goldchick@gmail.com', NULL, '$2y$10$fPWUCwvBjdMuCDByM35MbeQTmkTUvepBcKQABjLxKUaM97LTNq2zy', NULL, '2023-06-26 22:43:38', '2023-06-26 22:43:38'),
 	(5, 'samuelsepta', 'samuel@gmail.com', NULL, '$2y$10$MdHuiFxY/47ufA/W3INZEeoGplY63h2qSagnmOG8LuKrY0U9IsLQW', NULL, '2023-06-27 01:25:19', '2023-06-27 18:36:46');
 
--- Dumping data for table rezas_ecommerce.vouchers: ~1 rows (approximately)
+-- Dumping data for table rezas_ecommerce.vouchers: ~0 rows (approximately)
 DELETE FROM `vouchers`;
 INSERT INTO `vouchers` (`id`, `shop_id`, `code`, `discount`, `min_purchase`, `valid_from`, `valid_until`, `created_at`, `updated_at`) VALUES
 	(1, 1, 'CODE', 30000.00, 75000.00, '2023-06-30 22:12:55', '2023-07-30 22:12:56', '2023-06-30 22:13:03', '2023-06-30 22:13:04'),
@@ -266,8 +282,6 @@ INSERT INTO `voucher_logs` (`id`, `shop_id`, `voucher_id`, `transaction_id`, `cr
 
 -- Dumping data for table rezas_ecommerce.wishlists: ~0 rows (approximately)
 DELETE FROM `wishlists`;
-INSERT INTO `wishlists` (`id`, `user_id`, `product_id`, `shop_id`, `created_at`, `updated_at`) VALUES
-	(1, 5, 1, 2, '2023-06-27 01:25:33', '2023-06-27 01:25:33');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

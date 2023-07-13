@@ -16,6 +16,14 @@
                                 type="button" role="tab" aria-controls="details" aria-selected="false">Detail
                                 Pembelian</button>
                         </li>
+                        @if ($transaction->shipping_log->count() !== 0)
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="shipping-log-tab" data-coreui-toggle="tab"
+                                    data-coreui-target="#shipping-logs" type="button" role="tab"
+                                    aria-controls="shipping-logs" aria-selected="false">Riwayat Pengiriman</button>
+                            </li>
+                        @endif
+
                     </ul>
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade active show" id="summary" role="tabpanel" aria-labelledby="summary-tab">
@@ -87,14 +95,21 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
+                                        <label class="col-3 col-form-label" for="waybill">waybill ID</label>
+                                        <div class="col-9">
+                                            <input class="form-control" disabled id="waybill" type="text"
+                                                value="{{ $transaction->waybill }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group row">
                                         <label class="col-3 col-form-label" for="total_products">Jumlah Produk</label>
                                         <div class="col-9">
                                             <input class="form-control" disabled id="total_products" type="text"
                                                 value="{{ $transaction->total_products }}">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
                                     <div class="form-group row">
                                         <label class="col-3 col-form-label" for="sub_total">Subtotal Belanja</label>
                                         <div class="col-9">
@@ -246,6 +261,49 @@
                                         @endif
                                     @endrole
                                 </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="shipping-logs" role="tabpanel"
+                            aria-labelledby="shipping-logs-tab">
+                            <!-- /.row-->
+                            <div class="table-responsive-sm">
+                                <table class="table table-hover w-50">
+                                    <thead>
+                                        <tr>
+                                            <th class="center">Nomor</th>
+                                            <th class="center">Status</th>
+                                            <th>Waktu</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @php
+                                            $i = 0;
+                                        @endphp
+                                        @foreach ($transaction->shipping_log as $sl)
+                                            @php
+                                                $i++;
+                                            @endphp
+                                            @php
+                                                $badge = 'badge-success';
+                                            @endphp
+                                            @if (in_array($sl->status, ['REQUESTED']))
+                                                @php $badge = "badge-primary"; @endphp
+                                            @elseif (in_array($sl->status, ['CANCELLED']))
+                                                @php $badge = "badge-danger"; @endphp
+                                            @endif
+
+                                            <tr>
+                                                <td class="center">{{ $i }}</td>
+                                                <td class="center">
+                                                    <span class="badge {{ $badge }}">
+                                                        {{ $sl->status }}
+                                                    </span>
+                                                </td>
+                                                <td class="left">{{ parseTanggal($sl->created_at) }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
 

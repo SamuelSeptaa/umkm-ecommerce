@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\shippingLog;
 use App\Models\shop;
 use App\Models\transaction;
 use Illuminate\Http\Request;
@@ -74,10 +75,17 @@ class Pickup extends Controller
 
 
         if ($data['success']) {
+            $waybillId      = $data['courier']['waybill_id'];
             transaction::where('shop_id', $shop->id)
                 ->where('transactions.id', $request->id)->update([
+                    'waybill'       => $waybillId,
                     'status'        => 'SHIPPED',
                 ]);
+
+            shippingLog::create([
+                'transaction_id'        => $request->id,
+                'status'                => 'REQUESTED'
+            ]);
             return response()->json([
                 'status'        => 'Success',
                 'message'       => 'Berhasil request pickup, mohon menunggu kurir untuk datang'
@@ -88,5 +96,32 @@ class Pickup extends Controller
             'status'        => 'Failed',
             'message'       => "API Error message - " . $data['error']
         ], 404);
+    }
+
+    public function callback_shipping_webhook(Request $request)
+    {
+        $waybillId          = $request->courier_waybill_id;
+
+        $transaction        = transaction::where('waybill', $waybillId)->firstOrFail();
+
+        shippingLog::create([
+            'transaction_id'        => $transaction->id,
+            'status'                => strtoupper($request->status),
+        ]);
+        if (strcasecmp("DELIVERED", $request->status) == 0)
+            transaction::where('waybill', $waybillId)
+                ->update([
+                    'status'        => 'DONE'
+                ]);
+
+        if (strcasecmp("CANCELLED", $request->status) == 0)
+            transaction::where('waybill', $waybillId)
+                ->update([
+                    'status'        => 'PROCESSING'
+                ]);
+        return response()->json([
+            'status' => 'success',
+            'message'       => 'Shipping log updated'
+        ]);
     }
 }

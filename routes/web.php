@@ -105,6 +105,7 @@ Route::group(['middleware' => ['auth', 'role:merchant']], function () {
 });
 
 Route::post('/callback-payment', [Payment::class, 'index']);
+Route::post('/callback-shipping-webhook', [Pickup::class, 'callback_shipping_webhook']);
 
 Route::group(['middleware' => ['auth', 'role:admin|merchant']], function () {
     Route::get('/dashboard', [Dashboard::class, 'index'])->name("dashboard");

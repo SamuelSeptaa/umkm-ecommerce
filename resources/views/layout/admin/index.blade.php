@@ -107,7 +107,7 @@
     <script type="text/javascript" src="{{ asset('coreui/vendors/daterangepicker/daterangepicker.min.js') }}"></script>
 </body>
 
-</html>public\coreui\vendors\bootstrap-datepicker\bootstrap-datepicker.min.js
+</html>
 <script>
     const mapboxKey = 'pk.eyJ1Ijoic2FtdWVsc2VwdGEiLCJhIjoiY2t6czJvYTkwMzliODJ1cGFhaThpMGs4NCJ9.OsDTB6dWDaNla3EJTNpThQ';
 

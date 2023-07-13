@@ -19,4 +19,9 @@ class transaction extends Model
     {
         return $this->belongsTo(shop::class);
     }
+
+    public function shipping_log()
+    {
+        return $this->hasMany(shippingLog::class);
+    }
 }
