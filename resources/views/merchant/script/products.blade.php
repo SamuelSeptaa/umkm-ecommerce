@@ -1,14 +1,19 @@
 <script>
     function togleStatus(id, status) {
         let textAlert = '';
-        if (status == "PUBLISH")
+        let textMessage = "";
+        if (status == "PUBLISH") {
             textAlert = 'Draft';
-        else
+            textMessage = "Produk yang di Draft tidak akan muncul di halaman pembeli";
+        } else {
             textAlert = 'Publish';
+            textMessage = "Produk akan muncul kembali di halaman pembeli";
+        }
 
         Swal.fire({
             icon: "question",
             title: `${textAlert} produk yang dipilih?`,
+            text: textMessage,
             showCancelButton: true,
             cancelButtonText: "Batal",
             confirmButtonText: "Ya",
