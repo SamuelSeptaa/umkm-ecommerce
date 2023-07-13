@@ -44,7 +44,7 @@
                             </svg>
                         </button>
                         <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item"
-                                href="{{ route('transaction') }}">Lihat Daftar Member</a>
+                                href="{{ route('member-list') }}">Lihat Daftar Member</a>
                         </div>
                     </div>
                 </div>
@@ -78,7 +78,7 @@
                             </svg>
                         </button>
                         <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item"
-                                href="{{ route('laporan-penjualan') }}">Lihat Semua Transaksi</a>
+                                href="{{ route('transaction') }}">Lihat Semua Transaksi</a>
                         </div>
                     </div>
                 </div>
