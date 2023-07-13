@@ -96,15 +96,13 @@ class Cart extends Controller
     public function update_cart(Request $request)
     {
         $data = $request->post();
-
-
         if (!empty($data)) {
             for ($i = 0; $i < count($data['product_id']); $i++) {
                 $product            = product::findOrFail($data['product_id'][$i]);
                 if ($product->status === "DRAFT") {
                     return response()->json([
                         'status'    => 'Failed',
-                        'message'   => 'Ada produk di keranjang mu yang tidak dapat di proses'
+                        'message'   => 'Ada produk yang tidak dapat di proses'
                     ], 400);
                     break;
                 }

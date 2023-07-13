@@ -50,7 +50,7 @@ class Index extends Controller
             ->join('categories', 'categories.id', "=", "products.category_id")
             ->where('shops.slug', 'like', ($request->query("shop")) ?  $request->query("shop") : '%%')
             ->where('categories.slug', 'like', ($request->query("category")) ?  $request->query("category") : '%%')
-            ->where('products.product_name', 'like', ($request->query("product")) ?  "%" . $request->query("product") . "%" : '%%')
+            ->where('products.product_name', 'like', ($request->query("search")) ?  "%" . $request->query("search") . "%" : '%%')
             ->where('products.status', 'PUBLISH')
             ->paginate(12)->withQueryString();
 

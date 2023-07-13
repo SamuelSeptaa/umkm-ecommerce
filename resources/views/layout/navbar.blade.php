@@ -2,11 +2,11 @@
 <div class="humberger__menu__overlay"></div>
 <div class="humberger__menu__wrapper">
     <div class="humberger__menu__logo">
-        <a href="#"><img src="{{ asset('ogani/') }}/img/logo.png" alt=""></a>
+        <a href="/"><img src="{{ asset('ogani/') }}/img/logo.png" alt=""></a>
     </div>
     <div class="humberger__menu__cart">
         <ul id="mobile-fav-and-cart">
-            <li><a href="#"><i class="fa fa-heart"></i> <span v-text="counterFav"></span></a></li>
+            <li><a href="{{ route('favorite') }}"><i class="fa fa-heart"></i> <span v-text="counterFav"></span></a></li>
             <li><a href="{{ route('cart') }}"><i class="fa fa-shopping-bag"></i> <span v-text="counterCart"></span></a>
             </li>
         </ul>
@@ -79,7 +79,8 @@
                 <div class="header__cart">
                     @role('member')
                         <ul id="fav-and-cart">
-                            <li><a href="#"><i class="fa fa-heart"></i> <span v-text="counterFav"></span></a></li>
+                            <li><a href="{{ route('favorite') }}"><i class="fa fa-heart"></i> <span
+                                        v-text="counterFav"></span></a></li>
                             <li><a href="{{ route('cart') }}"><i class="fa fa-shopping-bag"></i> <span
                                         v-text="counterCart"></span></a>
                             </li>

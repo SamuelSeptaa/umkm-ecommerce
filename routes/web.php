@@ -6,6 +6,7 @@ use App\Http\Controllers\Cart;
 use App\Http\Controllers\Category;
 use App\Http\Controllers\Checkout;
 use App\Http\Controllers\Dashboard;
+use App\Http\Controllers\Favorite;
 use App\Http\Controllers\FeaturedProduct;
 use App\Http\Controllers\Index;
 use App\Http\Controllers\Login;
@@ -70,6 +71,9 @@ Route::group(['middleware' => ['auth', 'role:member']], function () {
 
     Route::get("/cart", [Cart::class, "cart"])->name("cart");
     Route::post("/update_cart", [Cart::class, "update_cart"])->name("update-cart");
+
+    Route::get("/favorite", [Favorite::class, "index"])->name("favorite");
+
 
     Route::get("/checkout", [Checkout::class, "index"])->name("checkout");
     Route::post("/rates", [Checkout::class, "rates"])->name("rates");
