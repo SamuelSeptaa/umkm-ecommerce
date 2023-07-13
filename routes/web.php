@@ -102,6 +102,10 @@ Route::group(['middleware' => ['auth', 'role:merchant']], function () {
     Route::get('/voucher/add', [Voucher::class, 'add'])->name("add-voucher");
     Route::post('/voucher/store', [Voucher::class, 'store'])->name("store-voucher");
     Route::get('/voucher/detail/{id}', [Voucher::class, 'detail'])->name("voucher-detail");
+
+    Route::get('laporan-penjualan-product', [ReportSales::class, 'laporan_penjualan_product'])->name("laporan-penjualan-product");
+    Route::post('laporan-penjualan-product/show', [ReportSales::class, 'show_laporan_penjualan_product'])->name("show-laporan-penjualan-product");
+    Route::get('laporan-penjualan-product/export', [ReportSales::class, 'export_laporan_penjualan_product'])->name("export-laporan-penjualan-product");
 });
 
 Route::post('/callback-payment', [Payment::class, 'index']);

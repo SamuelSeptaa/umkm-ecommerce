@@ -45,6 +45,12 @@
                 </div>
                 <div>Laporan Penjualan</div>
             </a>
+            <a class="nav-link" href="{{ route('laporan-penjualan-product') }}">
+                <div class="mx-2">
+                    <i class="fa-solid fa-arrow-trend-up"></i>
+                </div>
+                <div>Laporan Penjualan Produk</div>
+            </a>
         </li>
         <li class="nav-title">Toko</li>
         <li class="nav-item">
