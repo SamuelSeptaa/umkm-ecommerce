@@ -24,10 +24,10 @@ class Index extends Controller
         $this->data['shops']                = shop::orderBy('shop_name')->get();
         $this->data['categories']           = category::all();
         $this->data['featured']             = featured_product::with('product.category')->get();
-        $this->data['latest_product_1']     = product::orderBy('created_at', 'desc')->limit(3)->get();
-        $this->data['latest_product_2']     = product::orderBy('created_at', 'desc')->limit(3)->offset(3)->get();
-        $this->data['best_selling_1']       = product::orderBy('total_sold', 'desc')->limit(3)->get();
-        $this->data['best_selling_2']       = product::orderBy('total_sold', 'desc')->limit(3)->offset(3)->get();
+        $this->data['latest_product_1']     = product::where('status', 'PUBLISH')->orderBy('created_at', 'desc')->limit(3)->get();
+        $this->data['latest_product_2']     = product::where('status', 'PUBLISH')->orderBy('created_at', 'desc')->limit(3)->offset(3)->get();
+        $this->data['best_selling_1']       = product::where('status', 'PUBLISH')->orderBy('total_sold', 'desc')->limit(3)->get();
+        $this->data['best_selling_2']       = product::where('status', 'PUBLISH')->orderBy('total_sold', 'desc')->limit(3)->offset(3)->get();
         $this->data['latest_blog']          = blog::orderBy('created_at', 'desc')->limit(3)->get();
 
         return view('guest.index', $this->data);
@@ -51,6 +51,7 @@ class Index extends Controller
             ->where('shops.slug', 'like', ($request->query("shop")) ?  $request->query("shop") : '%%')
             ->where('categories.slug', 'like', ($request->query("category")) ?  $request->query("category") : '%%')
             ->where('products.product_name', 'like', ($request->query("product")) ?  "%" . $request->query("product") . "%" : '%%')
+            ->where('products.status', 'PUBLISH')
             ->paginate(12)->withQueryString();
 
         $this->data['script']   = "guest.script.shop";
@@ -61,9 +62,12 @@ class Index extends Controller
     {
         $this->headData();
 
-        $this->data['product']          = product::where('slug', $slug)->firstOrFail();
+        $this->data['product']          = product::where('slug', $slug)
+            ->where('products.status', 'PUBLISH')
+            ->firstOrFail();
         $this->data['related']          =
             product::where('shop_id', $this->data['product']->shop_id)
+            ->where('products.status', 'PUBLISH')
             ->inRandomOrder()->limit(4)->get();
 
         $this->data['script']           = 'guest.script.shop_detail';

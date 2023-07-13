@@ -2037,6 +2037,14 @@ ol {
 	width: 15px;
 }
 
+.shoping__cart__table tr.cart-error{
+    outline: 1.5px solid #ff0033;
+    box-shadow: 0 0 10px #ff0033;
+}
+
+.text-error{
+    font-weight:700;
+}
 .primary-btn.cart-btn {
 	color: #6f6f6f;
 	padding: 14px 30px 12px;
@@ -2047,7 +2055,7 @@ ol {
 	font-size: 14px;
 }
 
-.primary-btn.cart-btn.cart-btn-right {
+.primary-btn.cart-btn-right {
 	float: right;
 }
 

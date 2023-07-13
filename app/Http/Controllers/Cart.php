@@ -97,9 +97,20 @@ class Cart extends Controller
     {
         $data = $request->post();
 
-        shopping_cart::where('user_id', auth()->user()->id)->delete();
 
-        if (!empty($data))
+        if (!empty($data)) {
+            for ($i = 0; $i < count($data['product_id']); $i++) {
+                $product            = product::findOrFail($data['product_id'][$i]);
+                if ($product->status === "DRAFT") {
+                    return response()->json([
+                        'status'    => 'Failed',
+                        'message'   => 'Ada produk di keranjang mu yang tidak dapat di proses'
+                    ], 400);
+                    break;
+                }
+            }
+
+            shopping_cart::where('user_id', auth()->user()->id)->delete();
             for ($i = 0; $i < count($data['product_id']); $i++) {
                 $product            = product::findOrFail($data['product_id'][$i]);
                 shopping_cart::create([
@@ -109,6 +120,8 @@ class Cart extends Controller
                     'qty'           => $data['qty'][$i]
                 ]);
             }
+        }
+
 
         $user_id                            = auth()->user()->id;
         $results = DB::select("select SUM(temp_table.sub_total) as total FROM (

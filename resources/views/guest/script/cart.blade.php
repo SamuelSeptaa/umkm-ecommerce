@@ -83,9 +83,12 @@
                     window.location.reload()
             },
             error: function(xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
                 Swal.fire(
                     "Failed",
-                    error,
+                    xhr.responseJSON.message,
                     'error'
                 );
             },

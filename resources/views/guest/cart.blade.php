@@ -23,12 +23,27 @@
                                     <tbody>
                                         @csrf
                                         @foreach ($carts as $c)
-                                            <tr>
+                                            <tr
+                                                class="{{ $c->product->status == 'DRAFT' || $c->product->stock < $c->qty ? 'cart-error' : '' }}">
                                                 <td class="shoping__cart__item">
-                                                    <img src="{{ asset('storage/' . $c->product->image_url) }}"
-                                                        alt="">
-                                                    <h5>{{ $c->product->product_name }}</h5>
-                                                    <input type="hidden" name="product_id[]" value="{{ $c->product_id }}">
+                                                    <div class="ml-3">
+                                                        <img src="{{ asset('storage/' . $c->product->image_url) }}"
+                                                            alt="">
+                                                        <h5>{{ $c->product->product_name }}</h5>
+                                                        @if ($c->product->status == 'DRAFT')
+                                                            <div class="text-center mt-2">
+                                                                <div class="text-danger text-error">Yah, kamu belum bisa
+                                                                    checkout produk ini :(</div>
+                                                            </div>
+                                                        @elseif($c->product->stock < $c->qty)
+                                                            <div class="text-center mt-2">
+                                                                <div class="text-danger text-error">Maaf, produk ini hanya
+                                                                    tersisa sebanyak {{ $c->product->stock }} </div>
+                                                            </div>
+                                                        @endif
+                                                        <input type="hidden" name="product_id[]"
+                                                            value="{{ $c->product_id }}">
+                                                    </div>
                                                 </td>
                                                 <td class="shoping__cart__price">
                                                     @if ($c->product->discount > 0)
@@ -66,7 +81,9 @@
                                                     @endif
                                                 </td>
                                                 <td class="shoping__cart__item__close">
-                                                    <span v-on:click="removeItem" class="icon_close"></span>
+                                                    <div class="text-center">
+                                                        <span v-on:click="removeItem" class="icon_close"></span>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -84,7 +101,7 @@
                     <div class="shoping__cart__btns">
                         <a href="{{ route('shop') }}" class="primary-btn cart-btn btn-hover-green">LANJUTIN BELANJA</a>
                         @if (!$carts->isEmpty())
-                            <button class="btn primary-btn cart-btn cart-btn-right btn-hover-green" id="update-cart"></span>
+                            <button class="btn btn-info primary-btn cart-btn-right" id="update-cart"></span>
                                 Upadate Cart</button>
                         @endif
                     </div>
@@ -97,7 +114,8 @@
                                 <ul>
                                     <li>Total <span v-text="totalIdr"></span></li>
                                 </ul>
-                                <a href="{{ $carts->isEmpty() ? '#' : route('checkout') }}" class="primary-btn">LANJUT
+                                <a href="{{ $carts->isEmpty() ? '#' : route('checkout') }}"
+                                    class="primary-btn btn-info">LANJUT
                                     CHECKOUT</a>
                             </div>
                         </div>
