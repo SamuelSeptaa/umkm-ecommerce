@@ -18,7 +18,7 @@
                             </svg>
                         </button>
                         <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item"
-                                href="{{ route('product') }}">Lihat Toko</a>
+                                href="{{ route('shop-list') }}">Lihat Toko</a>
                         </div>
                     </div>
                 </div>
