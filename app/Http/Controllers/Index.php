@@ -30,6 +30,9 @@ class Index extends Controller
         $this->data['best_selling_2']       = product::where('status', 'PUBLISH')->orderBy('total_sold', 'desc')->limit(3)->offset(3)->get();
         $this->data['latest_blog']          = blog::orderBy('created_at', 'desc')->limit(3)->get();
 
+        $this->data['script']               = "guest.script.index";
+
+
         return view('guest.index', $this->data);
     }
 

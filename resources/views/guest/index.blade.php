@@ -22,7 +22,7 @@
                         <div class="hero__search__form">
                             <form action="{{ route('shop') }}">
                                 <input type="text" name="search" placeholder="Mau nyari apa?">
-                                <button type="submit" class="site-btn">SEARCH</button>
+                                <button type="submit" class="site-btn">CARI</button>
                             </form>
 
                         </div>
@@ -72,7 +72,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <h2>Featured Product</h2>
+                        <h2>Produk Teratas</h2>
                     </div>
                     <div class="featured__controls">
                         <ul>
@@ -84,16 +84,16 @@
                     </div>
                 </div>
             </div>
-            <div class="row featured__filter">
+            <div class="row featured__filter" id="product-featured-list">
                 @foreach ($featured as $f)
                     <div class="col-lg-3 col-md-4 col-sm-6 mix {{ $f->product->category->slug }}">
                         <div class="featured__item">
                             <div class="featured__item__pic set-bg"
                                 data-setbg="{{ asset('storage/' . $f->product->image_url) }}">
                                 <ul class="featured__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                    <li><button v-on:click="addFavorit({{ $f->product->id }})"
+                                            class="{{ in_array($f->product->id, $favorit) ? 'active' : '' }}"><i
+                                                class="fa fa-heart"></i></button></li>
                                 </ul>
                             </div>
                             <div class="featured__item__text">
@@ -120,7 +120,9 @@
                                 @foreach ($latest_product_1 as $l)
                                     <a href="#" class="latest-product__item">
                                         <div class="latest-product__item__pic">
-                                            <img src="{{ asset('storage/' . $l->image_url) }}" alt="">
+                                            <div class="product-image-slider"
+                                                style="background-image: url({{ asset('storage/' . $l->image_url) }});">
+                                            </div>
                                         </div>
                                         <div class="latest-product__item__text">
                                             <h6>{{ $l->product_name }}</h6>
@@ -133,7 +135,9 @@
                                 @foreach ($latest_product_2 as $l)
                                     <a href="#" class="latest-product__item">
                                         <div class="latest-product__item__pic">
-                                            <img src="{{ asset('storage/' . $l->image_url) }}" alt="">
+                                            <div class="product-image-slider"
+                                                style="background-image: url({{ asset('storage/' . $l->image_url) }});">
+                                            </div>
                                         </div>
                                         <div class="latest-product__item__text">
                                             <h6>{{ $l->product_name }}</h6>
@@ -153,7 +157,9 @@
                                 @foreach ($best_selling_1 as $l)
                                     <a href="#" class="latest-product__item">
                                         <div class="latest-product__item__pic">
-                                            <img src="{{ asset('storage/' . $l->image_url) }}" alt="">
+                                            <div class="product-image-slider"
+                                                style="background-image: url({{ asset('storage/' . $l->image_url) }});">
+                                            </div>
                                         </div>
                                         <div class="latest-product__item__text">
                                             <h6>{{ $l->product_name }}</h6>
@@ -166,7 +172,9 @@
                                 @foreach ($best_selling_2 as $l)
                                     <a href="#" class="latest-product__item">
                                         <div class="latest-product__item__pic">
-                                            <img src="{{ asset('storage/' . $l->image_url) }}" alt="">
+                                            <div class="product-image-slider"
+                                                style="background-image: url({{ asset('storage/' . $l->image_url) }});">
+                                            </div>
                                         </div>
                                         <div class="latest-product__item__text">
                                             <h6>{{ $l->product_name }}</h6>
