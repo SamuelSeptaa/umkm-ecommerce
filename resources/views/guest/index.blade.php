@@ -38,9 +38,9 @@
                     </div>
                     <div class="hero__item set-bg" data-setbg="{{ asset('ogani/img/hero/banner.jpg') }}">
                         <div class="hero__text">
-                            <span>PALANGKA RAYA FOOD</span>
-                            <h2>100% ENAK</h2>
-                            <a href="#" class="primary-btn">BELANJA SEKARANG</a>
+                            <span>WEBSITE UMKM KOTA</span>
+                            <h2>PALANGKA RAYA</h2>
+                            <a href="{{ route('shop') }}" class="primary-btn">BELANJA SEKARANG</a>
                         </div>
                     </div>
                 </div>
@@ -97,7 +97,9 @@
                                 </ul>
                             </div>
                             <div class="featured__item__text">
-                                <h6><a href="#">{{ $f->product->product_name }}</a></h6>
+                                <h6><a
+                                        href="{{ route('shop-detail', ['shop_id' => $f->product->shop_id, 'slug' => $f->product->slug]) }}">{{ $f->product->product_name }}</a>
+                                </h6>
                                 <h5>{{ currencyIDR($f->product->price) }}</h5>
                             </div>
                         </div>
@@ -118,7 +120,8 @@
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
                                 @foreach ($latest_product_1 as $l)
-                                    <a href="#" class="latest-product__item">
+                                    <a href="{{ route('shop-detail', ['shop_id' => $l->shop_id, 'slug' => $l->slug]) }}"
+                                        class="latest-product__item">
                                         <div class="latest-product__item__pic">
                                             <div class="product-image-slider"
                                                 style="background-image: url({{ asset('storage/' . $l->image_url) }});">
@@ -133,7 +136,8 @@
                             </div>
                             <div class="latest-prdouct__slider__item">
                                 @foreach ($latest_product_2 as $l)
-                                    <a href="#" class="latest-product__item">
+                                    <a href="{{ route('shop-detail', ['shop_id' => $l->shop_id, 'slug' => $l->slug]) }}"
+                                        class="latest-product__item">
                                         <div class="latest-product__item__pic">
                                             <div class="product-image-slider"
                                                 style="background-image: url({{ asset('storage/' . $l->image_url) }});">
@@ -155,7 +159,8 @@
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
                                 @foreach ($best_selling_1 as $l)
-                                    <a href="#" class="latest-product__item">
+                                    <a href="{{ route('shop-detail', ['shop_id' => $l->shop_id, 'slug' => $l->slug]) }}"
+                                        class="latest-product__item">
                                         <div class="latest-product__item__pic">
                                             <div class="product-image-slider"
                                                 style="background-image: url({{ asset('storage/' . $l->image_url) }});">
@@ -170,7 +175,8 @@
                             </div>
                             <div class="latest-prdouct__slider__item">
                                 @foreach ($best_selling_2 as $l)
-                                    <a href="#" class="latest-product__item">
+                                    <a href="{{ route('shop-detail', ['shop_id' => $l->shop_id, 'slug' => $l->slug]) }}"
+                                        class="latest-product__item">
                                         <div class="latest-product__item__pic">
                                             <div class="product-image-slider"
                                                 style="background-image: url({{ asset('storage/' . $l->image_url) }});">

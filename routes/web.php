@@ -37,7 +37,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [Index::class, 'index'])->name('index');
 Route::get('/shop', [Index::class, 'shop'])->name('shop');
-Route::get('/shop/{slug}', [Index::class, 'shop_detail'])->name('shop-detail');
+Route::get('/shop/{shop_id}/{slug}', [Index::class, 'shop_detail'])->name('shop-detail');
 Route::get('/blog', [Index::class, 'blog'])->name('blog');
 Route::get('/blog/{slug}', [Index::class, 'blog_detail'])->name('blog-detail');
 

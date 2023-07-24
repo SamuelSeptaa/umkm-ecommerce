@@ -61,11 +61,12 @@ class Index extends Controller
         return view('guest.shop', $this->data);
     }
 
-    public function shop_detail($slug)
+    public function shop_detail($shop_id, $slug)
     {
         $this->headData();
 
         $this->data['product']          = product::where('slug', $slug)
+            ->where('products.shop_id', $shop_id)
             ->where('products.status', 'PUBLISH')
             ->firstOrFail();
         $this->data['related']          =

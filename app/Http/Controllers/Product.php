@@ -129,16 +129,29 @@ class Product extends Controller
 
     public function store(Request $request)
     {
+        $shop       = shop::where('user_id', auth()->user()->id)->firstOrFail();
         $validatedData = $request->validate([
-            'product_name'      => ['required', 'unique:products', 'max:100', 'min:5', 'regex:/^[a-zA-Z\s0-9]+$/'],
+            'product_name'      => [
+                'required',
+                Rule::unique('products', 'product_name')->where(function ($query) use ($shop) {
+                    return $query->where('shop_id', $shop->id);
+                }),
+                'max:100', 'min:5', 'regex:/^[a-zA-Z\s0-9]+$/'
+            ],
             'category_id'       => ['required'],
             'description'       => ['required'],
             'price'             => ['required', 'gte:5000'],
             'stock'             => ['required', 'gte:1'],
             'image_url' => ['required', 'max:2048'],
         ]);
+
         $file       = $request->file('image_url');
         $filename   = createSlug($request->product_name);
+        $countSlug  = productModel::where('slug', $filename)->count();
+        if ($countSlug > 0) {
+            $filename = "$filename-$countSlug";
+        }
+
         $ext        = $file->getClientOriginalExtension();
         $path       = Storage::disk('public')->putFileAs(
             'img/product',
@@ -146,7 +159,6 @@ class Product extends Controller
             $filename . ".$ext"
         );
 
-        $shop       = shop::where('user_id', auth()->user()->id)->firstOrFail();
         productModel::create([
             'category_id'       => $request->category_id,
             'shop_id'           => $shop->id,
@@ -197,8 +209,11 @@ class Product extends Controller
 
     public function update(Request $request)
     {
+        $shop       = shop::where('user_id', auth()->user()->id)->firstOrFail();
         $validatedData = $request->validate([
-            'product_name'      => ['required', Rule::unique('products', 'product_name')->ignore($request->id), 'max:100', 'min:5', 'regex:/^[a-zA-Z\s0-9]+$/'],
+            'product_name'      => ['required', Rule::unique('products', 'product_name')->where(function ($query) use ($shop) {
+                return $query->where('shop_id', $shop->id);
+            })->ignore($request->id), 'max:100', 'min:5', 'regex:/^[a-zA-Z\s0-9]+$/'],
             'category_id'       => ['required'],
             'description'       => ['required'],
             'price'             => ['required', 'gte:5000'],
@@ -212,6 +227,10 @@ class Product extends Controller
             Storage::disk('public')->delete($product->image_url);
 
             $filename   = createSlug($request->product_name);
+            $countSlug  = productModel::where('slug', $filename)->count();
+            if ($countSlug > 0) {
+                $filename = "$filename-$countSlug";
+            }
             $ext        = $file->getClientOriginalExtension();
             $path       = Storage::disk('public')->putFileAs(
                 'img/product',
@@ -220,7 +239,6 @@ class Product extends Controller
             );
         }
 
-        $shop       = shop::where('user_id', auth()->user()->id)->firstOrFail();
         productModel::where('id', $request->id)
             ->update([
                 'category_id'       => $request->category_id,

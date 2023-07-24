@@ -64,6 +64,8 @@ class Pickup extends Controller
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_POSTFIELDS => $payload,
             CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_SSL_VERIFYHOST => FALSE,
+            CURLOPT_SSL_VERIFYPEER => FALSE,
             CURLOPT_HTTPHEADER => array(
                 "authorization: " . $biteshipKey, "Content-Type:application/json"
             ),
