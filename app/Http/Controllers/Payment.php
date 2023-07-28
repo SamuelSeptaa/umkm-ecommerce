@@ -30,11 +30,18 @@ class Payment extends Controller
 
                 Mail::to($transaction->email)->send(new TransactionPaid($transaction));
             } else {
-                transaction::where('receipt_number', $receipt_number)->update([
-                    'payment_status'    => strtoupper($status),
-                    'status'            => 'FAILED',
-                    'paid_date'         => NULL
-                ]);
+                if ($status === "failed")
+                    transaction::where('receipt_number', $receipt_number)->update([
+                        'payment_status'    => strtoupper($status),
+                        'status'            => 'FAILED',
+                        'paid_date'         => NULL
+                    ]);
+                if ($status === "expire")
+                    transaction::where('receipt_number', $receipt_number)->update([
+                        'payment_status'    => strtoupper($status),
+                        'status'            => 'EXPIRE',
+                        'paid_date'         => NULL
+                    ]);
             }
         }
     }
