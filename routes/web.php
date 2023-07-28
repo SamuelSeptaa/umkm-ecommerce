@@ -82,14 +82,16 @@ Route::group(['middleware' => ['auth', 'role:member']], function () {
 });
 
 Route::group(['middleware' => ['auth', 'role:merchant']], function () {
-    Route::get('/product', [Product::class, 'index'])->name("product");
-    Route::post('/show-product', [Product::class, 'show'])->name("show-product");
-    Route::post('/toggle-status-product', [Product::class, 'toggle_status'])->name("toggle-status-product");
-    Route::get('/product/add', [Product::class, 'add'])->name("add-product");
-    Route::post('/product/store', [Product::class, 'store'])->name("store-product");
-    Route::get('/product/detail/{product_id}', [Product::class, 'detail'])->name("detail-product");
-    Route::post('/update-product', [Product::class, 'update'])->name("update-product");
 
+    Route::prefix('product')->group(function () {
+        Route::get('/', [Product::class, 'index'])->name("product");
+        Route::post('/show', [Product::class, 'show'])->name("show-product");
+        Route::post('/toggle-status-product', [Product::class, 'toggle_status'])->name("toggle-status-product");
+        Route::get('/add', [Product::class, 'add'])->name("add-product");
+        Route::post('/store', [Product::class, 'store'])->name("store-product");
+        Route::get('/detail/{product_id}', [Product::class, 'detail'])->name("detail-product");
+        Route::post('/update-product', [Product::class, 'update'])->name("update-product");
+    });
 
     Route::post('/request-pickup', [Pickup::class, 'pickup'])->name("request-pickup");
 
@@ -102,14 +104,18 @@ Route::group(['middleware' => ['auth', 'role:merchant']], function () {
     Route::get('/detail-merchant', [MerchantProfile::class, 'detail_merchant'])->name("detail-merchant");
     Route::post('/update-merchant', [MerchantProfile::class, 'update'])->name("update-merchant");
 
-    Route::get('/voucher', [Voucher::class, 'index'])->name("voucher");
-    Route::get('/voucher/add', [Voucher::class, 'add'])->name("add-voucher");
-    Route::post('/voucher/store', [Voucher::class, 'store'])->name("store-voucher");
-    Route::get('/voucher/detail/{id}', [Voucher::class, 'detail'])->name("voucher-detail");
+    Route::prefix('voucher')->group(function () {
+        Route::get('/', [Voucher::class, 'index'])->name("voucher");
+        Route::get('/add', [Voucher::class, 'add'])->name("add-voucher");
+        Route::post('/store', [Voucher::class, 'store'])->name("store-voucher");
+        Route::get('/detail/{id}', [Voucher::class, 'detail'])->name("voucher-detail");
+    });
 
-    Route::get('laporan-penjualan-product', [ReportSales::class, 'laporan_penjualan_product'])->name("laporan-penjualan-product");
-    Route::post('laporan-penjualan-product/show', [ReportSales::class, 'show_laporan_penjualan_product'])->name("show-laporan-penjualan-product");
-    Route::get('laporan-penjualan-product/export', [ReportSales::class, 'export_laporan_penjualan_product'])->name("export-laporan-penjualan-product");
+    Route::prefix('laporan-penjualan-product')->group(function () {
+        Route::get('/', [ReportSales::class, 'laporan_penjualan_product'])->name("laporan-penjualan-product");
+        Route::post('/show', [ReportSales::class, 'show_laporan_penjualan_product'])->name("show-laporan-penjualan-product");
+        Route::get('/export', [ReportSales::class, 'export_laporan_penjualan_product'])->name("export-laporan-penjualan-product");
+    });
 });
 
 Route::post('/callback-payment', [Payment::class, 'index']);
@@ -121,9 +127,11 @@ Route::group(['middleware' => ['auth', 'role:admin|merchant']], function () {
     Route::get('/voucher', [Voucher::class, 'index'])->name("voucher");
     Route::post('/show-voucher', [Voucher::class, 'show'])->name("show-voucher");
 
-    Route::get('/transaction', [Transaction::class, 'index'])->name("transaction");
-    Route::post('/show-transaction', [Transaction::class, 'show'])->name("show-transaction");
-    Route::get('/transaction/detail/{id}', [Transaction::class, 'detail'])->name("transaction-detail");
+    Route::prefix('transaction')->group(function () {
+        Route::get('/', [Transaction::class, 'index'])->name("transaction");
+        Route::post('/show', [Transaction::class, 'show'])->name("show-transaction");
+        Route::get('/detail/{id}', [Transaction::class, 'detail'])->name("transaction-detail");
+    });
 
     Route::get('laporan-penjualan', [ReportSales::class, 'index'])->name("laporan-penjualan");
     Route::post('laporan-penjualan/show', [ReportSales::class, 'show'])->name("show-laporan-penjualan");
@@ -131,35 +139,49 @@ Route::group(['middleware' => ['auth', 'role:admin|merchant']], function () {
 });
 
 Route::group(['middleware' => ['auth', 'role:admin']], function () {
-    Route::get('/shop-list', [Shop::class, 'index'])->name("shop-list");
-    Route::post('/show-shop-list', [Shop::class, 'show'])->name("show-shop-list");
-    Route::get('/shop-list/detail/{id}', [Shop::class, 'detail'])->name("detail-shop");
-    Route::post('/shop-list/update', [Shop::class, 'update'])->name("update-shop");
-    Route::get('/shop-list/add', [Shop::class, 'add'])->name("add-shop");
-    Route::post('/shop-list/store', [Shop::class, 'store'])->name("store-shop");
-    Route::get('/member-list', [Member::class, 'index'])->name("member-list");
-    Route::post('/member-list/show', [Member::class, 'show'])->name("show-member-list");
+
+    Route::prefix('shop-list')->group(function () {
+        Route::get('/', [Shop::class, 'index'])->name("shop-list");
+        Route::post('/show', [Shop::class, 'show'])->name("show-shop-list");
+        Route::get('/detail/{id}', [Shop::class, 'detail'])->name("detail-shop");
+        Route::post('/update', [Shop::class, 'update'])->name("update-shop");
+        Route::get('/add', [Shop::class, 'add'])->name("add-shop");
+        Route::post('/store', [Shop::class, 'store'])->name("store-shop");
+    });
+
+    Route::prefix('member-list')->group(function () {
+        Route::get('/', [Member::class, 'index'])->name("member-list");
+        Route::post('/show', [Member::class, 'show'])->name("show-member-list");
+    });
 
 
-    Route::get('/category-list', [Category::class, 'index'])->name("category-list");
-    Route::post('/category-list/show', [Category::class, 'show'])->name("show-category-list");
-    Route::get('/category-list/add', [Category::class, 'add'])->name("add-category");
-    Route::post('/category-list/store', [Category::class, 'store'])->name("store-category");
-    Route::get('/category-list/detail/{id}', [Category::class, 'detail'])->name("detail-category");
-    Route::post('/category-list/update', [Category::class, 'update'])->name("update-category");
+    Route::prefix('category-list')->group(function () {
+        Route::get('/', [Category::class, 'index'])->name("category-list");
+        Route::post('/show', [Category::class, 'show'])->name("show-category-list");
+        Route::get('/add', [Category::class, 'add'])->name("add-category");
+        Route::post('/store', [Category::class, 'store'])->name("store-category");
+        Route::get('/detail/{id}', [Category::class, 'detail'])->name("detail-category");
+        Route::post('/update', [Category::class, 'update'])->name("update-category");
+    });
 
-    Route::get('/blog-list', [Blog::class, 'index'])->name("blogs");
-    Route::post('/blog-list/show', [Blog::class, 'show'])->name("show-blogs");
-    Route::get('/blog-list/add', [Blog::class, 'add'])->name("add-blog");
-    Route::post('/blog-list/store', [Blog::class, 'store'])->name("store-blog");
-    Route::get('/blog-list/detail/{id}', [Blog::class, 'detail'])->name("detail-blog");
-    Route::post('/blog-list/update', [Blog::class, 'update'])->name("update-blog");
-    Route::post('/blog-list/delete', [Blog::class, 'destroy'])->name("delete-blog");
+    Route::prefix('blog-list')->group(function () {
+        Route::get('/', [Blog::class, 'index'])->name("blogs");
+        Route::post('/show', [Blog::class, 'show'])->name("show-blogs");
+        Route::get('/add', [Blog::class, 'add'])->name("add-blog");
+        Route::post('/store', [Blog::class, 'store'])->name("store-blog");
+        Route::get('/detail/{id}', [Blog::class, 'detail'])->name("detail-blog");
+        Route::post('/update', [Blog::class, 'update'])->name("update-blog");
+        Route::post('/delete', [Blog::class, 'destroy'])->name("delete-blog");
+    });
 
+    Route::prefix('featured-product')->group(function () {
+        Route::get('/', [FeaturedProduct::class, 'index'])->name("featured-product");
+        Route::post('/update', [FeaturedProduct::class, 'update'])->name("update-featured-product");
+    });
 
-    Route::get('/featured-product', [FeaturedProduct::class, 'index'])->name("featured-product");
-    Route::post('/featured-product/update', [FeaturedProduct::class, 'update'])->name("update-featured-product");
 
     Route::get('/admin/profile', [AdminProfile::class, 'index'])->name("admin-profil");
     Route::post('/admin/profile/update', [AdminProfile::class, 'update'])->name("update-admin-profil");
+
+    Route::get('/admin-list', [AdminProfile::class, 'index'])->name("admin-list");
 });

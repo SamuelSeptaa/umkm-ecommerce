@@ -42,6 +42,12 @@
                 </div>
                 <div>Daftar Kategori</div>
             </a>
+            <a class="nav-link" href="{{ route('admin-list') }}">
+                <div class="mx-2">
+                    <i class="fa-solid fa-users-gear"></i>
+                </div>
+                <div>Daftar Admin</div>
+            </a>
         </li>
         <li class="nav-title">Penjualan</li>
         <li class="nav-item">
