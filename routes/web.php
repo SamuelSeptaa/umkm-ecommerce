@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminList;
 use App\Http\Controllers\AdminProfile;
 use App\Http\Controllers\Blog;
 use App\Http\Controllers\Cart;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Index;
 use App\Http\Controllers\Login;
 use App\Http\Controllers\Member;
 use App\Http\Controllers\MerchantProfile;
+use App\Http\Controllers\Pajak;
 use App\Http\Controllers\Payment;
 use App\Http\Controllers\Pickup;
 use App\Http\Controllers\Product;
@@ -183,5 +185,18 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/admin/profile', [AdminProfile::class, 'index'])->name("admin-profil");
     Route::post('/admin/profile/update', [AdminProfile::class, 'update'])->name("update-admin-profil");
 
-    Route::get('/admin-list', [AdminProfile::class, 'index'])->name("admin-list");
+    Route::prefix('admin-list')->group(function () {
+        Route::get('/', [AdminList::class, 'index'])->name("admin-list");
+        Route::post('/show', [AdminList::class, 'show'])->name("show-admin-list");
+        Route::get('/add', [AdminList::class, 'add'])->name("add-admin-list");
+        Route::post('/store', [AdminList::class, 'store'])->name("store-admin-list");
+        Route::post('/reset-password', [AdminList::class, 'reset_password'])->name("reset-password-admin");
+    });
+});
+
+Route::group(['middleware' => ['auth', 'role:tax']], function () {
+    Route::prefix('laporan-perpajakan')->group(function () {
+        Route::get('/', [Pajak::class, 'index'])->name("laporan-perpajakan");
+        Route::post('/download', [Pajak::class, 'download'])->name("download-pajak-tahunan");
+    });
 });

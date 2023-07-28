@@ -69,6 +69,9 @@
     @role('admin')
         @include('layout.admin.sidebar.sidebar_admin')
     @endrole
+    @role('tax')
+        @include('layout.admin.sidebar.sidebar_tax')
+    @endrole
     <div class="wrapper d-flex flex-column min-vh-100 bg-light">
         @include('layout.admin.navbar')
         <div class="body flex-grow-1 px-3">
@@ -186,6 +189,13 @@
 
     $('.daterange').on('cancel.daterangepicker', function(ev, picker) {
         $(this).val('');
+    });
+
+    $("#year-picker").datepicker({
+        format: "yyyy",
+        viewMode: "years",
+        minViewMode: "years",
+        autoclose: true,
     });
 
     $(document).on('keyup change', '#form-manipulation input, #form-manipulation textarea, #form-manipulation select',

@@ -25,6 +25,9 @@ class Login extends Controller
             if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('merchant')) {
                 return redirect('dashboard');
             }
+            if (Auth::user()->hasRole('tax')) {
+                return redirect()->route('laporan-perpajakan');
+            }
             if (Auth::user()->hasRole('member')) {
                 return redirect('/');
             }
