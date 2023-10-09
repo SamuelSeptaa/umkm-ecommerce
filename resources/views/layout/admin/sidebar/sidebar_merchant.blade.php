@@ -24,6 +24,12 @@
                 </div>
                 <div>Daftar Produk</div>
             </a>
+            <a class="nav-link" href="{{ route('featured-product') }}">
+                <div class="mx-2">
+                    <i class="fa-solid fa-feather"></i>
+                </div>
+                <div>Produk Teratas</div>
+            </a>
             <a class="nav-link" href="{{ route('transaction') }}">
                 <div class="mx-2">
                     <i class="fa-solid fa-file-invoice-dollar"></i>

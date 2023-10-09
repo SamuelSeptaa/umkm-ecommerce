@@ -30,12 +30,12 @@
                 </div>
                 <div>Daftar Member</div>
             </a>
-            <a class="nav-link" href="{{ route('voucher') }}">
+            {{-- <a class="nav-link" href="{{ route('voucher') }}">
                 <div class="mx-2">
                     <i class="fa-solid fa-tags"></i>
                 </div>
                 <div>Daftar Voucher</div>
-            </a>
+            </a> --}}
             <a class="nav-link" href="{{ route('category-list') }}">
                 <div class="mx-2">
                     <i class="fa-solid fa-font-awesome"></i>
@@ -49,7 +49,7 @@
                 <div>Daftar Admin</div>
             </a>
         </li>
-        <li class="nav-title">Penjualan</li>
+        {{-- <li class="nav-title">Penjualan</li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('transaction') }}">
                 <div class="mx-2">
@@ -57,7 +57,7 @@
                 </div>
                 <div>Daftar Transaksi</div>
             </a>
-        </li>
+        </li> --}}
         <li class="nav-title">Website</li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('blogs') }}">
@@ -66,12 +66,12 @@
                 </div>
                 <div>Blog</div>
             </a>
-            <a class="nav-link" href="{{ route('featured-product') }}">
+            {{-- <a class="nav-link" href="{{ route('featured-product') }}">
                 <div class="mx-2">
                     <i class="fa-solid fa-feather"></i>
                 </div>
                 <div>Produk Teratas</div>
-            </a>
+            </a> --}}
         </li>
         <li class="nav-title">Laporan</li>
         <li class="nav-item">

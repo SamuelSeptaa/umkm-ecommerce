@@ -79,6 +79,7 @@ Route::group(['middleware' => ['auth', 'role:member']], function () {
 
     Route::get("/checkout", [Checkout::class, "index"])->name("checkout");
     Route::post("/rates", [Checkout::class, "rates"])->name("rates");
+    Route::post("/address", [Checkout::class, "address"])->name("address");
     Route::post("/apply-coupon", [Checkout::class, "apply_coupon"])->name("apply-coupon");
     Route::post("/make-transaction", [Checkout::class, "make_transaction"])->name("make-transaction");
 });
@@ -124,6 +125,11 @@ Route::post('/callback-payment', [Payment::class, 'index']);
 Route::post('/callback-shipping-webhook', [Pickup::class, 'callback_shipping_webhook']);
 
 Route::group(['middleware' => ['auth', 'role:admin|merchant']], function () {
+    Route::prefix('featured-product')->group(function () {
+        Route::get('/', [FeaturedProduct::class, 'index'])->name("featured-product");
+        Route::post('/update', [FeaturedProduct::class, 'update'])->name("update-featured-product");
+    });
+
     Route::get('/dashboard', [Dashboard::class, 'index'])->name("dashboard");
 
     Route::get('/voucher', [Voucher::class, 'index'])->name("voucher");
@@ -176,10 +182,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
         Route::post('/delete', [Blog::class, 'destroy'])->name("delete-blog");
     });
 
-    Route::prefix('featured-product')->group(function () {
-        Route::get('/', [FeaturedProduct::class, 'index'])->name("featured-product");
-        Route::post('/update', [FeaturedProduct::class, 'update'])->name("update-featured-product");
-    });
+
 
 
     Route::get('/admin/profile', [AdminProfile::class, 'index'])->name("admin-profil");

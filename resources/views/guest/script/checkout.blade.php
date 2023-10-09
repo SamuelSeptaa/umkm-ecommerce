@@ -18,7 +18,8 @@
             disountIDR: "",
             successMessage: "",
             errorMessage: "",
-            payment_code: ""
+            payment_code: "",
+            address: "{{ $profile->member->address }}"
         },
         created() {
             this.rateIDR = currencyIDR(this.rate);
@@ -27,9 +28,51 @@
         },
         methods: {
             resetRate: function() {
+                this.checkAddress();
                 if (this.selectedCourier !== "") {
                     this.checkRates();
                 }
+            },
+            checkAddress: function() {
+                const self = this;
+                const lat = self.lat;
+                const long = self.long;
+
+                $.ajax({
+                    type: "post",
+                    url: `{{ route('address') }}`,
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    data: {
+                        lat: lat,
+                        long: long,
+                    },
+                    processData: true,
+                    beforeSend: function() {
+                        showLoading();
+                    },
+                    success: function(response) {
+                        self.address = response.data.address;
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        const statusCode = jqXHR.status;
+                        switch (statusCode) {
+                            default:
+                                Swal.fire(
+                                    textStatus,
+                                    jqXHR.responseJSON.message,
+                                    'error'
+                                );
+                        }
+
+                    },
+                    complete: function() {
+                        hideLoading();
+                    }
+                });
+
+
             },
             checkRates: function() {
                 const self = this;

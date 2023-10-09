@@ -10,6 +10,7 @@ use App\Models\shop;
 use App\Models\shopping_cart;
 use App\Models\wishlist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use SebastianBergmann\CodeUnit\FunctionUnit;
 
 class Index extends Controller
@@ -23,7 +24,7 @@ class Index extends Controller
         $this->data['sub_title']            = "Beranda";
         $this->data['shops']                = shop::orderBy('shop_name')->get();
         $this->data['categories']           = category::all();
-        $this->data['featured']             = featured_product::with('product.category')->get();
+        $this->data['featured']             = featured_product::with('product.category')->orderBy(DB::raw("RAND()"))->limit(8)->get();
         $this->data['latest_product_1']     = product::where('status', 'PUBLISH')->orderBy('created_at', 'desc')->limit(3)->get();
         $this->data['latest_product_2']     = product::where('status', 'PUBLISH')->orderBy('created_at', 'desc')->limit(3)->offset(3)->get();
         $this->data['best_selling_1']       = product::where('status', 'PUBLISH')->orderBy('total_sold', 'desc')->limit(3)->get();

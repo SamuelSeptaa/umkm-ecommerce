@@ -36,7 +36,8 @@
                             </div>
                             <div class="form-group">
                                 <p>Alamat<span>*</span></p>
-                                <textarea class="form-control mb-0 " name="address" id="address" rows="3" placeholder="Alamat Lengkap">{{ $profile->member->address }}</textarea>
+                                <textarea class="form-control mb-0 " name="address" id="address" rows="3" placeholder="Alamat Lengkap"
+                                    v-model="address">{{ $profile->member->address }}</textarea>
                                 <div class="invalid-feedback" for="address"></div>
                             </div>
                             <div class="form-group">

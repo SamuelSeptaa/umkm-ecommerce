@@ -112,6 +112,52 @@ class Checkout extends Controller
             ], 404);
     }
 
+    public function address(Request $request)
+    {
+        $mapboxKey    = env('MAPBOX_KEY');
+        $longitudes = $request->long;
+        $latitudes = $request->lat;
+
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.mapbox.com/geocoding/v5/mapbox.places/$longitudes,$latitudes.json?access_token=$mapboxKey",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_SSL_VERIFYHOST => FALSE,
+            CURLOPT_SSL_VERIFYPEER => FALSE,
+            CURLOPT_HTTPHEADER => array(
+                "Content-Type:application/json"
+            ),
+        ));
+
+        $result = curl_exec($curl);
+        curl_close($curl);
+        $data = json_decode($result, true);
+        $features = (array_key_exists('type', $data)) ? $data['features'] : null;
+
+        if ($features) {
+            $address = $features[0]["place_name"];
+            return response()->json([
+                'status'        => 'Success',
+                'message'       => 'Success get address',
+                'data'          => [
+                    'address'     => $address
+                ]
+            ], 201);
+        } else
+            return response()->json([
+                'status'        => 'Failed',
+                'message'       => "Alamat tidak ditemukan",
+                'data'          => [
+                    'data'     => null
+                ]
+            ], 404);
+    }
+
     public function apply_coupon(Request $request)
     {
         $coupon = $request->coupon;

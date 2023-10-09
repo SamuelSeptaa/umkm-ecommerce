@@ -42,6 +42,7 @@
             .addTo(map);
         $("#latitude").val(e.lngLat.lat);
         $("#longitude").val(e.lngLat.lng);
+        generateAddress(e.lngLat.lat, e.lngLat.lng);
     });
 
     geolocateControl.on('geolocate', (e) => {
@@ -52,5 +53,42 @@
             .addTo(map);
         $("#latitude").val(e.coords.latitude);
         $("#longitude").val(e.coords.longitude);
+        generateAddress(e.coords.latitude, e.coords.longitude);
     });
+
+    const generateAddress = (lat, long) => {
+        $.ajax({
+            type: "post",
+            url: `{{ route('address') }}`,
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            data: {
+                lat: lat,
+                long: long,
+            },
+            processData: true,
+            beforeSend: function() {
+                showLoading();
+            },
+            success: function(response) {
+                $("#address").val(response.data.address);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                const statusCode = jqXHR.status;
+                switch (statusCode) {
+                    default:
+                        Swal.fire(
+                            textStatus,
+                            jqXHR.responseJSON.message,
+                            'error'
+                        );
+                }
+
+            },
+            complete: function() {
+                hideLoading();
+            }
+        });
+    }
 </script>
