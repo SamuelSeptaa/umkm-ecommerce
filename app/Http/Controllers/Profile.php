@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\member;
 use App\Models\payment_method;
+use App\Models\shippingLog;
 use App\Models\transaction;
 use App\Models\transaction_detail;
 use App\Models\User;
@@ -81,6 +82,8 @@ class Profile extends Controller
         $transaction                        = transaction::where('member_id', $member->id)->where('receipt_number', $receipt_number)->firstOrFail();
         $this->data['transaction']          = $transaction;
         $this->data['transaction_details']  = transaction_detail::where('transaction_id', $transaction->id)->get();
+        $this->data['shipping_logs']        = shippingLog::where('transaction_id', $transaction->id)->orderBy('id', 'asc')->get();
+
 
         $this->data['receipt_number']       = $transaction->receipt_number;
         $this->data['sub_title']            = $receipt_number;

@@ -57,7 +57,49 @@
                     {{ $transaction->payment_status }}
                 </span>
             </div>
+
         </div>
+        @if (!$shipping_logs->isEmpty())
+            <b>Riwayat Pengiriman</b>
+            <div class="row  mb-3">
+                <div class="col-lg-4">
+                    Status
+                </div>
+                <div class="col-lg-4">
+                    Deskripsi
+                </div>
+                <div class="col-lg-4">
+                    Waktu
+                </div>
+            </div>
+            @foreach ($transaction->shipping_log as $sl)
+                <div class="row">
+                    @php
+                        $badge = 'badge-success';
+                    @endphp
+                    @if (in_array($sl->status, ['REQUESTED']))
+                        @php $badge = "badge-primary"; @endphp
+                    @elseif (in_array($sl->status, ['CANCELLED']))
+                        @php $badge = "badge-danger"; @endphp
+                    @endif
+                    <div class="col-lg-4">
+                        <span class="badge {{ $badge }}">
+                            {{ $sl->status }}
+                        </span>
+                    </div>
+                    <div class="col-lg-4">
+                        @if ($sl->description)
+                            {{ $sl->description }}
+                        @endif
+                    </div>
+                    <div class="col-lg-4">
+                        {{ parseTanggal($sl->created_at) }}
+                    </div>
+                </div>
+                <hr>
+            @endforeach
+        @endif
+
     </div>
     <div class="col-lg-6 col-md-6">
         <div class="checkout__order">

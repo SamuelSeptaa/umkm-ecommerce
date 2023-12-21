@@ -272,6 +272,7 @@
                                         <tr>
                                             <th class="center">Nomor</th>
                                             <th class="center">Status</th>
+                                            <th class="center">Deskripsi</th>
                                             <th>Waktu</th>
                                         </tr>
                                     </thead>
@@ -299,6 +300,7 @@
                                                         {{ $sl->status }}
                                                     </span>
                                                 </td>
+                                                <td class="left">{{ $sl->description }}</td>
                                                 <td class="left">{{ parseTanggal($sl->created_at) }}</td>
                                             </tr>
                                         @endforeach

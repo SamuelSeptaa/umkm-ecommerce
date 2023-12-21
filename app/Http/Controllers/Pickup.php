@@ -105,11 +105,29 @@ class Pickup extends Controller
         $waybillId          = $request->courier_waybill_id;
 
         $transaction        = transaction::where('waybill', $waybillId)->firstOrFail();
+        $description = "kurir didapatkan";
+        switch (strtolower($request->status)) {
+            case "picking_up":
+                $description = "sedang menjemput pesanan";
+
+            case "picked":
+                $description = "pesanan telah dijemput";
+                break;
+            case "dropping_off":
+                $description = "pesanan diantar menuju pelanggan";
+                break;
+            case "delivered":
+                $description = "pesanan sampai";
+                break;
+        }
 
         shippingLog::create([
             'transaction_id'        => $transaction->id,
+            'description'           => $description,
             'status'                => strtoupper($request->status),
         ]);
+
+
         if (strcasecmp("DELIVERED", $request->status) == 0)
             transaction::where('waybill', $waybillId)
                 ->update([
