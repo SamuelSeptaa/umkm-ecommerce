@@ -161,7 +161,9 @@ class Checkout extends Controller
     public function apply_coupon(Request $request)
     {
         $coupon = $request->coupon;
-        $isExist = voucher::where('code', $coupon)->first();
+        $memberCart         = shopping_cart::where('user_id', auth()->user()->id)->first();
+
+        $isExist = voucher::where('code', $coupon)->where('shop_id', $memberCart->shop_id)->first();
 
         if (!$isExist) {
             return response()->json([

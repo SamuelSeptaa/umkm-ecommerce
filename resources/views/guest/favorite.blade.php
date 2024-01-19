@@ -25,7 +25,8 @@
                                                     <div class="ml-3">
                                                         <img src="{{ asset('storage/' . $f->product->image_url) }}"
                                                             alt="">
-                                                        <a href="{{ route('shop-detail', ['slug' => $f->product->slug]) }}">
+                                                        <a
+                                                            href="{{ route('shop-detail', ['shop_id' => $f->product->shop_id, 'slug' => $f->product->slug]) }}">
                                                             <h5>{{ $f->product->product_name }}</h5>
                                                         </a>
                                                     </div>
