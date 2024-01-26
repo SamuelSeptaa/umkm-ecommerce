@@ -218,7 +218,8 @@
                                 <ul>
                                     <li><i class="fa fa-calendar-o"></i> {{ parseTanggal($b->created_at) }}</li>
                                 </ul>
-                                <h5><a href="{{ $b->slug }}">{{ $b->title }}</a></h5>
+                                <h5><a href="{{ route('blog-detail', ['slug' => $b->slug]) }}">{{ $b->title }}</a>
+                                </h5>
                                 <p>{{ $b->info }}</p>
                             </div>
                         </div>
