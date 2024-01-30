@@ -29,6 +29,13 @@ class Payment extends Controller
                 ]);
 
                 Mail::to($transaction->email)->send(new TransactionPaid($transaction));
+
+                return response()->json(
+                    [
+                        'status'        => 'Success',
+                        'message'       => 'Pembayaran diterima',
+                    ]
+                );
             } else {
                 if ($status === "failed")
                     transaction::where('receipt_number', $receipt_number)->update([
@@ -42,6 +49,13 @@ class Payment extends Controller
                         'status'            => 'EXPIRE',
                         'paid_date'         => NULL
                     ]);
+
+                return response()->json(
+                    [
+                        'status'        => 'Success',
+                        'message'       => 'Status pembayaran updated',
+                    ]
+                );
             }
         }
     }
